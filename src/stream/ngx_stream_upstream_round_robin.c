@@ -32,7 +32,12 @@ static void ngx_stream_upstream_empty_save_session(ngx_peer_connection_t *pc,
 
 #endif
 
-
+/*
+主要完成了配置中指定服务器的初始化工作：
+1、服务器属性获取。包括socket、设定权重值、失败次数和失败时间上限等等；
+2、区分单台服务器。为后续做单独处理做准备；
+3、正常server和backup server分开处理。
+*/
 ngx_int_t
 ngx_stream_upstream_init_round_robin(ngx_conf_t *cf,
     ngx_stream_upstream_srv_conf_t *us)
@@ -41,9 +46,9 @@ ngx_stream_upstream_init_round_robin(ngx_conf_t *cf,
     ngx_uint_t                       i, j, n, w;
     ngx_stream_upstream_server_t    *server;
     ngx_stream_upstream_rr_peer_t   *peer, **peerp;
-    ngx_stream_upstream_rr_peers_t  *peers, *backup;
+    ngx_stream_upstream_rr_peers_t  *peers, *backup;//一个是正常的servers，一个是backup servers
 
-    us->peer.init = ngx_stream_upstream_init_round_robin_peer;
+    us->peer.init = ngx_stream_upstream_init_round_robin_peer;//upstream中服务器节点的初始化赋值
 
     if (us->servers) {
         server = us->servers->elts;

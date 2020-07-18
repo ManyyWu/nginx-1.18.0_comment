@@ -75,7 +75,7 @@
 #include <sys/sendfile.h>
 #else
 extern ssize_t sendfile(int s, int fd, int32_t *offset, size_t size);
-#define NGX_SENDFILE_LIMIT  0x80000000
+#define NGX_SENDFILE_LIMIT  0x80000000 //sendfile发送文件的上限值
 #endif
 
 
@@ -98,7 +98,7 @@ extern ssize_t sendfile(int s, int fd, int32_t *offset, size_t size);
 typedef struct iocb  ngx_aiocb_t;
 #endif
 
-
+//TCP实现监听时的backlog队列，它表示允许正在通过三次握手建立TCP连接但还没有任何进程开始处理的连接最大个数
 #if (NGX_HAVE_CAPABILITIES)
 #include <linux/capability.h>
 #endif

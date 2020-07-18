@@ -32,8 +32,25 @@ static ngx_int_t ngx_http_try_files_init(ngx_conf_t *cf);
 
 
 static ngx_command_t  ngx_http_try_files_commands[] = {
+    /*
+    
+    语法：try_files path1 [path2] uri;
+    配置块：server、location   
 
-    { ngx_string("try_files"),
+    try_files后要跟若干路径，如path1 path2...，而且最后必须要有uri参数，意义如下：尝试按照顺序访问每一个path，如果可以有效地读取，
+    就直接向用户返回这个path对应的文件结束请求，否则继续向下访问。如果所有的path都找不到有效的文件，就重定向到最后的参数uri上。因此，
+    最后这个参数uri必须存在，而且它应该是可以有效重定向的。例如：
+    try_files /system/maintenance.html $uri $uri/index.html $uri.html @other;
+    location @other {
+      proxy_pass http://backend;
+    }
+    
+    上面这段代码表示如果前面的路径，如/system/maintenance.html等，都找不到，就会反向代理到http://backend服务上。还可以用指定错误码的方式与error_page配合使用，例如：
+    location / {
+      try_files $uri $uri/ /error.php?c=404 =404;
+    }
+    */ //try_files和error_page都有重定向功能
+    { ngx_string("try_files"),  //注意try_files至少包含两个参数，否则解析配置文件会出错
       NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_2MORE,
       ngx_http_try_files,
       NGX_HTTP_LOC_CONF_OFFSET,

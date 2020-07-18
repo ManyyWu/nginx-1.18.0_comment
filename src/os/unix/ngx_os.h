@@ -13,9 +13,10 @@
 #include <ngx_core.h>
 
 
-#define NGX_IO_SENDFILE    1
+#define NGX_IO_SENDFILE    1 //./configure配置了sendfile，编译的时候加上sendfile选项,，就会在ngx_linux_io把flag置为该值
 
 
+//一下四个方法在ngx_connection_s中包含
 typedef ssize_t (*ngx_recv_pt)(ngx_connection_t *c, u_char *buf, size_t size);
 typedef ssize_t (*ngx_recv_chain_pt)(ngx_connection_t *c, ngx_chain_t *in,
     off_t limit);
@@ -31,7 +32,7 @@ typedef struct {
     ngx_send_pt        udp_send;
     ngx_send_chain_pt  udp_send_chain;
     ngx_send_chain_pt  send_chain;
-    ngx_uint_t         flags;
+    ngx_uint_t         flags;//例如NGX_IO_SENDFILE
 } ngx_os_io_t;
 
 
@@ -63,10 +64,10 @@ ngx_chain_t *ngx_udp_unix_sendmsg_chain(ngx_connection_t *c, ngx_chain_t *in,
 
 typedef struct {
     struct iovec  *iovs;
-    ngx_uint_t     count;
+    ngx_uint_t     count; //等于0，则表明chain链中的所有数据在文件中
     size_t         size;
     ngx_uint_t     nalloc;
-} ngx_iovec_t;
+} ngx_iovec_t;//可以参考ngx_output_chain_to_iovec
 
 ngx_chain_t *ngx_output_chain_to_iovec(ngx_iovec_t *vec, ngx_chain_t *in,
     size_t limit, ngx_log_t *log);

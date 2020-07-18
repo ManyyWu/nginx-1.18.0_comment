@@ -90,7 +90,7 @@ static char *ngx_openssl_engine(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 static void ngx_openssl_exit(ngx_cycle_t *cycle);
 
 
-static ngx_command_t  ngx_openssl_commands[] = {
+static ngx_command_t  ngx_openssl_commands[] = { //打开ssl硬件加速，需要硬件支持，通过openssl engine -t查看
 
     { ngx_string("ssl_engine"),
       NGX_MAIN_CONF|NGX_DIRECT_CONF|NGX_CONF_TAKE1,
@@ -1588,7 +1588,8 @@ ngx_ssl_set_session(ngx_connection_t *c, ngx_ssl_session_t *session)
     return NGX_OK;
 }
 
-
+/* TLS单向认证 协议握手过程参考http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html */
+//tls单向认证四次握手过程，都会调用该函数处理，返回NGX_AGAIN表示握手还没有完成，需要再次进行后续握手过程
 ngx_int_t
 ngx_ssl_handshake(ngx_connection_t *c)
 {
@@ -1603,11 +1604,13 @@ ngx_ssl_handshake(ngx_connection_t *c)
 
     ngx_ssl_clear_error(c->log);
 
-    n = SSL_do_handshake(c->ssl->connection);
+    //这里会试着握手
+    n = SSL_do_handshake(c->ssl->connection); //改函数内部会调用ngx_http_ssl_alpn_select执行
 
+    //0x80:SSLv2  0x16:SSLv3/TLSv1 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_do_handshake: %d", n);
 
-    if (n == 1) {
+    if (n == 1) { //握手完成
 
         if (ngx_handle_read_event(c->read, 0) != NGX_OK) {
             return NGX_ERROR;
@@ -1760,7 +1763,8 @@ ngx_ssl_try_early_data(ngx_connection_t *c)
     sslerr = SSL_get_error(c->ssl->connection, n);
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_get_error: %d", sslerr);
-
+    //这里应该再重新接收一次和NGINX一样,等待下一次循环（epoll）再进行，同时设置读写句柄，以便下次读取的时候直接进行握手
+    //单向认证四次握手过程还没有完成，需要继续握手
     if (sslerr == SSL_ERROR_WANT_READ) {
         c->read->ready = 0;
         c->read->handler = ngx_ssl_handshake_handler;
@@ -1850,6 +1854,7 @@ ngx_ssl_handshake_log(ngx_connection_t *c)
 
         *d = '\0';
 
+            /* 打印密码和版本，如SSL: TLSv1.2, cipher: "ECDHE-RSA-AES128-GCM-SHA256 TLSv1.2 Kx=ECDH Au=RSA Enc=AESGCM(128) Mac=AEAD */
         ngx_log_debug2(NGX_LOG_DEBUG_EVENT, c->log, 0,
                        "SSL: %s, cipher: \"%s\"",
                        SSL_get_version(c->ssl->connection), &buf[1]);
@@ -1868,6 +1873,8 @@ ngx_ssl_handshake_log(ngx_connection_t *c)
 #endif
 
 
+
+/* tls握手第一步，接收客户端发送过来的ClientHello请求，TLS协议握手过程参考http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html */
 static void
 ngx_ssl_handshake_handler(ngx_event_t *ev)
 {
@@ -2333,7 +2340,7 @@ ngx_ssl_write_handler(ngx_event_t *wev)
  * Besides for protocols such as HTTP it is possible to always buffer
  * the output to decrease a SSL overhead some more.
  */
-
+//发送in链中的数据到c，如果发送in没有全部发送成功，则剩余的部分数据通过in返回
 ngx_chain_t *
 ngx_ssl_send_chain(ngx_connection_t *c, ngx_chain_t *in, off_t limit)
 {

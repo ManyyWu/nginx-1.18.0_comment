@@ -3,6 +3,8 @@
  * An internal implementation, based on Alexander Peslyak's
  * public domain implementation:
  * http://openwall.info/wiki/people/solar/software/public-domain-source-code/md5
+ * It is not expected to be optimal and is used only
+ * if no MD5 implementation was found in system.
  */
 
 

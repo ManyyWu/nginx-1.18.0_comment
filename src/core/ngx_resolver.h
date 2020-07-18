@@ -74,7 +74,7 @@ typedef struct {
     u_short                   port;
 } ngx_resolver_srv_t;
 
-
+    /* event ident must be after 3 pointers as in ngx_connection_t */
 typedef struct {
     ngx_str_t                 name;
     u_short                   priority;

@@ -14,7 +14,7 @@
 /* FreeBSD, NetBSD, OpenBSD */
 
 #define ngx_init_setproctitle(log) NGX_OK
-#define ngx_setproctitle(title)    setproctitle("%s", title)
+#define ngx_setproctitle(title)    setproctitle("%s", title) //Linux修改进程名称(setproctitle()) .
 
 
 #else /* !NGX_HAVE_SETPROCTITLE */
@@ -35,12 +35,12 @@ void ngx_setproctitle(char *title);
 #define NGX_SETPROCTITLE_PAD       '\0'
 
 ngx_int_t ngx_init_setproctitle(ngx_log_t *log);
-void ngx_setproctitle(char *title);
+void ngx_setproctitle(char *title); //Linux修改进程名称(setproctitle()) .
 
 #else
 
 #define ngx_init_setproctitle(log) NGX_OK
-#define ngx_setproctitle(title)
+#define ngx_setproctitle(title) //Linux修改进程名称(setproctitle()) .
 
 #endif /* OSes */
 

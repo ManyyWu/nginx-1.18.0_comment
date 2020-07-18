@@ -24,7 +24,7 @@ int     ngx_freebsd_machdep_hlt_logical_cpus;
 ngx_uint_t  ngx_freebsd_sendfile_nbytes_bug;
 ngx_uint_t  ngx_freebsd_use_tcp_nopush;
 
-ngx_uint_t  ngx_debug_malloc;
+ngx_uint_t  ngx_debug_malloc; //if (ngx_debug_malloc)          ngx_memset(p, 0xA5, size)
 
 
 static ngx_os_io_t ngx_freebsd_io = {
@@ -91,7 +91,7 @@ ngx_debug_init(void)
 
     mo = getenv("MALLOC_OPTIONS");
 
-    if (mo && ngx_strchr(mo, 'J')) {
+    if (mo && ngx_strchr(mo, 'J')) {//getenv是函数名，从环境中取字符串,获取 环境变量的值
         ngx_debug_malloc = 1;
     }
 #endif
