@@ -1,6 +1,6 @@
 # Nginx-1.18.0
    
-注释来自 https://github.com/ManyyWu/nginx-1.9.2_comment
+注释来自[y123456yz](https://github.com/y123456yz/reading-code-of-nginx-1.9.2)
 
 ## 说明:  
 nginx的以下功能模块的相关代码已经阅读，并对其源码及相关数据结构进行了详细备注，主要参考书籍为淘宝陶辉先生
