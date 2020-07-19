@@ -130,7 +130,7 @@ have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
 # STUB # 在ngx_auto_config.h文件中加入NGX_SUPPRESS_WARN宏、NGX_SMP宏
 . auto/stubs
 
-#在ngx_auto_config.h文件中指定NGX_USER和NGX_GROUP宏,如果执行configure时没有参数指定,默认两者皆为nobody（也就是默认以nobody用户运行进程）
+#在ngx_auto_config.h文件中指定NGX_USER和NGX_GROUP宏,如果执行configure时没有参数指定,默认两者皆为nobody(也就是默认以nobody用户运行进程)
 have=NGX_USER value="\"$NGX_USER\"" . auto/define
 have=NGX_GROUP value="\"$NGX_GROUP\"" . auto/define
 

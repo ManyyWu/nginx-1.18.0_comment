@@ -212,7 +212,7 @@ Line2730 int rc = pcre_copy_substring((char *)bptr, use_offsets, count,
 int pcre_dfa_exec(const pcre *code, const pcre_extra *extra, const char *subject, int length, int startoffset, int options, 
 int *ovector, int ovecsize, int *workspace, int wscount);
 
-功能：使用编译好的模式进行匹配,采用的是一种非传统的方法DFA,只是对匹配串扫描一次（与Perl不兼容）.
+功能：使用编译好的模式进行匹配,采用的是一种非传统的方法DFA,只是对匹配串扫描一次(与Perl不兼容).
 
 参数：
 
@@ -222,7 +222,7 @@ extra         指向一个pcre_extra结构体,可以为NULL
 
 subject    需要匹配的字符串
 
-length       匹配的字符串长度（Byte）
+length       匹配的字符串长度(Byte)
 
 startoffset        匹配的开始位置
 
@@ -264,7 +264,7 @@ extra         指向一个pcre_extra结构体,可以为NULL
 
 subject    需要匹配的字符串
 
-length       匹配的字符串长度（Byte）
+length       匹配的字符串长度(Byte)
 
 startoffset        匹配的开始位置
 

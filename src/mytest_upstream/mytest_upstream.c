@@ -118,8 +118,8 @@ static void* ngx_http_mytest_upstream_create_loc_conf(ngx_conf_t *cf)
     mycf->upstream.temp_file_write_size = 2 * ngx_pagesize;
     mycf->upstream.max_temp_file_size = 1024 * 1024 * 1024;
 
-//upstream模块要求hide_headers成员必须要初始化（upstream在解析完上游服务器返回的包头时,会调用ngx_http_upstream_process_headers
-//方法按照hide_headers成员将本应转发给下游的一些http头部隐藏）,这里将它赋为NGX_CONF_UNSET_PTR ,是为了在merge合并配置项方法中使用
+//upstream模块要求hide_headers成员必须要初始化(upstream在解析完上游服务器返回的包头时,会调用ngx_http_upstream_process_headers
+//方法按照hide_headers成员将本应转发给下游的一些http头部隐藏),这里将它赋为NGX_CONF_UNSET_PTR ,是为了在merge合并配置项方法中使用
 //upstream模块提供的ngx_http_upstream_hide_headers_hash方法初始化hide_headers 成员
     mycf->upstream.hide_headers = NGX_CONF_UNSET_PTR;
     mycf->upstream.pass_headers = NGX_CONF_UNSET_PTR;

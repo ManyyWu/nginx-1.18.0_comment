@@ -83,7 +83,7 @@ typedef struct {
 内存块数据       ---  ngx_pool_data_t;
 大内存块         --- ngx_pool_large_s; 
 */
-//内存池数据结构,链表形式存储   图形化理解参考Nginx 内存池（pool）分析 http://www.linuxidc.com/Linux/2011-08/41860.htm
+//内存池数据结构,链表形式存储   图形化理解参考Nginx 内存池(pool)分析 http://www.linuxidc.com/Linux/2011-08/41860.htm
 struct ngx_pool_s {
     ngx_pool_data_t       d;//节点数据    // 包含 pool 的数据区指针的结构体 pool->d.last ~ pool->d.end 中的内存区便是可用数据区.
     size_t                max;//当前内存节点可以申请的最大内存空间 // 一次最多从pool中开辟的最大空间
@@ -95,7 +95,7 @@ pool 中的 chain 指向一个 ngx_chain_t 数据,其值是由宏 ngx_free_chain
 可以释放的ngx_chain_t数据. 由函数ngx_alloc_chain_link进行使用.
 */
     ngx_chain_t          *chain;// pool 当前可用的 ngx_chain_t 数据,注意：由 ngx_free_chain 赋值   ngx_alloc_chain_link
-    ngx_pool_large_t     *large;//节点中大内存块指针   // pool 中指向大数据快的指针（大数据快是指 size > max 的数据块）
+    ngx_pool_large_t     *large;//节点中大内存块指针   // pool 中指向大数据快的指针(大数据快是指 size > max 的数据块)
     ngx_pool_cleanup_t   *cleanup;// pool 中指向 ngx_pool_cleanup_t 数据块的指针 //cleanup在ngx_pool_cleanup_add赋值
     ngx_log_t            *log; // pool 中指向 ngx_log_t 的指针,用于写日志的  ngx_event_accept会赋值
 };

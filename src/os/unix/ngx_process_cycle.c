@@ -38,7 +38,7 @@ ngx_pid_t     ngx_parent;
 在configure执行时是可以指定把它们安装在不同目录的. 为了简单起见,本节只说明默认安装情况下的命令行的使用情况,如果读者安装的
 目录发生了变化,那么替换一下即可.
 
-（1）默认方式启动
+(1)默认方式启动
 
 直接执行Nginx二进制程序. 例如：
 
@@ -46,9 +46,9 @@ ngx_pid_t     ngx_parent;
 
 这时,会读取默认路径下的配置文件：/usr/local/nginx/conf/nginx.conf.
 
-实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件（参见1.5.1节）.
+实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件(参见1.5.1节).
 
-（2）另行指定配置文件的启动方式
+(2)另行指定配置文件的启动方式
 
 使用-c参数指定配置文件. 例如：
 
@@ -56,13 +56,13 @@ ngx_pid_t     ngx_parent;
 
 这时,会读取-c参数后指定的nginx.conf配置文件来启动Nginx.
 
-（3）另行指定安装目录的启动方式
+(3)另行指定安装目录的启动方式
 
 使用-p参数指定Nginx的安装目录. 例如：
 
 /usr/local/nginx/sbin/nginx -p /usr/local/nginx/
 
-（4）另行指定全局配置项的启动方式
+(4)另行指定全局配置项的启动方式
 
 可以通过-g参数临时指定一些全局配置项,以使新的配置项生效. 例如：
 
@@ -80,7 +80,7 @@ ngx_pid_t     ngx_parent;
 
 如果不带上-g "pid /var/nginx/test.pid;",那么找不到pid文件,也会出现无法停止服务的情况.
 
-（5）测试配置信息是否有错误
+(5)测试配置信息是否有错误
 
 在不启动Nginx的情况下,使用-t参数仅测试配置文件是否有错误. 例如：
 
@@ -88,25 +88,25 @@ ngx_pid_t     ngx_parent;
 
 执行结果中显示配置是否正确.
 
-（6）在测试配置阶段不输出信息
+(6)在测试配置阶段不输出信息
 
 测试配置选项时,使用-q参数可以不把error级别以下的信息输出到屏幕. 例如：
 
 /usr/local/nginx/sbin/nginx -t -q
 
-（7）显示版本信息
+(7)显示版本信息
 
 使用-v参数显示Nginx的版本信息. 例如：
 
 /usr/local/nginx/sbin/nginx -v
 
-（8）显示编译阶段的参数
+(8)显示编译阶段的参数
 
 使用-V参数除了可以显示Nginx的版本信息外,还可以显示配置编译阶段的信息,如GCC编译器的版本、操作系统的版本、执行configure时的参数等. 例如：
 
 /usr/local/nginx/sbin/nginx -V
 
-（9）快速地停止服务
+(9)快速地停止服务
 
 使用-s stop可以强制停止Nginx服务. -s参数其实是告诉Nginx程序向正在运行的Nginx服务发送信号量,Nginx程序通过nginx.pid文件中得到master进程的进程ID,
 再向运行中的master进程发送TERM信号来快速地关闭Nginx服务. 例如：
@@ -131,7 +131,7 @@ kill -s SIGINT 10800
 
 上述两条命令的效果与执行/usr/local/nginx/sbin/nginx -s stop是完全一样的.
 
-（10）“优雅”地停止服务
+(10)“优雅”地停止服务
 
 如果希望Nginx服务可以正常地处理完当前所有请求再停止服务,那么可以使用-s quit参数来停止服务. 例如：
 
@@ -148,7 +148,7 @@ kill -s SIGQUIT <nginx master pid>
 
 kill -s SIGWINCH <nginx worker pid>
 
-（11）使运行中的Nginx重读配置项并生效
+(11)使运行中的Nginx重读配置项并生效
 
 使用-s reload参数可以使运行中的Nginx服务重新加载nginx.conf文件. 例如：
 
@@ -159,7 +159,7 @@ kill -s SIGWINCH <nginx worker pid>
 
 kill -s SIGHUP <nginx master pid>
 
-（12）日志文件回滚
+(12)日志文件回滚
 
 使用-s reopen参数可以重新打开日志文件,这样可以先把当前日志文件改名或转移到其他目录中进行备份,再重新打开时就会生成新的日志文件.
 这个功能使得日志文件不至于过大. 例如：
@@ -170,23 +170,23 @@ kill -s SIGHUP <nginx master pid>
 
 kill -s SIGUSR1 <nginx master pid>
 
-（13）平滑升级Nginx
+(13)平滑升级Nginx
 
 当Nginx服务升级到新的版本时,必须要将旧的二进制文件Nginx替换掉,通常情况下这是需要重启服务的,但Nginx支持不重启服务来完成新版本的平滑升级.
 
 升级时包括以下步骤：
 
-1）通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
+1)通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
 
 kill -s SIGUSR2 <nginx master pid>
 
 这时,运行中的Nginx会将pid文件重命名,如将/usr/local/nginx/logs/nginx.pid重命名为/usr/local/nginx/logs/nginx.pid.oldbin,这样新的Nginx才有可能启动成功.
 
-2）启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
+2)启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
 
-3）通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
+3)通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
 
-（14）显示命令行帮助
+(14)显示命令行帮助
 
 使用-h或者-?参数会显示支持的所有命令行参数.
 
@@ -199,7 +199,7 @@ sig_atomic_t  ngx_quit; //当接收到QUIT信号时,ngx_quit标志位会设为1,
 sig_atomic_t  ngx_debug_quit;
 ngx_uint_t    ngx_exiting; //ngx_exiting标志位仅由ngx_worker_process_cycle方法在退出时作为标志位使用
 sig_atomic_t  ngx_reconfigure;//nginx -s reload会触发该新号
-sig_atomic_t  ngx_reopen; //当接收到USRI信号时,ngx_reopen标志位会设为1,这是在告诉Nginx需要重新打开文件（如切换日志文件时）
+sig_atomic_t  ngx_reopen; //当接收到USRI信号时,ngx_reopen标志位会设为1,这是在告诉Nginx需要重新打开文件(如切换日志文件时)
 
 sig_atomic_t  ngx_change_binary; //平滑升级到新版本的Nginx程序,热升级
 ngx_pid_t     ngx_new_binary;//进行热代码替换,这里是调用execve来执行新的代码.  这个是在ngx_change_binary的基础上获取值
@@ -361,7 +361,7 @@ ngx_reconfigure. ngx_reopen. ngx_change_binary. ngx_noaccept这些标志位,见�
 会用到,它仅仅是在master工作流程中作为标志位使用的,与信号无关.
 
 实际上,根据以下8个标志位：ngx_reap、ngx_terminate、ngx_quit、ngx_reconfigure、ngx_restart、ngx_reopen、ngx_change_binary、
-ngx_noaccept,决定执行不同的分支流程,并循环执行（注意,每次一个循环执行完毕后进程会被挂起,直到有新的信号才会激活继续执行）.
+ngx_noaccept,决定执行不同的分支流程,并循环执行(注意,每次一个循环执行完毕后进程会被挂起,直到有新的信号才会激活继续执行).
 */
     for ( ;; ) {
         /*
@@ -528,7 +528,7 @@ ngx_noaccept,决定执行不同的分支流程,并循环执行（注意,每次�
 
             live = 1;
 
-            //向原先的（并非刚刚拉起的）所有子进程发送QUIT信号,要求它们优雅地退出自己的进程.
+            //向原先的(并非刚刚拉起的)所有子进程发送QUIT信号,要求它们优雅地退出自己的进程.
             ngx_signal_worker_processes(cycle,
                                         ngx_signal_value(NGX_SHUTDOWN_SIGNAL));
         }
@@ -658,7 +658,7 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
     ch.command = NGX_CMD_OPEN_CHANNEL;
 
     /*
-    由master进程按照配置文件中worker进程的数目,启动这些子进程（也就是调用表8-2中的ngx_start_worker_processes方法）.
+    由master进程按照配置文件中worker进程的数目,启动这些子进程(也就是调用表8-2中的ngx_start_worker_processes方法).
     */
     for (i = 0; i < n; i++) { //n为nginx.conf worker_processes中配置的进程数
 /*
@@ -1096,7 +1096,7 @@ ngx_master_process_exit(ngx_cycle_t *cycle)
     ngx_start_worker_processes---| ngx_processes[]相关的操作赋值流程
                                  |----------ngx_pass_open_channel
 */
-//在Nginx主循环（这里的主循环是ngx_worker_process_cycle方法）中,会定期地调用事件模块,以检查是否有网络事件发生.
+//在Nginx主循环(这里的主循环是ngx_worker_process_cycle方法)中,会定期地调用事件模块,以检查是否有网络事件发生.
 static void
 ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data) //data表示这是第几个worker进程
 {
@@ -1143,8 +1143,8 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data) //data表示这是第�
                 ngx_close_idle_connections(cycle);
                 /*
                 如果ngx_exiting为1,则开始准备关闭worker进程. 首先,根据当前ngx_cycle_t中所有正在处理的连接,调用它们对应的关闭连接处理方法
-                （就是将连接中的close标志位置为1,再调用读事件的处理方法,在第9章中会详细讲解Nginx连接）. 调用所有活动连接的读事件处理方法处
-                理连接关闭事件后,将检查ngx_event timer_ rbtree红黑树（保存所有事件的定时器,在第9章中会介绍它）是否为空,如果不为空,表示还
+                (就是将连接中的close标志位置为1,再调用读事件的处理方法,在第9章中会详细讲解Nginx连接). 调用所有活动连接的读事件处理方法处
+                理连接关闭事件后,将检查ngx_event timer_ rbtree红黑树(保存所有事件的定时器,在第9章中会介绍它)是否为空,如果不为空,表示还
                 有事件需要处理,将继续向下执行,调用ngx_process—events—and—timers方法处理事件;如果为空,表示已经处理完所有的事件,这时将调
                 用所有模块的exit_process方法,最后销毁内存池,退出整个worker进程.
                 注意ngx_exiting标志位只有唯一一段代码会设置它,也就是下面接收到QUIT信号. ngx_quit只有;在首次设置为1时,才会将ngx_exiting置为1.
@@ -1358,7 +1358,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
           }
     本文来自CSDN博客,转载请标明出处：http://blog.csdn.net/sunnyboychina/archive/2007/11/14/1884076.aspx
     ------Solutions------
-    调用socketpair创建的两个socket都是打开的,fork后子进程会继承这两个打开的socket. 为了实现父子进程通过socket pair（类似于管道）通信,必须保证父子进程分别open某一个socket.
+    调用socketpair创建的两个socket都是打开的,fork后子进程会继承这两个打开的socket. 为了实现父子进程通过socket pair(类似于管道)通信,必须保证父子进程分别open某一个socket.
     ------Solutions------
     可以这么理解：父子进程一个负责向socket写数据,一个从中读取数据,当写的时候当然不能读了,同理,当读的时候就不能写了. 和操作系统中的临界资源差不多.
     ------Solutions------
@@ -1564,7 +1564,7 @@ ngx_channel_handler(ngx_event_t *ev)
 
 /*
 除了充当代理服务器,nginx还可行使类似varnish/squid的缓存职责,即将客户端的请求内容缓存在Nginx服务器,下次同样的请求则由nginx直接返回,
-减轻了被代理服务器的压力;cache使用一块公共内存区域（共享内存）,存放缓存的索引数据,Nginx启动时cache loader进程将磁盘缓存的对象文件
+减轻了被代理服务器的压力;cache使用一块公共内存区域(共享内存),存放缓存的索引数据,Nginx启动时cache loader进程将磁盘缓存的对象文件
 (cycle->pathes,以红黑树组织)加载到内存中,加载完毕后自动退出;只有开启了proxy buffer才能使用proxy cache;
 
 注1：若被代理服务器返回的http头包含no-store/no-cache/private/max-age=0或者expires包含过期日期时,则该响应数据不被nginx缓存;

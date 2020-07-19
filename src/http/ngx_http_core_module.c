@@ -229,8 +229,8 @@ static ngx_command_t  ngx_http_core_commands[] = {
     语法：connection_pool_size size;
     默认：connection_pool_size 256;
     配置块：http、server
-    Nginx对于每个建立成功的TCP连接会预先分配一个内存池,上面的size配置项将指定这个内存池的初始大小（即ngx_connection_t结构体中的pool内存池初始大小,
-    9.8.1节将介绍这个内存池是何时分配的）,用于减少内核对于小块内存的分配次数. 需慎重设置,因为更大的size会使服务器消耗的内存增多,而更小的size则会引发更多的内存分配次数.
+    Nginx对于每个建立成功的TCP连接会预先分配一个内存池,上面的size配置项将指定这个内存池的初始大小(即ngx_connection_t结构体中的pool内存池初始大小,
+    9.8.1节将介绍这个内存池是何时分配的),用于减少内核对于小块内存的分配次数. 需慎重设置,因为更大的size会使服务器消耗的内存增多,而更小的size则会引发更多的内存分配次数.
     */
     { ngx_string("connection_pool_size"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_CONF_TAKE1,
@@ -243,8 +243,8 @@ static ngx_command_t  ngx_http_core_commands[] = {
 语法：request_pool_size size;
 默认：request_pool_size 4k;
 配置块：http、server
-Nginx开始处理HTTP请求时,将会为每个请求都分配一个内存池,size配置项将指定这个内存池的初始大小（即ngx_http_request_t结构体中的pool内存池初始大小,
-11.3节将介绍这个内存池是何时分配的）,用于减少内核对于小块内存的分配次数. TCP连接关闭时会销毁connection_pool_size指定的连接内存池,HTTP请求结束
+Nginx开始处理HTTP请求时,将会为每个请求都分配一个内存池,size配置项将指定这个内存池的初始大小(即ngx_http_request_t结构体中的pool内存池初始大小,
+11.3节将介绍这个内存池是何时分配的),用于减少内核对于小块内存的分配次数. TCP连接关闭时会销毁connection_pool_size指定的连接内存池,HTTP请求结束
 时会销毁request_pool_size指定的HTTP请求内存池,但它们的创建、销毁时间并不一致,因为一个TCP连接可能被复用于多个HTTP请求.
 */
     { ngx_string("request_pool_size"),
@@ -255,10 +255,10 @@ Nginx开始处理HTTP请求时,将会为每个请求都分配一个内存池,siz
       &ngx_http_core_pool_size_p },
     /*
     读取HTTP头部的超时时间
-    语法：client_header_timeout time（默认单位：秒）;
+    语法：client_header_timeout time(默认单位：秒);
     默认：client_header_timeout 60;
     配置块：http、server、location
-    客户端与服务器建立连接后将开始接收HTTP头部,在这个过程中,如果在一个时间间隔（超时时间）内没有读取到客户端发来的字节,则认为超时,
+    客户端与服务器建立连接后将开始接收HTTP头部,在这个过程中,如果在一个时间间隔(超时时间)内没有读取到客户端发来的字节,则认为超时,
     并向客户端返回408 ("Request timed out")响应.
     */
     { ngx_string("client_header_timeout"),
@@ -289,7 +289,7 @@ Nginx开始处理HTTP请求时,将会为每个请求都分配一个内存池,siz
 语法：large_client_header_buffers number size;
 默认：large_client_header_buffers 4 8k;
 配置块：http、server
-large_client_header_buffers定义了Nginx接收一个超大HTTP头部请求的buffer个数和每个buffer的大小. 如果HTTP请求行（如GET /index HTTP/1.1）
+large_client_header_buffers定义了Nginx接收一个超大HTTP头部请求的buffer个数和每个buffer的大小. 如果HTTP请求行(如GET /index HTTP/1.1)
 的大小超过上面的单个buffer,则返回"Request URI too large" (414). 请求中一般会有许多header,每一个header的大小也不能超过单个buffer的大小,
 否则会返回"Bad request" (400). 当然,请求行和请求头部的总和也不可以超过buffer个数*buffer大小.
 
@@ -309,7 +309,7 @@ large_client_header_buffers定义了Nginx接收一个超大HTTP头部请求的bu
 语法：ignore_invalid_headers on | off;
 默认：ignore_invalid_headers on;
 配置块：http、server
-如果将其设置为off,那么当出现不合法的HTTP头部时,Nginx会拒绝服务,并直接向用户发送400（Bad Request）错误. 如果将其设置为on,则会忽略此HTTP头部.
+如果将其设置为off,那么当出现不合法的HTTP头部时,Nginx会拒绝服务,并直接向用户发送400(Bad Request)错误. 如果将其设置为on,则会忽略此HTTP头部.
 */
     { ngx_string("ignore_invalid_headers"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_CONF_FLAG,
@@ -337,7 +337,7 @@ HTTP头部是否允许下画线
 语法：underscores_in_headers on | off;
 默认：underscores_in_headers off;
 配置块：http、server
-默认为off,表示HTTP头部的名称中不允许带“_”（下画线）.
+默认为off,表示HTTP头部的名称中不允许带“_”(下画线).
 */
     { ngx_string("underscores_in_headers"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_CONF_FLAG,
@@ -637,7 +637,7 @@ HTTP请求包体的最大值
 语法：client_header_buffer_size size;
 默认：client_header_buffer_size 1k;
 配置块：http、server
-上面配置项定义了正常情况下Nginx接收用户请求中HTTP header部分（包括HTTP行和HTTP头部）时分配的内存buffer大小. 有时,
+上面配置项定义了正常情况下Nginx接收用户请求中HTTP header部分(包括HTTP行和HTTP头部)时分配的内存buffer大小. 有时,
 请求中的HTTP header部分可能会超过这个大小,这时large_client_header_buffers定义的buffer将会生效.
 */
     { ngx_string("client_body_buffer_size"),
@@ -649,7 +649,7 @@ HTTP请求包体的最大值
 
     /*
     读取HTTP包体的超时时间
-    语法：client_body_timeout time（默认单位：秒）;
+    语法：client_body_timeout time(默认单位：秒);
     默认：client_body_timeout 60;
     配置块：http、server、location
     此配置项与client_header_timeout相似,只是这个超时时间只在读取HTTP包体时才有效.
@@ -686,7 +686,7 @@ client_body_temp_path  /opt/nginx/client_temp 1 2;
     默认：client_body_in_file_only off;
     配置块：http、server、location
     当值为非off时,用户请求中的HTTP包体一律存储到磁盘文件中,即使只有0字节也会存储为文件. 当请求结束时,如果配置为on,则这个文件不会
-    被删除（该配置一般用于调试、定位问题）,但如果配置为clean,则会删除该文件.
+    被删除(该配置一般用于调试、定位问题),但如果配置为clean,则会删除该文件.
    */
     { ngx_string("client_body_in_file_only"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
@@ -909,18 +909,18 @@ tcp/ip传输的一个标准了,这个标准的大概的意思是,一般情况下
 也就是说tcp_nopush = on 会设置调用tcp_cork方法,这个也是默认的,结果就是数据包不会马上传送出去,等到数据包最大时,一次性的传输出去,
 这样有助于解决网络堵塞.
 
-以快递投递举例说明一下（以下是我的理解,也许是不正确的）,当快递东西时,快递员收到一个包裹,马上投递,这样保证了即时性,但是会
+以快递投递举例说明一下(以下是我的理解,也许是不正确的),当快递东西时,快递员收到一个包裹,马上投递,这样保证了即时性,但是会
 耗费大量的人力物力,在网络上表现就是会引起网络堵塞,而当快递收到一个包裹,把包裹放到集散地,等一定数量后统一投递,这样就是tcp_cork的
 选项干的事情,这样的话,会最大化的利用网络资源,虽然有一点点延迟.
 
 对于nginx配置文件中的tcp_nopush,默认就是tcp_nopush,不需要特别指定,这个选项对于www,ftp等大文件很有帮助
 
 tcp_nodelay
-        TCP_NODELAY和TCP_CORK基本上控制了包的“Nagle化”,Nagle化在这里的含义是采用Nagle算法把较小的包组装为更大的帧.  John Nagle是Nagle算法的发明人,后者就是用他的名字来命名的,他在1984年首次用这种方法来尝试解决福特汽车公司的网络拥塞问题（欲了解详情请参看IETF RFC 896）. 他解决的问题就是所谓的silly window syndrome,中文称“愚蠢窗口症候群”,具体含义是,因为普遍终端应用程序每产生一次击键操作就会发送一个包,而典型情况下一个包会拥有一个字节的数据载荷以及40个字节长的包头,于是产生4000%的过载,很轻易地就能令网络发生拥塞,.  Nagle化后来成了一种标准并且立即在因特网上得以实现. 它现在已经成为缺省配置了,但在我们看来,有些场合下把这一选项关掉也是合乎需要的.
+        TCP_NODELAY和TCP_CORK基本上控制了包的“Nagle化”,Nagle化在这里的含义是采用Nagle算法把较小的包组装为更大的帧.  John Nagle是Nagle算法的发明人,后者就是用他的名字来命名的,他在1984年首次用这种方法来尝试解决福特汽车公司的网络拥塞问题(欲了解详情请参看IETF RFC 896). 他解决的问题就是所谓的silly window syndrome,中文称“愚蠢窗口症候群”,具体含义是,因为普遍终端应用程序每产生一次击键操作就会发送一个包,而典型情况下一个包会拥有一个字节的数据载荷以及40个字节长的包头,于是产生4000%的过载,很轻易地就能令网络发生拥塞,.  Nagle化后来成了一种标准并且立即在因特网上得以实现. 它现在已经成为缺省配置了,但在我们看来,有些场合下把这一选项关掉也是合乎需要的.
 
        现在让我们假设某个应用程序发出了一个请求,希望发送小块数据. 我们可以选择立即发送数据或者等待产生更多的数据然后再一次发送两种策略. 如果我们马上发送数据,那么交互性的以及客户/服务器型的应用程序将极大地受益. 如果请求立即发出那么响应时间也会快一些. 以上操作可以通过设置套接字的TCP_NODELAY = on 选项来完成,这样就禁用了Nagle 算法.
 
-       另外一种情况则需要我们等到数据量达到最大时才通过网络一次发送全部数据,这种数据传输方式有益于大量数据的通信性能,典型的应用就是文件服务器. 应用 Nagle算法在这种情况下就会产生问题. 但是,如果你正在发送大量数据,你可以设置TCP_CORK选项禁用Nagle化,其方式正好同 TCP_NODELAY相反（TCP_CORK和 TCP_NODELAY是互相排斥的）.
+       另外一种情况则需要我们等到数据量达到最大时才通过网络一次发送全部数据,这种数据传输方式有益于大量数据的通信性能,典型的应用就是文件服务器. 应用 Nagle算法在这种情况下就会产生问题. 但是,如果你正在发送大量数据,你可以设置TCP_CORK选项禁用Nagle化,其方式正好同 TCP_NODELAY相反(TCP_CORK和 TCP_NODELAY是互相排斥的).
 
 
 
@@ -943,7 +943,7 @@ tcp_nopush
       这两个选项都对网络连接的行为具有重要的作用. 许多UNIX系统都实现了TCP_NODELAY选项,但是,TCP_CORK则是Linux系统所独有的而且相对较新;它首先在内核版本2.4上得以实现.
       此外,其他UNIX系统版本也有功能类似的选项,值得注意的是,在某种由BSD派生的系统上的 TCP_NOPUSH选项其实就是TCP_CORK的一部分具体实现.
       TCP_NODELAY和TCP_CORK基本上控制了包的“Nagle化”,Nagle化在这里的含义是采用Nagle算法把较小的包组装为更大的帧.  John Nagle是Nagle算法的发明人,
-      后者就是用他的名字来命名的,他在1984年首次用这种方法来尝试解决福特汽车公司的网络拥塞问题（欲了解详情请参看IETF RFC 896）. 他解决的问题就是所谓的silly
+      后者就是用他的名字来命名的,他在1984年首次用这种方法来尝试解决福特汽车公司的网络拥塞问题(欲了解详情请参看IETF RFC 896). 他解决的问题就是所谓的silly
       window syndrome ,中文称“愚蠢窗口症候群”,具体含义是,因为普遍终端应用程序每产生一次击键操作就会发送一个包,而典型情况下一个包会拥有
       一个字节的数据载荷以及40 个字节长的包头,于是产生4000%的过载,很轻易地就能令网络发生拥塞,.  Nagle化后来成了一种标准并且立即在因特网上得以实现.
       它现在已经成为缺省配置了,但在我们看来,有些场合下把这一选项关掉也是合乎需要的.
@@ -952,13 +952,13 @@ tcp_nopush
       而且,如果请求立即发出那么响应时间也会快一些. 以上操作可以通过设置套接字的TCP_NODELAY选项来完成,这样就禁用了Nagle 算法.
       另外一种情况则需要我们等到数据量达到最大时才通过网络一次发送全部数据,这种数据传输方式有益于大量数据的通信性能,典型的应用就是文件服务器.
       应用 Nagle算法在这种情况下就会产生问题. 但是,如果你正在发送大量数据,你可以设置TCP_CORK选项禁用Nagle化,其方式正好同 TCP_NODELAY相反
-      （TCP_CORK 和 TCP_NODELAY 是互相排斥的）. 下面就让我们仔细分析下其工作原理.
+      (TCP_CORK 和 TCP_NODELAY 是互相排斥的). 下面就让我们仔细分析下其工作原理.
       假设应用程序使用sendfile()函数来转移大量数据. 应用协议通常要求发送某些信息来预先解释数据,这些信息其实就是报头内容. 典型情况下报头很小,
-      而且套接字上设置了TCP_NODELAY. 有报头的包将被立即传输,在某些情况下（取决于内部的包计数器）,因为这个包成功地被对方收到后需要请求对方确认.
+      而且套接字上设置了TCP_NODELAY. 有报头的包将被立即传输,在某些情况下(取决于内部的包计数器),因为这个包成功地被对方收到后需要请求对方确认.
       这样,大量数据的传输就会被推迟而且产生了不必要的网络流量交换.
-      但是,如果我们在套接字上设置了TCP_CORK（可以比喻为在管道上插入“塞子”）选项,具有报头的包就会填补大量的数据,所有的数据都根据大小自动地通过包传输出去.
+      但是,如果我们在套接字上设置了TCP_CORK(可以比喻为在管道上插入“塞子”)选项,具有报头的包就会填补大量的数据,所有的数据都根据大小自动地通过包传输出去.
       当数据传输完成时,最好取消TCP_CORK 选项设置给连接“拔去塞子”以便任一部分的帧都能发送出去. 这同“塞住”网络连接同等重要.
-      总而言之,如果你肯定能一起发送多个数据集合（例如HTTP响应的头和正文）,那么我们建议你设置TCP_CORK选项,这样在这些数据之间不存在延迟.
+      总而言之,如果你肯定能一起发送多个数据集合(例如HTTP响应的头和正文),那么我们建议你设置TCP_CORK选项,这样在这些数据之间不存在延迟.
       能极大地有益于WWW、FTP以及文件服务器的性能,同时也简化了你的工作. 示例代码如下：
       
       intfd, on = 1; 
@@ -999,7 +999,7 @@ tcp_nopush
     配置块：http、server、location
     
     连接超时后将通过向客户端发送RST包来直接重置连接. 这个选项打开后,Nginx会在某个连接超时后,不是使用正常情形下的四次握手关闭TCP连接,
-    而是直接向用户发送RST重置包,不再等待用户的应答,直接释放Nginx服务器上关于这个套接字使用的所有缓存（如TCP滑动窗口）. 相比正常的关闭方式,
+    而是直接向用户发送RST重置包,不再等待用户的应答,直接释放Nginx服务器上关于这个套接字使用的所有缓存(如TCP滑动窗口). 相比正常的关闭方式,
     它使得服务器避免产生许多处于FIN_WAIT_1、FIN_WAIT_2、TIME_WAIT状态的TCP连接.
     
     注意,使用RST重置包关闭连接会带来一些问题,默认情况下不会开启.
@@ -1087,10 +1087,10 @@ location /flv/ {
       NULL },
         /*
         keepalive超时时间
-        语法：keepalive_timeout time（默认单位：秒）;
+        语法：keepalive_timeout time(默认单位：秒);
         默认：keepalive_timeout 75;
         配置块：http、server、location
-        一个keepalive 连接在闲置超过一定时间后（默认的是75秒）,服务器和浏览器都会去关闭这个连接. 当然,keepalive_timeout配置项是用
+        一个keepalive 连接在闲置超过一定时间后(默认的是75秒),服务器和浏览器都会去关闭这个连接. 当然,keepalive_timeout配置项是用
         来约束Nginx服务器的,Nginx也会按照规范把这个时间传给浏览器,但每个浏览器对待keepalive的策略有可能是不同的.
         */ //注意和ngx_http_upstream_keepalive_commands中keepalive的区别
     { ngx_string("keepalive_timeout"),
@@ -1210,7 +1210,7 @@ lingering_close
     默认：lingering_time 30s;
     配置块：http、server、location
     lingering_close启用后,这个配置项对于上传大文件很有用. 上文讲过,当用户请求的Content-Length大于max_client_body_size配置时,
-    Nginx服务会立刻向用户发送413（Request entity too large）响应. 但是,很多客户端可能不管413返回值,仍然持续不断地上传HTTP body,
+    Nginx服务会立刻向用户发送413(Request entity too large)响应. 但是,很多客户端可能不管413返回值,仍然持续不断地上传HTTP body,
     这时,经过了lingering_time设置的时间后,Nginx将不管用户是否仍在上传,都会把连接关闭掉.
     */
     { ngx_string("lingering_time"),
@@ -1442,7 +1442,7 @@ before：是比exact更宽松的比较. 只要文件的上次修改时间等于�
 这样,通过读取缓存就减少了对磁盘的操作.
 
 该配置项后面跟3种参数.
-max：表示在内存中存储元素的最大个数. 当达到最大限制数量后,将采用LRU（Least Recently Used）算法从缓存中淘汰最近最少使用的元素.
+max：表示在内存中存储元素的最大个数. 当达到最大限制数量后,将采用LRU(Least Recently Used)算法从缓存中淘汰最近最少使用的元素.
 inactive：表示在inactive指定的时间段内没有被访问过的元素将会被淘汰. 默认时间为60秒.
 off：关闭缓存功能.
 例如：
@@ -1746,8 +1746,8 @@ ngx_http_handler(ngx_http_request_t *r) /* 执行11个阶段的指定阶段 */
         r->lingering_close = (r->headers_in.content_length_n > 0
                               || r->headers_in.chunked); 
         /*
-       当internal标志位为0时,表示不需要重定向（如刚开始处理请求时）,将phase_handler序号置为0,意味着从ngx_http_phase_engine_t指定数组
-       的第一个回调方法开始执行（了解ngx_http_phase_engine_t是如何将各HTTP模块的回调方法构造成handlers数组的）.
+       当internal标志位为0时,表示不需要重定向(如刚开始处理请求时),将phase_handler序号置为0,意味着从ngx_http_phase_engine_t指定数组
+       的第一个回调方法开始执行(了解ngx_http_phase_engine_t是如何将各HTTP模块的回调方法构造成handlers数组的).
           */
         r->phase_handler = 0;
 
@@ -1837,7 +1837,7 @@ ngx_http_request_t结构体中的phase_handler成员将决定执行到哪一阶�
 会被重置,而HTTP框架实现的checker穷法也会修改phase_handler成员的值
 
 当checker方法的返回值非NGX_OK时,意味着向下执行phase_engine中的各处理方法;反之,当任何一个checker方法返回NGX_OK时,意味着把控制权交还
-给Nginx的事件模块,由它根据事件（网络事件、定时器事件、异步I/O事件等）再次调度请求. 然而,一个请求多半需要Nginx事件模块多次地调度HTTP模
+给Nginx的事件模块,由它根据事件(网络事件、定时器事件、异步I/O事件等)再次调度请求. 然而,一个请求多半需要Nginx事件模块多次地调度HTTP模
 块处理,也就是在该函数外设置的读/写事件的回调方法ngx_http_request_handler
 */
         

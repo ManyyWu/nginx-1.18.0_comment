@@ -175,8 +175,8 @@ Nginx中许多特有的数据结构都会用到两个概念：单个ngx_buf_t缓
 介参数,第1个参数是数字,通常会用来表示缓存区的个数：第2个参数表示单个缓存区的
 空间大小,它像ngx_conf_set_size_slot中的参数单位一样,可以不携带单位,也可以使用k
 或者K、m或者M作为单位,如“gzip_buffers 4 8k;”. 我们用ngx_http_mytest_conf_t结构
-中的ngx_bufs_t my_bufs;来存储参数,ngx_bufs_t（12.1.3节ngx_http_upstream_conf_t结构
-体中的bufs成员就是应用ngx_bufs_t配置的一个非常好的例子）的定义很简单
+中的ngx_bufs_t my_bufs;来存储参数,ngx_bufs_t(12.1.3节ngx_http_upstream_conf_t结构
+体中的bufs成员就是应用ngx_bufs_t配置的一个非常好的例子)的定义很简单
 */
     {
         ngx_string("test_bufs"),

@@ -26,7 +26,7 @@ FLOW_CONTROL_ERROR (3) : 终端检测到对等端违反了流量控制协议.
 SETTINGS_TIMEOUT (4) : 终端发送了设置帧,但是没有及时收到响应. 见Settings Synchronization.
 STREAM_CLOSED (5) : 终端在流半封闭的时候收到帧.
 FRAME_SIZE_ERROR (6) : 终端收到大小超过最大尺寸的帧.
-REFUSED_STREAM (7) : 终端拒绝流在它执行任何应用处理之前,详见Reliability（章节 8.1.4）
+REFUSED_STREAM (7) : 终端拒绝流在它执行任何应用处理之前,详见Reliability(章节 8.1.4)
 CANCEL (8) : 终端使用这个标示某个流不再需要.
 COMPRESSION_ERROR (9) : 终端无法维持报头压缩上下文的连接
 CONNECT_ERROR (10) : 响应某个连接请求建立的连接被服为异常关闭.
@@ -66,7 +66,7 @@ INADEQUATE_SECURITY (12) ： 基础传输包含属性不满足文档或者终端
 #define NGX_HTTP_V2_MAX_STREAMS_SETTING          0x3
 /* 发送端流控窗口大小,接收到客户端setting中携带有该类型后,需要做流控窗口调整,默认值2^16-1 (65,535)个字节大小;最大值为2^31-1个字节大小,若溢出需要报FLOW_CONTROL_ERROR错误 */
 #define NGX_HTTP_V2_INIT_WINDOW_SIZE_SETTING     0x4
-/* 单帧负载最大值,默认为2^14（16384）个字节,两端所发送帧都会收到此设定影响;值区间为2^14（16384）-2^24-1(16777215)  */
+/* 单帧负载最大值,默认为2^14(16384)个字节,两端所发送帧都会收到此设定影响;值区间为2^14(16384)-2^24-1(16777215)  */
 #define NGX_HTTP_V2_MAX_FRAME_SIZE_SETTING       0x5
 
 //SETTING帧FRAME_SIZE的取值
@@ -800,7 +800,7 @@ ngx_http_v2_state_preface(ngx_http_v2_connection_t *h2c, u_char *pos,
 {
 /*
 客户端连接序言以24个字节的序列开始 PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n
-服务端连接序言包含一个有可能是空的设置（SETTING）帧,它必须在HTTP/2连接中首个发送.
+服务端连接序言包含一个有可能是空的设置(SETTING)帧,它必须在HTTP/2连接中首个发送.
 */
     static const u_char preface[] = "PRI * HTTP/2.0\r\n";
 
@@ -2079,7 +2079,7 @@ ngx_http_v2_state_priority(ngx_http_v2_connection_t *h2c, u_char *pos,
 
     depend = dependency & 0x7fffffff;
     /*
-    独家专属标志（exclusive flag）将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
+    独家专属标志(exclusive flag)将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
                       A
     A                 |
    / \      ==>       D
@@ -2943,7 +2943,7 @@ rst_stream:
 
 /*
 客户端连接序言以24个字节的序列开始 PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n
-服务端连接序言包含一个有可能是空的设置（SETTING）帧,它必须在HTTP/2连接中首个发送.
+服务端连接序言包含一个有可能是空的设置(SETTING)帧,它必须在HTTP/2连接中首个发送.
 */
 /* 组setting帧报文,加入到ngx_http_v2_connection_t->last_out  ack为1表示收到对方的setting帧,需要应答,其中内容部分为0 */
 static ngx_int_t
@@ -4958,7 +4958,7 @@ ngx_http_v2_adjust_windows(ngx_http_v2_connection_t *h2c, ssize_t delta) //delta
 
 
 /*
-exclusive:独家专属标志（exclusive flag）将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
+exclusive:独家专属标志(exclusive flag)将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
                       A
     A                 |
    / \      ==>       D
@@ -5051,7 +5051,7 @@ ngx_http_v2_set_dependency(ngx_http_v2_connection_t *h2c,
     }
 
     /*
-    一旦设置独家专属标志（exclusive flag）将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
+    一旦设置独家专属标志(exclusive flag)将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
                           A
         A                 |
        / \      ==>       D
@@ -5094,7 +5094,7 @@ ngx_http_v2_set_dependency(ngx_http_v2_connection_t *h2c,
 /*
 children权重更新,例如如下情况:
 
-一旦设置独家专属标志（exclusive flag）将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
+一旦设置独家专属标志(exclusive flag)将为现有依赖插入一个水平的依赖关系,其父级流只能被插入的新流所依赖. 比如流D设置专属标志并依赖于流A：
                       A
     A                 |
    / \      ==>       D

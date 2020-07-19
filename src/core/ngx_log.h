@@ -55,8 +55,8 @@
 #define NGX_LOG_DEBUG             8
 
 /*
-在使用ngx_log_debug宏时,level的崽义完全不同,它表达的意义不再是级别（已经
-是DEBUG级别）,而是日志类型,因为ngx_log_debug宏记录的日志必须是NGX-LOG—
+在使用ngx_log_debug宏时,level的崽义完全不同,它表达的意义不再是级别(已经
+是DEBUG级别),而是日志类型,因为ngx_log_debug宏记录的日志必须是NGX-LOG—
 DEBUG调试级别的,这里的level由各子模块定义. level的取值范围参见表4-7.
 表4-7 ngx_log_debug日志接口level参数的取值范围
 ┏━━━━━━━━━━┳━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -117,7 +117,7 @@ struct ngx_log_s {
 
     time_t               disk_full_time;
 
-    /* 记录日志时的回调方法. 当handler已经实现（不为NULL）,并且不是DEBUG调试级别时,才会调用handler钩子方法 */
+    /* 记录日志时的回调方法. 当handler已经实现(不为NULL),并且不是DEBUG调试级别时,才会调用handler钩子方法 */
     ngx_log_handler_pt   handler; //从连接池获取ngx_connection_t后,c->log->handler = ngx_http_log_error;
 
     /*
@@ -183,7 +183,7 @@ struct ngx_log_s {
 ┃NGX LOG DEBUG   ┃    8 ┃    调试级别,最低级别日志                                          ┃
 ┗━━━━━━━━┻━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
     使用ngx_log_error宏记录日志时,如果传人的level级别小于或等于log参数中的日志
-级别（通常是由nginx.conf配置文件中指定）,就会输出日志内容,否则这条日志会被忽略.
+级别(通常是由nginx.conf配置文件中指定),就会输出日志内容,否则这条日志会被忽略.
 */
 #define ngx_log_error(level, log, ...)                                        \
     if ((log)->log_level >= level) ngx_log_error_core(level, log, __VA_ARGS__)
@@ -192,8 +192,8 @@ void ngx_log_error_core(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,
     const char *fmt, ...);
 
 /*
-    在使用ngx_log_debug宏时,level的崽义完全不同,它表达的意义不再是级别（已经
-是DEBUG级别）,而是日志类型,因为ngx_log_debug宏记录的日志必须是NGX-LOG—
+    在使用ngx_log_debug宏时,level的崽义完全不同,它表达的意义不再是级别(已经
+是DEBUG级别),而是日志类型,因为ngx_log_debug宏记录的日志必须是NGX-LOG—
 DEBUG调试级别的,这里的level由各子模块定义. level的取值范围参见表4-7.
 表4-7 ngx_log_debug日志接口level参数的取值范围
 ┏━━━━━━━━━━┳━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓

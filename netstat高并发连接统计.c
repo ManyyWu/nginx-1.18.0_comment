@@ -4,10 +4,10 @@
 1)统计80端口连接数
 netstat -nat|grep -i "80"|wc -l
 
-2）统计httpd协议连接数
+2)统计httpd协议连接数
 ps -ef|grep httpd|wc -l
 
-3）、统计已连接上的,状态为“established
+3)、统计已连接上的,状态为“established
 netstat -na|grep ESTABLISHED|wc -l
 
 4)、查出哪个IP地址连接最多,将其封了.
@@ -49,7 +49,7 @@ netstat -nat||grep ESTABLISHED|wc - 可查看所有建立连接的详细记录
 　　Linux命令：
 netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
-（这条语句是从 新浪互动社区事业部 新浪互动社区事业部技术总监王老大那儿获得的,非常不错）返回结果示例：
+(这条语句是从 新浪互动社区事业部 新浪互动社区事业部技术总监王老大那儿获得的,非常不错)返回结果示例：
 　　LAST_ACK 5
 　　SYN_RECV 30
 　　ESTABLISHED 1597
@@ -65,7 +65,7 @@ TIME_WAIT表示处理完毕,等待超时结束的请求数.
 
 查看Apache并发请求数及其TCP连接状态
 
-查看httpd进程数（即prefork模式下Apache能够处理的并发请求数）：
+查看httpd进程数(即prefork模式下Apache能够处理的并发请求数)：
 　　Linux命令：
 
 ps -ef | grep httpd | wc -l

@@ -18,7 +18,7 @@ benchtime	webbench.c	/^int benchtime=30;\/\/压测时间，默认30秒，通过-
 build_request	webbench.c	/^void build_request(const char *url)$/;"	f
 bytes	webbench.c	/^int bytes=0; \/\/记录进程成功读取的字节数  通过读取服务端的回应来计算$/;"	v
 clients	webbench.c	/^int clients=1;\/\/并发数目，默认只有1个进程发请求，通过-c参数设置$/;"	v
-failed	webbench.c	/^int failed=0;\/\/记录失败的数量（speed表示成功数，failed表示失败数）  一次连接失败 或者读写失败都+1$/;"	v
+failed	webbench.c	/^int failed=0;\/\/记录失败的数量(speed表示成功数，failed表示失败数)  一次连接失败 或者读写失败都+1$/;"	v
 force	webbench.c	/^int force=0;\/\/是否需要等待读取从server返回的数据，0表示要等待读取$/;"	v
 force_reload	webbench.c	/^int force_reload=0;\/\/是否使用缓存，1表示不缓存，0表示可以缓存页面$/;"	v
 host	webbench.c	/^char host[MAXHOSTNAMELEN];\/\/服务器端ip$/;"	v

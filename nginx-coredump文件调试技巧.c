@@ -69,11 +69,11 @@ core文件生成路径:
 输入可执行文件运行命令的同一路径下.
  若系统生成的core文件不带其他任何扩展名称,则全部命名为core. 新的core文件生成将覆盖原来的core文件.
 
-1）/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展. 文件内容为1,表示添加pid作为扩展名,生成的core文件格式为core.xxxx;为0则表示生成的core文件同一命名为core.
+1)/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展. 文件内容为1,表示添加pid作为扩展名,生成的core文件格式为core.xxxx;为0则表示生成的core文件同一命名为core.
  可通过以下命令修改此文件：
 echo "1" > c
 
-2）proc/sys/kernel/core_pattern可以控制core文件保存位置和文件名格式.
+2)proc/sys/kernel/core_pattern可以控制core文件保存位置和文件名格式.
  可通过以下命令修改此文件：
 echo "/corefile/core-%e-%p-%t" > core_pattern,可以将core文件统一生成到/corefile目录下,产生的文件名为core-命令名-pid-时间戳
  以下是参数列表:
@@ -191,7 +191,7 @@ $grep signal error.log
 
 2. 简单方式,看进程号是否连续
 
-一般来说,在worker进程启动时,其进程号都是连续的（至少相差不是很远）,如果有进程退出,其进程号就不一定连续.
+一般来说,在worker进程启动时,其进程号都是连续的(至少相差不是很远),如果有进程退出,其进程号就不一定连续.
 $ps aux | grep nginx
 
 lizi      7223  0.0  0.0  74844  2024 ?        Ss   13:32   0:00 nginx: master process ./nginx
@@ -272,13 +272,13 @@ working_directory与编译时指定的--prefix=/path不同,后者表示在配置
 
 Linux环境下段错误的产生原因及调试方法小结
 最近在Linux环境下做C语言项目,由于是在一个原有项目基础之上进行二次开发,而且项目工程庞大复杂,出现了不少问题,其中遇到最多、花
-费时间最长的问题就是著名的“段错误”（Segmentation Fault）. 借此机会系统学习了一下,这里对Linux环境下的段错误做个小结,方便以后
+费时间最长的问题就是著名的“段错误”(Segmentation Fault). 借此机会系统学习了一下,这里对Linux环境下的段错误做个小结,方便以后
 同类问题的排查与解决.
 
 1. 段错误是什么 
 
 一句话来说,段错误是指访问的内存超出了系统给这个程序所设定的内存空间,例如访问了不存在的内存地址、访问了系统保护的内存地址、访问了
-只读的内存地址等等情况. 这里贴一个对于“段错误”的准确定义（参考Answers.com）：
+只读的内存地址等等情况. 这里贴一个对于“段错误”的准确定义(参考Answers.com)：
 
 A segmentation fault (often shortened to segfault) is a particular error condition that can occur during the operation of computer 
 software. In short, a segmentation fault occurs when a program attempts to access a memory location that it is not allowed to access, 
@@ -499,7 +499,7 @@ Quit anyway? (y or n) y
 
 panfeng@ubuntu:~/segfault$ ulimit -c 
 0 
-2、可以看到默认设置情况下,本机Linux环境下发生段错误时不会自动生成core文件,下面设置下core文件的大小限制（单位为KB）：
+2、可以看到默认设置情况下,本机Linux环境下发生段错误时不会自动生成core文件,下面设置下core文件的大小限制(单位为KB)：
 
 panfeng@ubuntu:~/segfault$ ulimit -c 1024 
 panfeng@ubuntu:~/segfault$ ulimit -c 
@@ -541,7 +541,7 @@ Program terminated with signal 11, Segmentation fault.
 
 (gdb) quit 
 4.3.2 适用场景 
-1、适合于在实际生成环境下调试程序的段错误（即在不用重新发生段错误的情况下重现段错误）.
+1、适合于在实际生成环境下调试程序的段错误(即在不用重新发生段错误的情况下重现段错误).
 
 2、当程序很复杂,core文件相当大时,该方法不可用.
 
@@ -594,10 +594,10 @@ panfeng@ubuntu:~/segfault$ grep -n -A 10 -B 10 "80484e0" ./segfault3Dump
 4.4.2 适用场景 
 1、不需要-g参数编译,不需要借助于core文件,但需要有一定的汇编语言基础.
 
-2、如果使用了gcc编译优化参数（-O1,-O2,-O3）的话,生成的汇编指令将会被优化,使得调试过程有些难度.
+2、如果使用了gcc编译优化参数(-O1,-O2,-O3)的话,生成的汇编指令将会被优化,使得调试过程有些难度.
 
 4.5 使用catchsegv 
-catchsegv命令专门用来扑获段错误,它通过动态加载器（ld-linux.so）的预加载机制（PRELOAD）把一个事先写好的库（/lib/libSegFault.so）
+catchsegv命令专门用来扑获段错误,它通过动态加载器(ld-linux.so)的预加载机制(PRELOAD)把一个事先写好的库(/lib/libSegFault.so)
 加载上,用于捕捉断错误的出错信息.
 
 复制代码 代码如下:

@@ -3,7 +3,7 @@
 分布式：一个业务分拆多个子业务,部署在不同的服务器上
 集群：同一个业务,部署在多个服务器上
 
-用户请求访问图片时,则由CDN厂商提供智能DNS解析,将最近的（当然也可能有其它更复杂的策略,例如负载情况、健康状态等）服务节点地址返回给用户,
+用户请求访问图片时,则由CDN厂商提供智能DNS解析,将最近的(当然也可能有其它更复杂的策略,例如负载情况、健康状态等)服务节点地址返回给用户,
 用户请求到达指定的服务器节点上,该节点上提供了类似Squid/Vanish的代理缓存服务,如果是第一次请求该路径,则会从源站获取图片资源返回客户端浏览器,
 如果缓存中存在,则直接从缓存中获取并返回给客户端浏览器,完成请求/响应过程.
 
@@ -41,7 +41,7 @@ Accept-Encoding:gzip,deflate.
 
  
 
-（3）请求正文
+(3)请求正文
 
 请求头和请求正文之间是一个空行,这个行非常重要,它表示请求头已经结束,接下来的是请求正文. 请求正文中可以包含客户提交的查询字符串信息：
 
@@ -57,7 +57,7 @@ GET方法是默认的HTTP请求方法,我们日常用GET方法来提交表单数
 
 Http://127.0.0.1/login.jsp?Name=zhangshi&Age=30&Submit=?%E+??
 
-从上面的URL请求中,很容易就可以辩认出表单提交的内容. （？之后的内容）另外由于GET方法提交的数据是作为URL请求的一部分所以提交的数据量不能太大
+从上面的URL请求中,很容易就可以辩认出表单提交的内容. (？之后的内容)另外由于GET方法提交的数据是作为URL请求的一部分所以提交的数据量不能太大
 
  
 
@@ -239,7 +239,7 @@ Connection:Keep-Alive
 
 
 
-HTTP响应代码、http头部详细分析（一）| 所属分类：http 响应代码    一、HTTP响应码响应码由三位十进制数字组成,它们出现在由HTTP服务器发送的响应的第一行.
+HTTP响应代码、http头部详细分析(一)| 所属分类：http 响应代码    一、HTTP响应码响应码由三位十进制数字组成,它们出现在由HTTP服务器发送的响应的第一行.
      响应码分五种类型,由它们的第一位数字表示：
 1xx：信息,请求收到,继续处理
 2xx：成功,行为被成功地接受、理解和采纳
@@ -262,13 +262,13 @@ Accept-Language 定义客户端乐于接受的自然语言列表. 例如：Accep
 Accept-Ranges 一个响应头标,它允许服务器指明：将在给定的偏移和长度处,为资源组成部分的接受请求. 该头标的值被理解为请求范围的度量单位. 例如Accept-Ranges: bytes或Accept-Ranges: none
 Age 允许服务器规定自服务器生成该响应以来所经过的时间长度,以秒为单位. 该头标主要用于缓存响应. 例如：Age: 30
 Allow 一个响应头标,它定义一个由位于请求URI中的次源所支持的HTTP方法列表. 例如：Allow: GET,PUT
-aUTHORIZATION 一个响应头标,用于定义访问一种资源所必需的授权（域和被编码的用户ID与口令）. 例如：Authorization: Basic YXV0aG9yOnBoaWw=
+aUTHORIZATION 一个响应头标,用于定义访问一种资源所必需的授权(域和被编码的用户ID与口令). 例如：Authorization: Basic YXV0aG9yOnBoaWw=
 Cache-Control 一个用于定义缓存指令的通用头标. 例如：Cache-Control: max-age=30
 Connection 一个用于表明是否保存socket连接为开放的通用头标. 例如：Connection: close或Connection: keep-alive
-Content-Base 一种定义基本URI的实体头标,为了在实体范围内解析相对URLs. 如果没有定义Content-Base头标解析相对URLs,使用Content- Location URI（存在且绝对）或使用URI请求. 例如：Content-Base:   http://www.myweb.com
+Content-Base 一种定义基本URI的实体头标,为了在实体范围内解析相对URLs. 如果没有定义Content-Base头标解析相对URLs,使用Content- Location URI(存在且绝对)或使用URI请求. 例如：Content-Base:   http://www.myweb.com
 Content-Encoding 一种介质类型修饰符,标明一个实体是如何编码的. 例如：Content-Encoding: zipContent-Language 用于指定在输入流中数据的自然语言类型. 例如：Content-Language: en
 Content-Length 指定包含于请求或响应中数据的字节长度. 例如：Content-Length:382
-Content-Location 指定包含于请求或响应中的资源定位（URI）. 如果是一绝. 对URL它也作为被解析实体的相对URL的出发点. 例如：Content-Location:   http://www.myweb.com/news
+Content-Location 指定包含于请求或响应中的资源定位(URI). 如果是一绝. 对URL它也作为被解析实体的相对URL的出发点. 例如：Content-Location:   http://www.myweb.com/news
 Content-MD5 实体的一种MD5摘要,用作校验和. 发送方和接受方都计算MD5摘要,接受方将其计算的值与此头标中传递的值进行比较. 例如：Content-MD5: <base64 of 128 MD5 digest>
 Content-Range 随部分实体一同发送;标明被插入字节的低位与高位字节偏移,也标明此实体的总长度. 例如：Content-Range: 1001-2000/5000
 Contern-Type 标明发送或者接收的实体的MIME类型. 例如：Content-Type: text/html
@@ -283,22 +283,22 @@ If-None-Match 如果包含一个请求,指定一个或者多个实体标记. 资
 If-Range 指定资源的一个实体标记,客户端已经拥有此资源的一个拷贝. 必须与Range头标一同使用. 如果此实体自上次被客户端检索以来,还不曾修改过,那么服务器 只发送指定的范围,否则它将发送整个资源. 例如：Range: byte=0-499<CRLF>If-Range:'208f-419e-30f8dc99'
 If-Unmodified-Since 只有自指定的日期以来,被请求的实体还不曾被修改过,才会返回此实体. 例如：If-Unmodified-Since:Mon,10PR 18:42:51 GMT
 Last-Modified 指定被请求资源上次被修改的日期和时间. 例如：Last-Modified: Mon,10PR 18:42:51 GMT
-Location 对于一个已经移动的资源,用于重定向请求者至另一个位置. 与状态编码302（暂时移动）或者301（永久性移动）配合使用. 例如：Location:   http://www2.myweb.com/index.jsp
+Location 对于一个已经移动的资源,用于重定向请求者至另一个位置. 与状态编码302(暂时移动)或者301(永久性移动)配合使用. 例如：Location:   http://www2.myweb.com/index.jsp
 Max-Forwards 一个用于TRACE方法的请求头标,以指定代理或网关的最大数目,该请求通过网关才得以路由. 在通过请求传递之前,代理或网关应该减少此数目. 例如：Max-Forwards: 3
 Pragma 一个通用头标,它发送实现相关的信息. 例如：Pragma: no-cache
-Proxy-Authenticate 类似于WWW-Authenticate,便是有意请求只来自请求链（代理）的下一个服务器的认证. 例如：Proxy-Authenticate: Basic realm-admin
+Proxy-Authenticate 类似于WWW-Authenticate,便是有意请求只来自请求链(代理)的下一个服务器的认证. 例如：Proxy-Authenticate: Basic realm-admin
 Proxy-Proxy-Authorization 类似于授权,但并非有意传递任何比在即时服务器链中更进一步的内容. 例如：Proxy-Proxy-Authorization: Basic YXV0aG9yOnBoaWw=
 Public 列表显示服务器所支持的方法集. 例如：Public: OPTIONS,MGET,MHEAD,GET,HEAD
 Range 指定一种度量单位和一个部分被请求资源的偏移范围. 例如：Range: bytes=206-5513
 Refener 一种请求头标域,标明产生请求的初始资源. 对于HTML表单,它包含此表单的Web页面的地址. 例如：Refener:   http://www.myweb.com/news/search.html
-Retry-After 一种响应头标域,由服务器与状态编码503（无法提供服务）配合发送,以标明再次请求之前应该等待多长时间. 此时间即可以是一种日期,也可以是一种秒单位. 例如：Retry-After: 18
+Retry-After 一种响应头标域,由服务器与状态编码503(无法提供服务)配合发送,以标明再次请求之前应该等待多长时间. 此时间即可以是一种日期,也可以是一种秒单位. 例如：Retry-After: 18
 Server 一种标明Web服务器软件及其版本号的头标. 例如：Server: Apache/2.0.46(Win32)
 Transfer-Encoding 一种通用头标,标明对应被接受方反向的消息体实施变换的类型. 例如：Transfer-Encoding: chunked
-Upgrade 允许服务器指定一种新的协议或者新的协议版本,与响应编码101（切换协议）配合使用. 例如：Upgrade: HTTP/2.0
-User-Agent 定义用于产生请求的软件类型（典型的如Web浏览器）. 例如：User-Agent: Mozilla/4.0(compatible; MSIE 5.5; Windows NT; DigExt)
+Upgrade 允许服务器指定一种新的协议或者新的协议版本,与响应编码101(切换协议)配合使用. 例如：Upgrade: HTTP/2.0
+User-Agent 定义用于产生请求的软件类型(典型的如Web浏览器). 例如：User-Agent: Mozilla/4.0(compatible; MSIE 5.5; Windows NT; DigExt)
 Vary 一个响应头标,用于表示使用服务器驱动的协商从可用的响应表示中选择响应实体. 例如：Vary: *Via 一个包含所有中间主机和协议的通用头标,用于满足请求. 例如：Via: 1.0 fred.com, 1.1 wilma.com
 Warning 用于提供关于响应状态补充信息的响应头标. 例如：Warning: 99   www.myweb.com   Piano needs tuning
-www-Authenticate 一个提示用户代理提供用户名和口令的响应头标,与状态编码401（未授权）配合使用. 响应一个授权头标. 例如：www-Authenticate: Basic realm=zxm.mgmt
+www-Authenticate 一个提示用户代理提供用户名和口令的响应头标,与状态编码401(未授权)配合使用. 响应一个授权头标. 例如：www-Authenticate: Basic realm=zxm.mgmt
 
 
 
@@ -310,45 +310,45 @@ www-Authenticate 一个提示用户代理提供用户名和口令的响应头标
 最全的HTTP头部信息分析 
 2011-11-03 本文行家：尉聊子
     
-HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*表示任何类型,type/*表示该类型下的所有子类型,type/sub-type. 2.Accept-Charset：浏览器申明自己接收的字符集Accept-Encoding：浏览器申明自己接收的编码方法,通常指定压缩方法,是否支持压缩,支持什么压缩方法（gzip,deflate）Accept-Language：：浏览器申明
+HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*表示任何类型,type/*表示该类型下的所有子类型,type/sub-type. 2.Accept-Charset：浏览器申明自己接收的字符集Accept-Encoding：浏览器申明自己接收的编码方法,通常指定压缩方法,是否支持压缩,支持什么压缩方法(gzip,deflate)Accept-Language：：浏览器申明
 
  HTTP 头部解释
 
 1. Accept：告诉WEB服务器自己接受什么介质类型,* /* 表示任何类型,type/* 表示该类型下的所有子类型,type/sub-type.
  
 2. Accept-Charset：   浏览器申明自己接收的字符集
-   Accept-Encoding：  浏览器申明自己接收的编码方法,通常指定压缩方法,是否支持压缩,支持什么压缩方法  （gzip,deflate）
+   Accept-Encoding：  浏览器申明自己接收的编码方法,通常指定压缩方法,是否支持压缩,支持什么压缩方法  (gzip,deflate)
    Accept-Language：：浏览器申明自己接收的语言语言跟字符集的区别：中文是语言,中文有多种字符集,比如big5,gb2312,gbk等等.
  
-3. Accept-Ranges：WEB服务器表明自己是否接受获取其某个实体的一部分（比如文件的一部分）的请求. bytes：表示接受,none：表示不接受.
+3. Accept-Ranges：WEB服务器表明自己是否接受获取其某个实体的一部分(比如文件的一部分)的请求. bytes：表示接受,none：表示不接受.
  
 4. Age：当代理服务器用自己缓存的实体去响应请求时,用该头部表明该实体从产生到现在经过多长时间了.
  
 5. Authorization：当客户端接收到来自WEB服务器的 WWW-Authenticate 响应时,该头部来回应自己的身份验证信息给WEB服务器.
  
-6. Cache-Control：请求：no-cache（不要缓存的实体,要求现在从WEB服务器去取）
-                                     max-age：（只接受 Age 值小于 max-age 值,并且没有过期的对象）
-                                     max-stale：（可以接受过去的对象,但是过期时间必须小于
-                                                        max-stale 值）
-                                     min-fresh：（接受其新鲜生命期大于其当前 Age 跟 min-fresh 值之和的
-                                                        缓存对象）
+6. Cache-Control：请求：no-cache(不要缓存的实体,要求现在从WEB服务器去取)
+                                     max-age：(只接受 Age 值小于 max-age 值,并且没有过期的对象)
+                                     max-stale：(可以接受过去的对象,但是过期时间必须小于
+                                                        max-stale 值)
+                                     min-fresh：(接受其新鲜生命期大于其当前 Age 跟 min-fresh 值之和的
+                                                        缓存对象)
                             响应：public(可以用 Cached 内容回应任何用户)
-                                      private（只能用缓存内容回应先前请求该内容的那个用户）
-                                      no-cache（可以缓存,但是只有在跟WEB服务器验证了其有效后,才能返回给客户端）
-                                      max-age：（本响应包含的对象的过期时间）
-                                      ALL:  no-store（不允许缓存）
+                                      private(只能用缓存内容回应先前请求该内容的那个用户)
+                                      no-cache(可以缓存,但是只有在跟WEB服务器验证了其有效后,才能返回给客户端)
+                                      max-age：(本响应包含的对象的过期时间)
+                                      ALL:  no-store(不允许缓存)
  
-7. Connection：请求：close（告诉WEB服务器或者代理服务器,在完成本次请求的响应
-                                                  后,断开连接,不要等待本次连接的后续请求了）.
-                                 keepalive（告诉WEB服务器或者代理服务器,在完成本次请求的
-                                                         响应后,保持连接,等待本次连接的后续请求）.
-                       响应：close（连接已经关闭）.
-                                 keepalive（连接保持着,在等待本次连接的后续请求）.
+7. Connection：请求：close(告诉WEB服务器或者代理服务器,在完成本次请求的响应
+                                                  后,断开连接,不要等待本次连接的后续请求了).
+                                 keepalive(告诉WEB服务器或者代理服务器,在完成本次请求的
+                                                         响应后,保持连接,等待本次连接的后续请求).
+                       响应：close(连接已经关闭).
+                                 keepalive(连接保持着,在等待本次连接的后续请求).
    Keep-Alive：如果浏览器请求保持连接,则该头部表明希望 WEB 服务器保持
-                      连接多长时间（秒）.
+                      连接多长时间(秒).
                       例如：Keep-Alive：300
  
-8. Content-Encoding：WEB服务器表明自己使用了什么压缩方法（gzip,deflate）压缩响应中的对象.
+8. Content-Encoding：WEB服务器表明自己使用了什么压缩方法(gzip,deflate)压缩响应中的对象.
                                  例如：Content-Encoding：gzip                   
    Content-Language：WEB 服务器告诉浏览器自己响应的对象的语言.
    Content-Length：    WEB 服务器告诉浏览器自己响应的对象的长度.
@@ -358,7 +358,7 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
    Content-Type：      WEB 服务器告诉浏览器自己响应的对象的类型.
                                 例如：Content-Type：application/xml
  
-9. ETag：就是一个对象（比如URL）的标志值,就一个对象而言,比如一个 html 文件,
+9. ETag：就是一个对象(比如URL)的标志值,就一个对象而言,比如一个 html 文件,
               如果被修改了,其 Etag 也会别修改, 所以,ETag 的作用跟 Last-Modified 的
               作用差不多,主要供 WEB 服务器 判断一个对象是否改变了.
               比如前一次请求某个 html 文件时,获得了其 ETag,当这次又请求这个文件时,
@@ -377,9 +377,9 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
     If-None-Match：如果对象的 ETag 改变了,其实也就意味著对象也改变了,才执行请求的动作.
  
 13. If-Modified-Since：如果请求的对象在该头部指定的时间之后修改了,才执行请求
-                       的动作（比如返回对象）,否则返回代码304,告诉浏览器该对象没有修改.
+                       的动作(比如返回对象),否则返回代码304,告诉浏览器该对象没有修改.
                        例如：If-Modified-Since：Thu, 10 Apr 2008 09:14:42 GMT
-    If-Unmodified-Since：如果请求的对象在该头部指定的时间之后没修改过,才执行请求的动作（比如返回对象）.
+    If-Unmodified-Since：如果请求的对象在该头部指定的时间之后没修改过,才执行请求的动作(比如返回对象).
  
 14. If-Range：浏览器告诉 WEB 服务器,如果我请求的对象没有改变,就把我缺少的部分
                给我,如果对象改变了,就把整个对象给我.  浏览器通过发送请求对象的
@@ -397,7 +397,7 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
 18. Proxy-Authenticate： 代理服务器响应浏览器,要求其提供代理身份验证信息.
       Proxy-Authorization：浏览器响应代理服务器的身份验证请求,提供自己的身份信息.
  
-19. Range：浏览器（比如 Flashget 多线程下载时）告诉 WEB 服务器自己想取对象的哪部分.
+19. Range：浏览器(比如 Flashget 多线程下载时)告诉 WEB 服务器自己想取对象的哪部分.
                     例如：Range: bytes=1173546-
  
 20. Referer：浏览器向 WEB 服务器表明自己是从哪个 网页/URL 获得/点击 当前请求中的网址/URL.
@@ -405,11 +405,11 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
  
 21. Server: WEB 服务器表明自己是什么软件及版本等信息. 例如：Server：Apache/2.0.61 (Unix)
  
-22. User-Agent: 浏览器表明自己的身份（是哪种浏览器）.
+22. User-Agent: 浏览器表明自己的身份(是哪种浏览器).
                         例如：User-Agent：Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN;   
                                   rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14
  
-23. Transfer-Encoding: WEB 服务器表明自己对本响应消息体（不是消息体里面的对象）作了怎样的编码,比如是否分块（chunked）.
+23. Transfer-Encoding: WEB 服务器表明自己对本响应消息体(不是消息体里面的对象)作了怎样的编码,比如是否分块(chunked).
                        例如：Transfer-Encoding: chunked
  
 24. Vary: WEB服务器用该头部的内容告诉 Cache 服务器,在什么条件下才能用本响应
@@ -422,7 +422,7 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
                  例如：Vary：Accept-Encoding
  
 25. Via： 列出从客户端到 OCS 或者相反方向的响应经过了哪些代理服务器,他们用
-        什么协议（和版本）发送的请求. 当客户端请求到达第一个代理服务器时,该服务器会在自己发出的请求里面
+        什么协议(和版本)发送的请求. 当客户端请求到达第一个代理服务器时,该服务器会在自己发出的请求里面
         添加 Via 头部,并填上自己的相关信息,当下一个代理服务器 收到第一个代理服务器的请求时,会在自己发
         出的请求里面复制前一个代理服务器的请求的Via头部,并把自己的相关信息加到后面, 以此类推,当 OCS
         收到最后一个代理服务器的请求时,检查 Via 头部,就知道该请求所经过的路由.
@@ -441,21 +441,21 @@ HTTP头部解释1.Accept：告诉WEB服务器自己接受什么介质类型,* /*
 分类： 网站 2014-09-08 00:16 154人阅读 评论(0) 收藏 举报 
 目录(?)[+]
 
-理解HTTP消息头 二常见的HTTP返回码403 Access Forbidden404 Object not found401 Access Denied302 Object Moved500 Internal Server Error理解HTTP消息头 三理解HTTP消息头 四服务器返回的消息Content-TypeContent-DispositionContent-Type与Content-DispositionCache（一）初识HTTP消息头
+理解HTTP消息头 二常见的HTTP返回码403 Access Forbidden404 Object not found401 Access Denied302 Object Moved500 Internal Server Error理解HTTP消息头 三理解HTTP消息头 四服务器返回的消息Content-TypeContent-DispositionContent-Type与Content-DispositionCache(一)初识HTTP消息头
 
-但凡搞WEB开发的人都离不开HTTP（超文本传输协议）,而要了解HTTP,除了HTML本身以外,还有一部分不可忽视的就是HTTP消息头.
+但凡搞WEB开发的人都离不开HTTP(超文本传输协议),而要了解HTTP,除了HTML本身以外,还有一部分不可忽视的就是HTTP消息头.
 做过Socket编程的人都知道,当我们设计一个通信协议时,“消息头/消息体”的分割方式是很常用的,消息头告诉对方这个消息是干什么的,消息体告诉对方怎么干. HTTP传输的消息也是这样规定的,每一个HTTP包都分为HTTP头和HTTP体两部分,后者是可选的,而前者是必须的. 每当我们打开一个网页,在上面点击右键,选择“查看源文件”,这时看到的HTML代码就是HTTP的消息体,那么消息头又在哪呢？IE浏览器不让我们看到这部分,但我们可以通过截取数据包等方法看到它.
 下面就来看一个简单的例子：
 首先制作一个非常简单的网页,它的内容只有一行：
 <html><body>hello world</body></html>
-把它放到WEB服务器上,比如IIS,然后用IE浏览器请求这个页面（http://localhost:8080/simple.htm）,当我们请求这个页面时,浏览器实际做了以下四项工作：
+把它放到WEB服务器上,比如IIS,然后用IE浏览器请求这个页面(http://localhost:8080/simple.htm),当我们请求这个页面时,浏览器实际做了以下四项工作：
 1 解析我们输入的地址,从中分解出协议名、主机名、端口、对象路径等部分,对于我们的这个地址,解析得到的结果如下：
 协议名：http
 主机名：localhost
 端口：8080
 对象路径：/simple.htm
 2 把以上部分结合本机自己的信息,封装成一个HTTP请求数据包
-3 使用TCP协议连接到主机的指定端口（localhost, 8080）,并发送已封装好的数据包
+3 使用TCP协议连接到主机的指定端口(localhost, 8080),并发送已封装好的数据包
 4 等待服务器返回数据,并解析返回数据,最后显示出来
 由截取到的数据包我们不难发现浏览器生成的HTTP数据包的内容如下：
 GET /simple.htm HTTP/1.1<CR>
@@ -491,11 +491,11 @@ Content-Length: 37<CR>
  
  
  
-理解HTTP消息头 （二）
+理解HTTP消息头 (二)
 常见的HTTP返回码
 上一篇文章里我简要的说了说HTTP消息头的格式,注意到在服务器返回的HTTP消息头里有一个“HTTP/1.1 200 OK”,这里的200是HTTP规定的返回代码,表示请求已经被正常处理完成. 浏览器通过这个返回代码就可以知道服务器对所发请求的处理情况是什么,每一种返回代码都有自己的含义. 这里列举几种常见的返回码.
 1 403 Access Forbidden
-如果我们试图请求服务器上一个文件夹,而在WEB服务器上这个文件夹并没有允许对这个文件夹列目录的话,就会返回这个代码. 一个完整的403回复可能是这样的：（IIS5.1）
+如果我们试图请求服务器上一个文件夹,而在WEB服务器上这个文件夹并没有允许对这个文件夹列目录的话,就会返回这个代码. 一个完整的403回复可能是这样的：(IIS5.1)
 HTTP/1.1 403 Access Forbidden
 Server: Microsoft-IIS/5.1
 Date: Mon, 06 Mar 2006 08:57:39 GMT
@@ -526,7 +526,7 @@ Content-Type: text/html; charset=iso-8859-1
 </body></html>
 也许你会问,无论是404还是200,都会在消息体内给出一个说明网页,那么对于客户端来说二者有什么区别呢？一个比较明显的区别在于200是成功请求,浏览器会记录下这个地址,以便下次再访问时可以自动提示该地址,而404是失败请求,浏览器只会显示出返回的页面内容,并不会记录此地址,要再次访问时还需要输入完整的地址.
 3 401 Access Denied
-当WEB服务器不允许匿名访问,而我们又没有提供正确的用户名/密码时,服务器就会给出这个返回代码. 在IIS中,设置IIS的安全属性为不允许匿名访问（如下图）,此时直接访问的话就会得到以下返回结果：
+当WEB服务器不允许匿名访问,而我们又没有提供正确的用户名/密码时,服务器就会给出这个返回代码. 在IIS中,设置IIS的安全属性为不允许匿名访问(如下图),此时直接访问的话就会得到以下返回结果：
 
 HTTP/1.1 401 Access Denied
 Server: Microsoft-IIS/5.1
@@ -543,7 +543,7 @@ Content-Type: text/html
 此时浏览器上给出的提示如下图,让我们输入用户名和密码：
 
 因返回信息中消息体较长,只取前面两行内容. 注意,如果是用localhost来访问本机的IIS,因IE可以直接取得当前用户的身份,它会和服务器间直接进行协商,所以不会看到401提示.
-当我们在输入了用户名和密码以后,服务器与客户端会再进行两次对话. 首先客户端向服务器索取一个公钥,服务器端会返回一个公钥,二者都用BASE64编码,相应的消息如下（编码部分已经做了处理）：
+当我们在输入了用户名和密码以后,服务器与客户端会再进行两次对话. 首先客户端向服务器索取一个公钥,服务器端会返回一个公钥,二者都用BASE64编码,相应的消息如下(编码部分已经做了处理)：
 GET / HTTP/1.1
 Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, * / *
 Accept-Language: zh-cn
@@ -659,9 +659,9 @@ Cache-control: private
 
  
  
-理解HTTP消息头 （三）
+理解HTTP消息头 (三)
 
-（三） 客户端发送的内容
+(三) 客户端发送的内容
 这一次主要来观察HTTP消息头中客户端的请求,从中找到一些有意思的内容.
  
 1 HTTP_REFERER
@@ -718,7 +718,7 @@ Set-Cookie: ASPSESSIONIDCSQCRTBS=KOIPGIMBCOCBFMOBENDCAKDP; path=/
 SESSION和COOKIE的方式各有优缺点. SESSION的优点是比较安全,不容易被欺骗,缺点是过期时间短,如果用过在超过过期时间里没有向服务器发送任何信息,就会被认为超过过期了;COOKIE则相反,根据服务器端设置的超时时间,可以长时间保留信息,即使关机再开机也可能保留状态,而安全性自然大打折扣. 很多网站都提供两种验证方式相结合,如果用户临时用这台电脑访问此访问则需要输入用户名和密码,不保存COOKIE;如果用户使用的是自己的个人电脑,则可以让网站在自己硬盘上保留COOKIE,以后访问时就不需要重新输入用户名和密码了.
  
 4 POST
-浏览器访问服务器常用的方式有GET和POST两种,GET方式只发送HTTP消息头,没有消息体,也就是除了要GET的基本信息之外不向服务器提供其他信息,网页表单（FROM）的默认提交方式就是用GET方式,它会把所有向服务器提交的信息都作为URL后面的参数,如a.asp?a=1&b=2这样的方式. 而当要提交的数据量很大,或者所提交内容不希望别人直接看到时,应该使用POST方式. POST方式提交的数据是作为HTTP消息体存在的,例如,写一个网页表单：
+浏览器访问服务器常用的方式有GET和POST两种,GET方式只发送HTTP消息头,没有消息体,也就是除了要GET的基本信息之外不向服务器提供其他信息,网页表单(FROM)的默认提交方式就是用GET方式,它会把所有向服务器提交的信息都作为URL后面的参数,如a.asp?a=1&b=2这样的方式. 而当要提交的数据量很大,或者所提交内容不希望别人直接看到时,应该使用POST方式. POST方式提交的数据是作为HTTP消息体存在的,例如,写一个网页表单：
 <form method=post>
 <input type=text name=text1>
 <input type=submit>
@@ -774,9 +774,9 @@ ABCDEFG
 
  
  
-理解HTTP消息头 （四）
+理解HTTP消息头 (四)
 服务器返回的消息
-服务器返回的HTTP消息也分为消息头和消息体两部分. 前面连载的第二篇里已经介绍了返回消息中常见返回代码的含义. 对于非正常的返回代码的处理比较简单,只要照着要求去做就好了,而对于正常的返回代码（200）,其处理方式就多种多样了.
+服务器返回的HTTP消息也分为消息头和消息体两部分. 前面连载的第二篇里已经介绍了返回消息中常见返回代码的含义. 对于非正常的返回代码的处理比较简单,只要照着要求去做就好了,而对于正常的返回代码(200),其处理方式就多种多样了.
 
 1 Content-Type
 Content-Type是返回消息中非常重要的内容,它标识出这个返回内容的类型,其值为“主类型/子类型”的格式,例如最常见的就是text/html,它的意思是说返回的内容是文本类型,这个文本又是HTML格式的. 原则上浏览器会根据Content-Type来决定如何显示返回的消息体内容. 常见的内容类型有：
@@ -805,20 +805,20 @@ Response.AddHeader("Content-Disposition: attachment; filename=mypage.htm");
 如果把Content-Type和Content-Disposition结合在一起使用会怎么样呢？
 打开一个网页时,浏览器会首先看是否有Content-Disposition: attachment这一项,如果有,无论Content-Type的值是什么,都会提示文件下载.
 如果指定了filename,就会提示默认的文件名为此文件名. 注意到在IE6中除了“保存”按扭外还有“打开”按扭,此时打开文件的类型是由在filename中指定的文件扩展名决定的,例如让filename=mypic.jpg,浏览器就会查找默认的图片查看器来打开此文件.
-如果没有指定filename,那么浏览器就根据Content-Type中的类型来决定文件的类型,例如Content-Type类型为image/gif,那么就会去查找默认的看GIF图片的工具,并且设置此文件的名字为所请求的网页的主名（不带扩展名）加上对应于此文件类弄扩展名,例如请求的mypage.aspx,就会自动变成mypage.gif. 如果并没有指定Content-Type值,那么就默认它为“text/html”,并且保存的文件名就是所请求的网页文件名.
+如果没有指定filename,那么浏览器就根据Content-Type中的类型来决定文件的类型,例如Content-Type类型为image/gif,那么就会去查找默认的看GIF图片的工具,并且设置此文件的名字为所请求的网页的主名(不带扩展名)加上对应于此文件类弄扩展名,例如请求的mypage.aspx,就会自动变成mypage.gif. 如果并没有指定Content-Type值,那么就默认它为“text/html”,并且保存的文件名就是所请求的网页文件名.
 但如果没有指定Content-Disposition,那么就和前面关于Content-Type中所讨论的情况是一样的了.
 
 4 Cache
 返回消息中的Cache用于指定网页缓存. 我们经常可以看到这样的情况,打开一个网页时速度不快,但再次打开时就会快很多,原因是浏览器已经对此页面进行了缓存,那么在同一浏览器窗口中再次打开此页时不会重新从服务器端获取. 网页的缓存是由HTTP消息头中的“Cache-control”来控制的,常见的取值有private、no-cache、max-age、must-revalidate等,默认为private. 其作用根据不同的重新浏览方式分为以下几种情况：
-（1） 打开新窗口
+(1) 打开新窗口
 如果指定cache-control的值为private、no-cache、must-revalidate,那么打开新窗口访问时都会重新访问服务器. 而如果指定了max-age值,那么在此值内的时间里就不会重新访问服务器,例如：
 Cache-control: max-age=5
 表示当访问此网页后的5秒内再次访问不会去服务器
-（2） 在地址栏回车
-如果值为private或must-revalidate（和网上说的不一样）,则只有第一次访问时会访问服务器,以后就不再访问. 如果值为no-cache,那么每次都会访问. 如果值为max-age,则在过期之前不会重复访问.
-（3） 按后退按扭
+(2) 在地址栏回车
+如果值为private或must-revalidate(和网上说的不一样),则只有第一次访问时会访问服务器,以后就不再访问. 如果值为no-cache,那么每次都会访问. 如果值为max-age,则在过期之前不会重复访问.
+(3) 按后退按扭
 如果值为private、must-revalidate、max-age,则不会重访问,而如果为no-cache,则每次都重复访问
-（4） 按刷新按扭
+(4) 按刷新按扭
 无论为何值,都会重复访问
 
 当指定Cache-control值为“no-cache”时,访问此页面不会在Internet临时文章夹留下页面备份.
@@ -859,7 +859,7 @@ HTTP协议的主要特点可概括如下：
 5.无状态：HTTP协议是无状态协议. 无状态是指协议对于事务处理没有记忆能力. 缺少状态意味着如果后续处理需要前面的信息,则它必须重传,这样可能导致每次连接传送的数据量增大. 另一方面,在服务器不需要先前信息时它的应答就较快.
  
 一、HTTP协议详解之URL篇
-http（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议,常基于TCP的连接方式,HTTP1.1版本中给出一种持续连接的机制,绝大多数的Web开发,都是构建在HTTP协议之上的Web应用.
+http(超文本传输协议)是一个基于请求与响应模式的、无状态的、应用层的协议,常基于TCP的连接方式,HTTP1.1版本中给出一种持续连接的机制,绝大多数的Web开发,都是构建在HTTP协议之上的Web应用.
 HTTP URL (URL是一种特殊类型的URI,包含了用于查找某个资源的足够的信息)的格式如下：
 http://host[":"port][abs_path]
 http表示要通过HTTP协议来定位网络资源;host表示合法的Internet主机域名或者IP地址;port指定一个端口号,为空则使用缺省端口 80;abs_path指定请求资源的URI;如果URL中没有给出abs_path,那么当它作为请求URI时,必须以"/"的形式给出,通常这个工作 浏览器自动帮我们完成.
@@ -871,10 +871,10 @@ eg:
 二、HTTP协议详解之请求篇
     http请求由三部分组成,分别是：请求行、消息报头(又叫请求头)、请求正文
 1、请求行以一个方法符号开头,以空格分开,后面跟着请求的URI和协议的版本,格式如下：Method Request-URI HTTP-Version CRLF
-其中 Method表示请求方法;Request-URI是一个统一资源标识符;HTTP-Version表示请求的HTTP协议版本;CRLF表示回车和换行（除了作为结
-尾的CRLF外,不允许出现单独的CR或LF字符）.
+其中 Method表示请求方法;Request-URI是一个统一资源标识符;HTTP-Version表示请求的HTTP协议版本;CRLF表示回车和换行(除了作为结
+尾的CRLF外,不允许出现单独的CR或LF字符).
 
-请求方法（所有方法全为大写）有多种,各个方法的解释如下：
+请求方法(所有方法全为大写)有多种,各个方法的解释如下：
 GET     请求获取Request-URI所标识的资源
 POST    在Request-URI所标识的资源后附加新的数据
 HEAD    请求获取由Request-URI所标识的资源的响应消息报头
@@ -919,21 +919,21 @@ HTTP-Version Status-Code Reason-Phrase CRLF
 404 Not Found  //请求资源不存在,eg：输入了错误的URL
 500 Internal Server Error //服务器发生不可预期的错误
 503 Server Unavailable  //服务器当前不能处理客户端的请求,一段时间后可能恢复正常
-eg：HTTP/1.1 200 OK （CRLF）
+eg：HTTP/1.1 200 OK (CRLF)
 2、响应报头后述
 3、响应正文就是服务器返回的资源的内容 
  
 四、HTTP协议详解之消息报头篇
-    HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成. 请求消息和响应消息都是由开始行（对于请求消息,开始行就是请求行,对于响应消息,开始行就是状态行）,消息报头（可选）,空行（只有CRLF的行）,消息正文（可选）组成.
+    HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成. 请求消息和响应消息都是由开始行(对于请求消息,开始行就是请求行,对于响应消息,开始行就是状态行),消息报头(可选),空行(只有CRLF的行),消息正文(可选)组成.
 HTTP消息报头包括普通报头、请求报头、响应报头、实体报头.
 每一个报头域都是由名字+"："+空格+值 组成,消息报头域的名字是大小写无关的.
 1、普通报头
 在普通报头中,有少数报头域用于所有的请求和响应消息,但并不用于被传输的实体,只用于传输的消息.
 eg：
-Cache-Control   用于指定缓存指令,缓存指令是单向的（响应中出现的缓存指令在请求中未必会出现）,且是独立的（一个消息的缓存指令不会影响另一个消息处理的缓存机制）,HTTP1.0使用的类似的报头域为Pragma.
-请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached;
+Cache-Control   用于指定缓存指令,缓存指令是单向的(响应中出现的缓存指令在请求中未必会出现),且是独立的(一个消息的缓存指令不会影响另一个消息处理的缓存机制),HTTP1.0使用的类似的报头域为Pragma.
+请求时的缓存指令包括：no-cache(用于指示请求或响应消息不能缓存)、no-store、max-age、max-stale、min-fresh、only-if-cached;
 响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage.
-eg：为了指示IE浏览器（客户端）不要缓存页面,服务器端的JSP程序可以编写如下：response.sehHeader("Cache-Control","no-cache");
+eg：为了指示IE浏览器(客户端)不要缓存页面,服务器端的JSP程序可以编写如下：response.sehHeader("Cache-Control","no-cache");
 //response.setHeader("Pragma","no-cache");作用相当于上述代码,通常两者//合用
 这句代码将在发送的响应消息中设置普通报头域：Cache-Control:no-cache
 
@@ -951,8 +951,8 @@ Accept-Encoding请求报头域类似于Accept,但是它是用于指定可接受�
 Accept-Language
 Accept-Language请求报头域类似于Accept,但是它是用于指定一种自然语言. eg：Accept-Language:zh-cn.如果请求消息中没有设置这个报头域,服务器假定客户端对各种语言都可以接受.
 Authorization
-Authorization请求报头域主要用于证明客户端有权查看某个资源. 当浏览器访问一个页面时,如果收到服务器的响应代码为401（未授权）,可以发送一个包含Authorization请求报头域的请求,要求服务器对其进行验证.
-Host（发送请求时,该报头域是必需的）
+Authorization请求报头域主要用于证明客户端有权查看某个资源. 当浏览器访问一个页面时,如果收到服务器的响应代码为401(未授权),可以发送一个包含Authorization请求报头域的请求,要求服务器对其进行验证.
+Host(发送请求时,该报头域是必需的)
 Host请求报头域主要用于指定被请求资源的Internet主机和端口号,它通常从HTTP URL中提取出来的,eg：
 我们在浏览器中输入：http://www.guet.edu.cn/index.html
 浏览器发送的请求消息中,就会包含Host请求报头域,如下：
@@ -981,11 +981,11 @@ Server响应报头域包含了服务器用来处理请求的软件信息. 与Use
 Server响应报头域的一个例子：
 Server：Apache-Coyote/1.1
 WWW-Authenticate
-WWW-Authenticate响应报头域必须被包含在401（未授权的）响应消息中,客户端收到401响应消息时候,并发送Authorization报头域请求服务器对其进行验证时,服务端响应报头就包含该报头域.
+WWW-Authenticate响应报头域必须被包含在401(未授权的)响应消息中,客户端收到401响应消息时候,并发送Authorization报头域请求服务器对其进行验证时,服务端响应报头就包含该报头域.
 eg：WWW-Authenticate:Basic realm="Basic Auth Test!"  //可以看出服务器对请求资源采用的是基本验证机制.
 
 4、实体报头
-请求和响应消息都可以传送一个实体. 一个实体由实体报头域和实体正文组成,但并不是说实体报头域和实体正文要在一起发送,可以只发送实体报头域. 实体报头定义了关于实体正文（eg：有无实体正文）和请求所标识的资源的元信息.
+请求和响应消息都可以传送一个实体. 一个实体由实体报头域和实体正文组成,但并不是说实体报头域和实体正文要在一起发送,可以只发送实体报头域. 实体报头定义了关于实体正文(eg：有无实体正文)和请求所标识的资源的元信息.
 常用的实体报头
 Content-Encoding
 Content-Encoding实体报头域被用作媒体类型的修饰符,它的值指示了已经被应用到实体正文的附加内容的编码,因而要获得Content- Type报头域中所引用的媒体类型,必须采用相应的解码机制. Content-Encoding这样用于记录文档的压缩方法,eg：Content- Encoding：gzip
@@ -1002,7 +1002,7 @@ Last-Modified
 Last-Modified实体报头域用于指示资源的最后修改日期和时间.
 Expires
 Expires实体报头域给出响应过期的日期和时间. 为了让代理服务器或浏览器在一段时间以后更新缓存中(再次访问曾访问过的页面时,直接从缓存中加载, 缩短响应时间和降低服务器负载)的页面,我们可以使用Expires实体报头域指定页面过期的时间. eg：Expires：Thu,15 Sep 2006 16:23:12 GMT
-HTTP1.1的客户端和缓存必须将其他非法的日期格式（包括0）看作已经过期. eg：为了让浏览器不要缓存页面,我们也可以利用Expires实体报头域,设置为0,jsp中程序如下：response.setDateHeader("Expires","0");
+HTTP1.1的客户端和缓存必须将其他非法的日期格式(包括0)看作已经过期. eg：为了让浏览器不要缓存页面,我们也可以利用Expires实体报头域,设置为0,jsp中程序如下：response.setDateHeader("Expires","0");
  
 五、利用telnet观察http协议的通讯过程
     实验目的及原理：
@@ -1078,10 +1078,10 @@ HTTP及其代理的常用端口80、3128和8080在network部分用port标签进�
 http://www.cnpaf.net/Class/HTTP/0532918532667330.html
 
 4、利用HTTP协议的特性进行拒绝服务攻击的一些构思
-服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求（毕竟客户端的正常请求比率非常之小）,此时从正常客户的角度看来,服务器失去响应,这种情况我们称作：服务器端受到了SYNFlood攻击（SYN洪水攻击）.
+服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求(毕竟客户端的正常请求比率非常之小),此时从正常客户的角度看来,服务器失去响应,这种情况我们称作：服务器端受到了SYNFlood攻击(SYN洪水攻击).
 而Smurf、TearDrop等是利用ICMP报文来Flood和IP碎片攻击的. 本文用"正常连接"的方法来产生拒绝服务攻击.
 19端口在早期已经有人用来做Chargen攻击了,即Chargen_Denial_of_Service,但是！他们用的方法是在两台Chargen 服务器之间产生UDP连接,让服务器处理过多信息而DOWN掉,那么,干掉一台WEB服务器的条件就必须有2个：1.有Chargen服务2.有HTTP 服务
-方法：攻击者伪造源IP给N台Chargen发送连接请求（Connect）,Chargen接收到连接后就会返回每秒72字节的字符流（实际上根据网络实际情况,这个速度更快）给服务器.
+方法：攻击者伪造源IP给N台Chargen发送连接请求(Connect),Chargen接收到连接后就会返回每秒72字节的字符流(实际上根据网络实际情况,这个速度更快)给服务器.
 
 5、Http指纹识别技术
    Http指纹识别的原理大致上也是相同的：记录不同服务器对Http协议执行中的微小差别进行识别.Http指纹识别比TCP/IP堆栈指纹识别复杂许 多,理由是定制Http服务器的配置文件、增加插件或组件使得更改Http的响应信息变的很容易,这样使得识别变的困难;然而定制TCP/IP堆栈的行为 需要对核心层进行修改,所以就容易识别.
@@ -1116,14 +1116,14 @@ HTTP1.1中提供了这种持续连接的方式,而下一代HTTP协议：HTTP-NG�
 也就是对其进行编码.  又如,Url的编码格式采用的是ASCII码,而不是Unicode,这也就是说你不能在Url中包含任何非ASCII字符,例如中文.
 否则如果客户端浏 览器和服务端浏览器支持的字符集不同的情况下,中文可能会造成问题.
 
-Url编码的原则就是使用安全的字符（没有特殊用途或者特殊意义的可打印字符）去表示那些不安全的字符.  哪些字符需要编码 RFC3986文档规定,
-Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、-_.~4个特殊字符以及所有保留字符.  RFC3986文档对Url的编解码问题做出了详细的建议,
+Url编码的原则就是使用安全的字符(没有特殊用途或者特殊意义的可打印字符)去表示那些不安全的字符.  哪些字符需要编码 RFC3986文档规定,
+Url中只允许包含英文字母(a-zA-Z)、数字(0-9)、-_.~4个特殊字符以及所有保留字符.  RFC3986文档对Url的编解码问题做出了详细的建议,
 指出了哪些字符需要被编码才不会引起Url语义的转变,以及对为什么这些字符需要编码做出了相 应的解释.  US-ASCII字符集中没有对应的可打印
 字符 Url中只允许使用可打印字符. US-ASCII码中的10-7F字节全都表示控制字符,这些字符都不能直接出现在Url中. 同时,对于80-FF字节
-（ISO-8859-1）,由于已经超出了US-ACII定义的字节范围,因此也不可以放在Url中.
+(ISO-8859-1),由于已经超出了US-ACII定义的字节范围,因此也不可以放在Url中.
 
-保留字符 Url可以划分成若干个组件,协议、主机、路径等. 有一些字符（:/?#[]@）是用作分隔不同组件的. 例如:冒号用于分隔协议和主机,
-/用于分隔主机和 路径,?用于分隔路径和查询参数,等等. 还有一些字符（!$&’()*+,;=）用于在每个组件中起到分隔作用的,如=用于表示
+保留字符 Url可以划分成若干个组件,协议、主机、路径等. 有一些字符(:/?#[]@)是用作分隔不同组件的. 例如:冒号用于分隔协议和主机,
+/用于分隔主机和 路径,?用于分隔路径和查询参数,等等. 还有一些字符(!$&’()*+,;=)用于在每个组件中起到分隔作用的,如=用于表示
 查询参数中的键值 对,&符号用于分隔查询多个键值对. 当组件中的普通数据包含这些特殊字符时,需要对其进行编码.
 
 RFC3986中指定了以下字符为保留字符： ! * ‘ ( ) ; : @ & = + $ , / ? # [ ] 不安全字符 还有一些字符,当他们直接放在Url中的时候,
@@ -1140,8 +1140,8 @@ Javascript中提供了3对函数用来对Url编码以得到合法的Url,它们�
 decodeURIComponent. 由于解码和编码的过程是可逆的,因此这里只解释编码的过程.  这三个编码的函数――escape,encodeURI,encodeURIComponent――
 都是用于将不安全不合法的Url字符转换为合法的 Url字符表示,它们有以下几个不同点.
 
-安全字符不同 下面的表格列出了这三个函数的安全字符（即函数不会对这些字符进行编码） 安全字符 escape（69个） * /@+-._0-9a-zA-Z 
-encodeURI（82个） !#$&’()*+,/:;=?@-._~0-9a-zA-Z encodeURIComponent（71个） !’()*-._~0-9a-zA-Z 兼容性不同 escape函数是
+安全字符不同 下面的表格列出了这三个函数的安全字符(即函数不会对这些字符进行编码) 安全字符 escape(69个) * /@+-._0-9a-zA-Z
+encodeURI(82个) !#$&’()*+,/:;=?@-._~0-9a-zA-Z encodeURIComponent(71个) !’()*-._~0-9a-zA-Z 兼容性不同 escape函数是
 从Javascript1.0的时候就存在了,其他两个函数是在Javascript1.5才引入的. 但是由于 Javascript1.5已经非常普及了,所以实际上
 使用encodeURI和encodeURIComponent并不会有什么兼容性问题.
 
@@ -1152,7 +1152,7 @@ escape的编码方式 是%uxxxx,其中的xxxx是用来表示unicode字符的4位
 
 适用场合不同 encodeURI被用作对一个完整的URI进行编码,而encodeURIComponent被用作对URI的一个组件进行编码.  从上面提到的安全字符
 范围表格来看,我们会发现,encodeURIComponent编码的字符范围要比encodeURI的大. 我们上面提到过,保留 字符一般是用来分隔URI组件
-（一个URI可以被切割成多个组件,参考预备知识一节）或者子组件（如URI中查询参数的分隔符）,如:号用于分隔 scheme和主机,?号用于
+(一个URI可以被切割成多个组件,参考预备知识一节)或者子组件(如URI中查询参数的分隔符),如:号用于分隔 scheme和主机,?号用于
 分隔主机和路径. 由于encodeURI操纵的对象是一个完整的的URI,这些字符在URI中本来就有特殊用途,因此这些保 留字符不会被encodeURI
 编码,否则意义就变了.  组件内部有自己的数据表示格式,但是这些数据内部不能包含有分隔组件的保留字符,否则就会导致整个URI中组件
 的分隔混乱. 因此对于单个组件使用 encodeURIComponent,需要编码的字符就更多了.
@@ -1269,15 +1269,15 @@ configure详解
 --prefix=PATH Nginx安装部署后的根目录 默认为/usr/local/nginx目录. 注意：这个目标的设置会影响其他参数中的相对目录. 例如,如果设置了--sbin-path=sbin/nginx,那么实际上可执行文件会被放到/usr/local/nginx/sbin/nginx中
 --sbin-path=PATH 可执行文件的放置路径 <prefix>/sbin/nginx
 --conf-path=PATH 配置文件的放置路径 <prefix>/conf/nginx.conf
---error-log-path=PATH error日志文件的放置路径. error日志用于定位问题,可输出多种级别（包括debug调试级别）的日志. 它的配置非常灵活,可以在nginx.conf里配置为不同请求的日志并输出到不同的log文件中. 这里是默认的Nginx核心日志路径 <prefix>/logs/error.log
---pid-path=PATH pid文件的存放路径. 这个文件里仅以ASC II码存放着Nginx master的进程ID,有了这个进程ID,在使用命令行（例如nginx -s reload）通过读取master进程ID向master进程发送信号时,才能对运行中的Nginx服务产生作用 <prefix>/logs/nginx.pid
+--error-log-path=PATH error日志文件的放置路径. error日志用于定位问题,可输出多种级别(包括debug调试级别)的日志. 它的配置非常灵活,可以在nginx.conf里配置为不同请求的日志并输出到不同的log文件中. 这里是默认的Nginx核心日志路径 <prefix>/logs/error.log
+--pid-path=PATH pid文件的存放路径. 这个文件里仅以ASC II码存放着Nginx master的进程ID,有了这个进程ID,在使用命令行(例如nginx -s reload)通过读取master进程ID向master进程发送信号时,才能对运行中的Nginx服务产生作用 <prefix>/logs/nginx.pid
 --lock-path=PATH lock文件的放置路径 <prefix>/logs/nginx.lock
 --builddir=DIR configure执行时与编译期间产生的临时文件放置的目录,包括产生的Makefile、C源文件、目标文件、可执行文件等 <nginx source path>/objs
 --with-perl_modules_path=PATH perl module放置的路径. 只有使用了第三方的perl module,才需要配置这个路径 无
 --with-perl=PATH perl binary放置的路径. 如果配置的Nginx会执行Perl脚本,那么就必须要设置此路径 无
 --http-log-path=PATH access日志放置的位置. 每一个HTTP请求在结束时都会记录的访问日志 <prefix>/logs/access.log
 --http-client-body-temp-path=PATH 处理HTTP请求时如果请求的包体需要暂时存放到临时磁盘文件中,则把这样的临时文件放置到该路径下 <prefix>/client_body_temp
---http-proxy-temp-path=PATH Nginx作为HTTP反向代理服务器时,上游服务器产生的HTTP包体在需要临时存放到磁盘文件时（详见12.8节）,这样的临时文件将放到该路径下 <prefix>/proxy_temp
+--http-proxy-temp-path=PATH Nginx作为HTTP反向代理服务器时,上游服务器产生的HTTP包体在需要临时存放到磁盘文件时(详见12.8节),这样的临时文件将放到该路径下 <prefix>/proxy_temp
 --http-fastcgi-temp-path=PATH Fastcgi所使用临时文件的放置目录 <prefix>/fastcgi_temp
 --http-uwsgi-temp-path=PATH uWSGI所使用临时文件的放置目录 <prefix>/uwsgi_temp
 --http-scgi-temp-path=PATH SCGI所使用临时文件的放置目录 <prefix>/scgi_temp
@@ -1312,8 +1312,8 @@ OpenSSL库的设置参数 意　义
 --with-openssl-opt=OPTIONS 编译OpenSSL源码时希望加入的编译选项
 
 表1-6　原子库的设置参数
-atomic（原子）库的设置参数 意　义
---with-libatomic 强制使用atomic库. atomic库是CPU架构独立的一种原子操作的实现. 它支持以下体系架构：x86（包括i386和x86_64）、PPC64、Sparc64（v9或更高版本）或者安装了GCC 4.1.0及更高版本的架构. 14.3节介绍了原子操作在Nginx中的实现
+atomic(原子)库的设置参数 意　义
+--with-libatomic 强制使用atomic库. atomic库是CPU架构独立的一种原子操作的实现. 它支持以下体系架构：x86(包括i386和x86_64)、PPC64、Sparc64(v9或更高版本)或者安装了GCC 4.1.0及更高版本的架构. 14.3节介绍了原子操作在Nginx中的实现
 --with-libatomic=DIR atomic库所在的位置
 
 表1-7　散列函数库的设置参数
@@ -1347,7 +1347,7 @@ zlib库的设置参数 意　义
 
 其他模块.
 
-（1）事件模块
+(1)事件模块
 
 表1-9中列出了Nginx可以选择哪些事件模块编译到产品中.
 
@@ -1366,7 +1366,7 @@ poll的性能与select类似,在大量并发连接下性能都远不如epoll. �
 注意：这里的aio module只能与FreeBSD操作系统上的kqueue事件处理机制合作,Linux上无法使用
 默认情况下是不安装aio module的
 
-（2）默认即编译进入Nginx的HTTP模块
+(2)默认即编译进入Nginx的HTTP模块
 
 表1-10列出了默认就会编译进Nginx的核心HTTP模块,以及如何把这些HTTP模块从产品中去除.
 
@@ -1379,7 +1379,7 @@ poll的性能与select类似,在大量并发连接下性能都远不如epoll. �
 --without-http_access_module 不安装http access module. 这个模块可以根据IP地址限制能够访问服务器的客户端
 --without-http_auth_basic_module 不安装http auth basic module. 这个模块可以提供最简单的用户名/密码认证
 --without-http_autoindex_module 不安装http autoindex module. 该模块提供简单的目录浏览功能
---without-http_geo_module 不安装http geo module. 这个模块可以定义一些变量,这些变量的值将与客户端IP地址关联,这样Nginx针对不同的地区的客户端（根据IP地址判断）返回不一样的结果,例如不同地区显示不同语言的网页
+--without-http_geo_module 不安装http geo module. 这个模块可以定义一些变量,这些变量的值将与客户端IP地址关联,这样Nginx针对不同的地区的客户端(根据IP地址判断)返回不一样的结果,例如不同地区显示不同语言的网页
 --without-http_map_module 不安装http map module. 这个模块可以建立一个key/value映射表,不同的key得到相应的value,这样可以针对不同的URL做特殊处理. 例如,返回302重定向响应时,可以期望URL不同时返回的Location字段也不一样
 --without-http_split_clients_module 不安装http split client module. 该模块会根据客户端的信息,例如IP地址、header头、cookie等,来区分处理
 --without-http_referer_module 不安装http referer module. 该模块可以根据请求中的referer字段来拒绝请求
@@ -1392,10 +1392,10 @@ poll的性能与select类似,在大量并发连接下性能都远不如epoll. �
 --without-http_limit_zone_module 不安装http limit zone module. 该模块针对某个IP地址限制并发连接数. 例如,使Nginx对一个IP地址仅允许一个连接
 --without-http_limit_req_module 不安装http limit req module. 该模块针对某个IP地址限制并发请求数
 --without-http_empty_gif_module 不安装http empty gif module. 该模块可以使得Nginx在收到无效请求时,立刻返回内存中的1×1像素的GIF图片. 这种好处在于,对于明显的无效请求不会去试图浪费服务器资源
---without-http_browser_module 不安装http browser module. 该模块会根据HTTP请求中的user-agent字段（该字段通常由浏览器填写）来识别浏览器
+--without-http_browser_module 不安装http browser module. 该模块会根据HTTP请求中的user-agent字段(该字段通常由浏览器填写)来识别浏览器
 --without-http_upstream_ip_hash_module 不安装http upstream ip hash module. 该模块提供当Nginx与后端server建立连接时,会根据IP做散列运算来决定与后端哪台server通信,这样可以实现负载均衡
 
-（3）默认不会编译进入Nginx的HTTP模块
+(3)默认不会编译进入Nginx的HTTP模块
 
 表1-11列出了默认不会编译至Nginx中的HTTP模块以及把它们加入产品中的方法.
 
@@ -1403,11 +1403,11 @@ poll的性能与select类似,在大量并发连接下性能都远不如epoll. �
 可选的HTTP 模块 意　义
 --with-http_ssl_module 安装http ssl module. 该模块使Nginx支持SSL协议,提供HTTPS服务.
 注意：该模块的安装依赖于OpenSSL开源软件,即首先应确保已经在之前的参数中配置了OpenSSL
---with-http_realip_module 安装http realip module. 该模块可以从客户端请求里的header信息（如X-Real-IP或者X-Forwarded-For）中获取真正的客户端IP地址
+--with-http_realip_module 安装http realip module. 该模块可以从客户端请求里的header信息(如X-Real-IP或者X-Forwarded-For)中获取真正的客户端IP地址
 --with-http_addition_module 安装http addtion module. 该模块可以在返回客户端的HTTP包体头部或者尾部增加内容
 --with-http_xslt_module 安装http xslt module. 这个模块可以使XML格式的数据在发给客户端前加入XSL渲染
 注意：这个模块依赖于libxml2和libxslt库,安装它前首先确保上述两个软件已经安装
---with-http_image_filter_module 安装http image_filter module. 这个模块将符合配置的图片实时压缩为指定大小（width*height）的缩略图再发送给用户,目前支持JPEG、PNG、GIF格式.
+--with-http_image_filter_module 安装http image_filter module. 这个模块将符合配置的图片实时压缩为指定大小(width*height)的缩略图再发送给用户,目前支持JPEG、PNG、GIF格式.
 注意：这个模块依赖于开源的libgd库,在安装前确保操作系统已经安装了libgd
 --with-http_geoip_module 安装http geoip module. 该模块可以依据MaxMind GeoIP的IP地址数据库对客户端的IP地址得到实际的地理位置信息
 注意：该库依赖于MaxMind GeoIP的库文件,可访问http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz获取
@@ -1419,11 +1419,11 @@ poll的性能与select类似,在大量并发连接下性能都远不如epoll. �
 --with-http_gzip_static_module 安装http gzip static module. 如果采用gzip模块把一些文档进行gzip格式压缩后再返回给客户端,那么对同一个文件每次都会重新压缩,这是比较消耗服务器CPU资源的. gzip static模块可以在做gzip压缩前,先查看相同位置是否有已经做过gzip压缩的.gz文件,如果有,就直接返回. 这样就可以预先在服务器上做好文档的压缩,给CPU减负
 --with-http_random_index_module 安装http random index module. 该模块在客户端访问某个目录时,随机返回该目录下的任意文件
 --with-http_secure_link_module 安装http secure link module. 该模块提供一种验证请求是否有效的机制. 例如,它会验证URL中需要加入的token参数是否属于特定客户端发来的,以及检查时间戳是否过期
---with-http_degradation_module 安装http degradation module. 该模块针对一些特殊的系统调用（如sbrk）做一些优化,如直接返回HTTP响应码为204或者444. 目前不支持Linux系统
---with-http_stub_status_module 安装http stub status module. 该模块可以让运行中的Nginx提供性能统计页面,获取相关的并发连接、请求的信息（14.2.1节中简单介绍了该模块的原理）
+--with-http_degradation_module 安装http degradation module. 该模块针对一些特殊的系统调用(如sbrk)做一些优化,如直接返回HTTP响应码为204或者444. 目前不支持Linux系统
+--with-http_stub_status_module 安装http stub status module. 该模块可以让运行中的Nginx提供性能统计页面,获取相关的并发连接、请求的信息(14.2.1节中简单介绍了该模块的原理)
 --with-google_perftools_module 安装google perftools module. 该模块提供Google的性能测试工具
 
-（4）邮件代理服务器相关的mail模块
+(4)邮件代理服务器相关的mail模块
 
 表1-12列出了把邮件模块编译到产品中的参数.
 
@@ -1454,7 +1454,7 @@ configure还接收一些其他参数,表1-13中列出了相关参数的说明.
 
 
 
-你可以设置TCP_CORK选项禁用Nagle化,其方式正好同 TCP_NODELAY相反（TCP_CORK 和 TCP_NODELAY 是互相排斥的）.
+你可以设置TCP_CORK选项禁用Nagle化,其方式正好同 TCP_NODELAY相反(TCP_CORK 和 TCP_NODELAY 是互相排斥的).
 
 
 
@@ -1463,7 +1463,7 @@ configure还接收一些其他参数,表1-13中列出了相关参数的说明.
 
 Nginx的命令行控制2013-04-03 11:54:50     我来说两句 收藏    我要投稿    本文所属图书 > 深入理解Nginx本书是阿里巴巴资深Nginx技术专家呕心沥血之作,是作者多年的经验结晶,也是目前市场上唯一一本通过还原Nginx设计思想,剖析Nginx架构来帮助读者快速高效开发HTTP模块的图书. 本书首先通过介绍官方Nginx的基本用...  立即去当当网订购在Linux中,需要使用命令行来控制Nginx服务器的启动与停止、重载配置文件、回滚日志文件、平滑升级等行为. 默认情况下,Nginx被安装在目录/usr/local/nginx/中,其二进制文件路径为/usr/local/nginc/sbin/nginx,配置文件路径为/usr/local/nginx/conf/nginx.conf. 当然,在configure执行时是可以指定把它们安装在不同目录的. 为了简单起见,本节只说明默认安装情况下的命令行的使用情况,如果读者安装的目录发生了变化,那么替换一下即可.
 
-（1）默认方式启动
+(1)默认方式启动
 
 直接执行Nginx二进制程序. 例如：
 
@@ -1471,9 +1471,9 @@ Nginx的命令行控制2013-04-03 11:54:50     我来说两句 收藏    我要�
 
 这时,会读取默认路径下的配置文件：/usr/local/nginx/conf/nginx.conf.
 
-实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件（参见1.5.1节）.
+实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件(参见1.5.1节).
 
-（2）另行指定配置文件的启动方式
+(2)另行指定配置文件的启动方式
 
 使用-c参数指定配置文件. 例如：
 
@@ -1481,13 +1481,13 @@ Nginx的命令行控制2013-04-03 11:54:50     我来说两句 收藏    我要�
 
 这时,会读取-c参数后指定的nginx.conf配置文件来启动Nginx.
 
-（3）另行指定安装目录的启动方式
+(3)另行指定安装目录的启动方式
 
 使用-p参数指定Nginx的安装目录. 例如：
 
 /usr/local/nginx/sbin/nginx -p /usr/local/nginx/
 
-（4）另行指定全局配置项的启动方式
+(4)另行指定全局配置项的启动方式
 
 可以通过-g参数临时指定一些全局配置项,以使新的配置项生效. 例如：
 
@@ -1503,7 +1503,7 @@ Nginx的命令行控制2013-04-03 11:54:50     我来说两句 收藏    我要�
 
 如果不带上-g "pid /var/nginx/test.pid;",那么找不到pid文件,也会出现无法停止服务的情况.
 
-（5）测试配置信息是否有错误
+(5)测试配置信息是否有错误
 
 在不启动Nginx的情况下,使用-t参数仅测试配置文件是否有错误. 例如：
 
@@ -1511,25 +1511,25 @@ Nginx的命令行控制2013-04-03 11:54:50     我来说两句 收藏    我要�
 
 执行结果中显示配置是否正确.
 
-（6）在测试配置阶段不输出信息
+(6)在测试配置阶段不输出信息
 
 测试配置选项时,使用-q参数可以不把error级别以下的信息输出到屏幕. 例如：
 
 /usr/local/nginx/sbin/nginx -t -q
 
-（7）显示版本信息
+(7)显示版本信息
 
 使用-v参数显示Nginx的版本信息. 例如：
 
 /usr/local/nginx/sbin/nginx -v
 
-（8）显示编译阶段的参数
+(8)显示编译阶段的参数
 
 使用-V参数除了可以显示Nginx的版本信息外,还可以显示配置编译阶段的信息,如GCC编译器的版本、操作系统的版本、执行configure时的参数等. 例如：
 
 /usr/local/nginx/sbin/nginx -V
 
-（9）快速地停止服务
+(9)快速地停止服务
 
 使用-s stop可以强制停止Nginx服务. -s参数其实是告诉Nginx程序向正在运行的Nginx服务发送信号量,Nginx程序通过nginx.pid文件中得到master进程的进程ID,再向运行中的master进程发送TERM信号来快速地关闭Nginx服务. 例如：
 
@@ -1553,7 +1553,7 @@ kill -s SIGINT 10800
 
 上述两条命令的效果与执行/usr/local/nginx/sbin/nginx -s stop是完全一样的.
 
-（10）“优雅”地停止服务
+(10)“优雅”地停止服务
 
 如果希望Nginx服务可以正常地处理完当前所有请求再停止服务,那么可以使用-s quit参数来停止服务. 例如：
 
@@ -1569,7 +1569,7 @@ kill -s SIGQUIT <nginx master pid>
 
 kill -s SIGWINCH <nginx worker pid>
 
-（11）使运行中的Nginx重读配置项并生效
+(11)使运行中的Nginx重读配置项并生效
 
 使用-s reload参数可以使运行中的Nginx服务重新加载nginx.conf文件. 例如：
 
@@ -1579,7 +1579,7 @@ kill -s SIGWINCH <nginx worker pid>
 
 kill -s SIGHUP <nginx master pid>
 
-（12）日志文件回滚
+(12)日志文件回滚
 
 使用-s reopen参数可以重新打开日志文件,这样可以先把当前日志文件改名或转移到其他目录中进行备份,再重新打开时就会生成新的日志文件. 这个功能使得日志文件不至于过大. 例如：
 
@@ -1589,23 +1589,21 @@ kill -s SIGHUP <nginx master pid>
 
 kill -s SIGUSR1 <nginx master pid>
 
-（13）平滑升级Nginx
+(13)平滑升级Nginx
 
 当Nginx服务升级到新的版本时,必须要将旧的二进制文件Nginx替换掉,通常情况下这是需要重启服务的,但Nginx支持不重启服务来完成新版本的平滑升级.
 
 升级时包括以下步骤：
 
-1）通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
+1)通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
 
 kill -s SIGUSR2 <nginx master pid>
 
 这时,运行中的Nginx会将pid文件重命名,如将/usr/local/nginx/logs/nginx.pid重命名为/usr/local/nginx/logs/nginx.pid.oldbin,这样新的Nginx才有可能启动成功.
 
-2）启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
+2)启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
 
-3）通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
-
-
+3)通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
 
 
 
@@ -1620,7 +1618,9 @@ kill -s SIGUSR2 <nginx master pid>
 
 
 
-nginx源码分析（3）- 自动脚本
+
+
+nginx源码分析(3)- 自动脚本
 
 nginx的自动脚本指的是configure脚本程序和auto子目录下面的脚本程序. 自动脚本完成两件事情,其一是检查环境,其二是生成文件.
 生成的文件有两类,一类是编译代码需要的Makefile文件,一类是根据环境检查结果生成的c代码. 生成的Makefile很干净,也很容易阅读.
@@ -1787,7 +1787,7 @@ have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\"" . auto/define
 # 在ngx_auto_config.h文件中加入NGX_SUPPRESS_WARN宏、NGX_SMP宏
 . auto/stubs
 
-#在ngx_auto_config.h文件中指定NGX_USER和NGX_GROUP宏,如果执行configure时没有参数指定,默认两者皆为nobody（也就是默认以nobody用户运行进程）
+#在ngx_auto_config.h文件中指定NGX_USER和NGX_GROUP宏,如果执行configure时没有参数指定,默认两者皆为nobody(也就是默认以nobody用户运行进程)
 have=NGX_USER value="\"$NGX_USER\"" . auto/define
 have=NGX_GROUP value="\"$NGX_GROUP\"" . auto/define
 
@@ -2166,8 +2166,8 @@ Nginx默认被安装到/usr/local/nginx下了,在其/conf/nginx.conf配置文件
 也是目前市场上唯一一本通过还原Nginx设计思想,剖析Nginx架构来帮助读者快速高效开发HTTP模块的图书. 本书首先通过介绍官方Nginx的基本用...  立即去当当网订购
 
 Nginx的configure脚本没有对C++语言编译模块提供支持,因此,修改编译方式就有以下两种思路：
-1）修改configure相关的脚本.
-2）修改configure执行完毕后生成的Makefile文件.
+1)修改configure相关的脚本.
+2)修改configure执行完毕后生成的Makefile文件.
 
 我们推荐使用第2种方法,因为Nginx的一个优点是具备大量的第三方模块,这些模块都是基于官方的configure脚本而写的,擅自修改configure脚本会导致我们的Nginx无法使用第三方模块.
 
@@ -2202,7 +2202,7 @@ objs/addon/httpmodule/ngx_http_mytest_module.o: $(ADDON_DEPS) \
 
 
 
-C语言与C++语言最大的不同在于编译后的符号有差别（C++为了支持多种面向对象特性,如重载、类等,编译后的方法名与C语言完全不同）,
+C语言与C++语言最大的不同在于编译后的符号有差别(C++为了支持多种面向对象特性,如重载、类等,编译后的方法名与C语言完全不同),
 这可以通过C++语言提供的extern “C” {}来实现符号的互相识别. 也就是说,在C++语言开发的模块中,include包含的Nginx官方头文件都需要使用extern “C”括起来. 例如：
 extern "C" {
     #include <ngx_config.h>
@@ -2253,7 +2253,7 @@ b->file->name.len = sizeof(filename) - 1;应改为b->file->name.len = strlen(fil
 
 ngx_bufs_t类型的成员可以使用nginx_conf_merge_str_value合并宏,应改为：ngx_bufs_t类型的成员可以使用 nginx_conf_merge_bufs_value合并宏
 
-4、97页倒数第5行（非代码行中的倒数第5计,实际在 3) URL参数标题下）
+4、97页倒数第5行(非代码行中的倒数第5计,实际在 3) URL参数标题下)
 
 arg 指向用户请求中的URL参数,应该为：args 指向用户请求中的URL参数
 
@@ -2295,7 +2295,7 @@ mycf->test_size应改为mycf->my_size
 而555页正数第14行,“//F_WRLCK意味着会导致进程睡眠”应改为“//F_SETLKW意味着会导致进程睡眠”
 
 13.77页第9行,header = part->elts;应为str = part->elts;.
-14、283页图88的第1）步介绍中,如果ngx_noaccept标志位为1,应改为ngx_reap标志位为1.
+14、283页图88的第1)步介绍中,如果ngx_noaccept标志位为1,应改为ngx_reap标志位为1.
 
 15、284页图8-8中,最上面的一行中“若所有子进程已退出则返回的live为1“应改为“若所有子进程已退出则返回的live为0“,下面紧邻的”live标志位为1,同时“应改为”live标志位为1,同时“.
 
@@ -2317,7 +2317,7 @@ mycf->test_size应改为mycf->my_size
 在configure执行时是可以指定把它们安装在不同目录的. 为了简单起见,本节只说明默认安装情况下的命令行的使用情况,如果读者安装的
 目录发生了变化,那么替换一下即可.
 
-（1）默认方式启动
+(1)默认方式启动
 
 直接执行Nginx二进制程序. 例如：
 
@@ -2325,9 +2325,9 @@ mycf->test_size应改为mycf->my_size
 
 这时,会读取默认路径下的配置文件：/usr/local/nginx/conf/nginx.conf.
 
-实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件（参见1.5.1节）.
+实际上,在没有显式指定nginx.conf配置文件路径时,将打开在configure命令执行时使用--conf-path=PATH指定的nginx.conf文件(参见1.5.1节).
 
-（2）另行指定配置文件的启动方式
+(2)另行指定配置文件的启动方式
 
 使用-c参数指定配置文件. 例如：
 
@@ -2335,13 +2335,13 @@ mycf->test_size应改为mycf->my_size
 
 这时,会读取-c参数后指定的nginx.conf配置文件来启动Nginx.
 
-（3）另行指定安装目录的启动方式
+(3)另行指定安装目录的启动方式
 
 使用-p参数指定Nginx的安装目录. 例如：
 
 /usr/local/nginx/sbin/nginx -p /usr/local/nginx/
 
-（4）另行指定全局配置项的启动方式
+(4)另行指定全局配置项的启动方式
 
 可以通过-g参数临时指定一些全局配置项,以使新的配置项生效. 例如：
 
@@ -2359,7 +2359,7 @@ mycf->test_size应改为mycf->my_size
 
 如果不带上-g "pid /var/nginx/test.pid;",那么找不到pid文件,也会出现无法停止服务的情况.
 
-（5）测试配置信息是否有错误
+(5)测试配置信息是否有错误
 
 在不启动Nginx的情况下,使用-t参数仅测试配置文件是否有错误. 例如：
 
@@ -2367,25 +2367,25 @@ mycf->test_size应改为mycf->my_size
 
 执行结果中显示配置是否正确.
 
-（6）在测试配置阶段不输出信息
+(6)在测试配置阶段不输出信息
 
 测试配置选项时,使用-q参数可以不把error级别以下的信息输出到屏幕. 例如：
 
 /usr/local/nginx/sbin/nginx -t -q
 
-（7）显示版本信息
+(7)显示版本信息
 
 使用-v参数显示Nginx的版本信息. 例如：
 
 /usr/local/nginx/sbin/nginx -v
 
-（8）显示编译阶段的参数
+(8)显示编译阶段的参数
 
 使用-V参数除了可以显示Nginx的版本信息外,还可以显示配置编译阶段的信息,如GCC编译器的版本、操作系统的版本、执行configure时的参数等. 例如：
 
 /usr/local/nginx/sbin/nginx -V
 
-（9）快速地停止服务
+(9)快速地停止服务
 
 使用-s stop可以强制停止Nginx服务. -s参数其实是告诉Nginx程序向正在运行的Nginx服务发送信号量,Nginx程序通过nginx.pid文件中得到master进程的进程ID,
 再向运行中的master进程发送TERM信号来快速地关闭Nginx服务. 例如：
@@ -2410,7 +2410,7 @@ kill -s SIGINT 10800
 
 上述两条命令的效果与执行/usr/local/nginx/sbin/nginx -s stop是完全一样的.
 
-（10）“优雅”地停止服务
+(10)“优雅”地停止服务
 
 如果希望Nginx服务可以正常地处理完当前所有请求再停止服务,那么可以使用-s quit参数来停止服务. 例如：
 
@@ -2427,7 +2427,7 @@ kill -s SIGQUIT <nginx master pid>
 
 kill -s SIGWINCH <nginx worker pid>
 
-（11）使运行中的Nginx重读配置项并生效
+(11)使运行中的Nginx重读配置项并生效
 
 使用-s reload参数可以使运行中的Nginx服务重新加载nginx.conf文件. 例如：
 
@@ -2438,7 +2438,7 @@ kill -s SIGWINCH <nginx worker pid>
 
 kill -s SIGHUP <nginx master pid>
 
-（12）日志文件回滚
+(12)日志文件回滚
 
 使用-s reopen参数可以重新打开日志文件,这样可以先把当前日志文件改名或转移到其他目录中进行备份,再重新打开时就会生成新的日志文件.
 这个功能使得日志文件不至于过大. 例如：
@@ -2449,23 +2449,23 @@ kill -s SIGHUP <nginx master pid>
 
 kill -s SIGUSR1 <nginx master pid>
 
-（13）平滑升级Nginx
+(13)平滑升级Nginx
 
 当Nginx服务升级到新的版本时,必须要将旧的二进制文件Nginx替换掉,通常情况下这是需要重启服务的,但Nginx支持不重启服务来完成新版本的平滑升级.
 
 升级时包括以下步骤：
 
-1）通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
+1)通知正在运行的旧版本Nginx准备升级. 通过向master进程发送USR2信号可达到目的. 例如：
 
 kill -s SIGUSR2 <nginx master pid>
 
 这时,运行中的Nginx会将pid文件重命名,如将/usr/local/nginx/logs/nginx.pid重命名为/usr/local/nginx/logs/nginx.pid.oldbin,这样新的Nginx才有可能启动成功.
 
-2）启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
+2)启动新版本的Nginx,可以使用以上介绍过的任意一种启动方法. 这时通过ps命令可以发现新旧版本的Nginx在同时运行.
 
-3）通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
+3)通过kill命令向旧版本的master进程发送SIGQUIT信号,以“优雅”的方式关闭旧版本的Nginx. 随后将只有新版本的Nginx服务运行,此时平滑升级完毕.
 
-（14）显示命令行帮助
+(14)显示命令行帮助
 
 使用-h或者-?参数会显示支持的所有命令行参数.
 

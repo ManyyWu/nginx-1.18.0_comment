@@ -233,7 +233,7 @@ ngx_palloc_block(ngx_pool_t *pool, size_t size)
 
     // 判断在当前 pool 分配内存的失败次数,即：不能复用当前 pool 的次数,
     // 如果大于 4 次,这放弃在此 pool 上再次尝试分配内存,以提高效率
-    //如果失败次数大于4（不等于4）,则更新current指针,放弃对老pool的内存进行再使用
+    //如果失败次数大于4(不等于4),则更新current指针,放弃对老pool的内存进行再使用
     for (p = pool->current; p->d.next; p = p->d.next) {
         if (p->d.failed++ > 4) {
             pool->current = p->d.next;// 更新 current 指针, 每次从pool中分配内存的时候都是从curren开始遍历pool节点获取内存的
@@ -277,7 +277,7 @@ ngx_palloc_large(ngx_pool_t *pool, size_t size)
         }
 
         /*
-         // 如果当前 large 后串的 large 内存块数目大于 3 （不等于3）,
+         // 如果当前 large 后串的 large 内存块数目大于 3 (不等于3),
         // 则直接去下一步分配新内存,不再查找了
         */
         if (n++ > 3) {//也就是说如果pool->large头后面连续4个large的alloc指针都被用了,则重新申请一个新的pool_larg并放到pool->large头部
@@ -437,7 +437,7 @@ ngx_pool_run_cleanup_file(ngx_pool_t *p, ngx_fd_t fd)
 
 /*
 Nginx会异步地将整个文件高效地发送给用户,但是我们必须要求HTTP框架在响应发送完毕后关闭已经打开的文件句柄,否则将会出现句柄泄露问题.
-设置清理文件句柄也很简单,只需要定义一个ngx_pool_cleanup_t结构体（这是最简单的方法,HTTP框架还提供了其他方式,在请求结束时回调各个HTTP模块的cleanup方法,将在第11章介绍）,
+设置清理文件句柄也很简单,只需要定义一个ngx_pool_cleanup_t结构体(这是最简单的方法,HTTP框架还提供了其他方式,在请求结束时回调各个HTTP模块的cleanup方法,将在第11章介绍),
 将我们刚得到的文件句柄等信息赋给它,并将Nginx提供的ngx_pool_cleanup_file函数设置到它的handler回调方法中即可.
 
 */

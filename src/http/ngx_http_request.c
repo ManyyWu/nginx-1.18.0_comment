@@ -130,7 +130,7 @@ ngx_http_header_t  ngx_http_headers_in[] = {
 一. 两个必要响应头Accept-Ranges、ETag
         客户端每次提交下载请求时,服务端都要添加这两个响应头,以保证客户端和服务端将此下载识别为可以断点续传的下载：
 Accept-Ranges：告知下载客户端这是一个可以恢复续传的下载,存放本次下载的开始字节位置、文件的字节大小;
-ETag：保存文件的唯一标识（我在用的文件名+文件最后修改时间,以便续传请求时对文件进行验证）;
+ETag：保存文件的唯一标识(我在用的文件名+文件最后修改时间,以便续传请求时对文件进行验证);
 参考http://www.cnblogs.com/diyunpeng/archive/2011/12/29/2305702.html
 */
     { ngx_string("Range"), offsetof(ngx_http_headers_in_t, range),
@@ -392,9 +392,9 @@ ngx_http_init_connection(ngx_connection_t *c)
     }
 
 /*
-在有些情况下,当TCP连接建立成功时同时也出现了可读事件（例如,在套接字listen配置时设置了deferred选项时,内核仅在套接字上确实收到请求时才会通知epoll
+在有些情况下,当TCP连接建立成功时同时也出现了可读事件(例如,在套接字listen配置时设置了deferred选项时,内核仅在套接字上确实收到请求时才会通知epoll
 调度事件的回调方法. 当然,在大部分情况下,ngx_http_init_request方法和
-ngx_http_init_connection方法都是由两个事件（TCP连接建立成功事件和连接上的可读事件）触发调用的
+ngx_http_init_connection方法都是由两个事件(TCP连接建立成功事件和连接上的可读事件)触发调用的
 */
 
 /*
@@ -1999,7 +1999,7 @@ ngx_http_process_request_header(ngx_http_request_t *r)
     }
 
     /* 
-	用户请求的HTTP版本小于1.0（如HTTP 0.9版本）,其处理过程将与HTTP l.0和HTTP l.1的完全不同,它不会有接收HTTP
+	用户请求的HTTP版本小于1.0(如HTTP 0.9版本),其处理过程将与HTTP l.0和HTTP l.1的完全不同,它不会有接收HTTP
     头部这一步骤. 这时将会调用ngx_http_find_virtual_server方法寻找到相应的虚拟主机
 	*/
     if (r->headers_in.host == NULL && r->http_version > NGX_HTTP_VERSION_10) {

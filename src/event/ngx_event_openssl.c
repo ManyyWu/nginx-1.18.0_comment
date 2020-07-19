@@ -1763,7 +1763,7 @@ ngx_ssl_try_early_data(ngx_connection_t *c)
     sslerr = SSL_get_error(c->ssl->connection, n);
 
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, c->log, 0, "SSL_get_error: %d", sslerr);
-    //这里应该再重新接收一次和NGINX一样,等待下一次循环（epoll）再进行,同时设置读写句柄,以便下次读取的时候直接进行握手
+    //这里应该再重新接收一次和NGINX一样,等待下一次循环(epoll)再进行,同时设置读写句柄,以便下次读取的时候直接进行握手
     //单向认证四次握手过程还没有完成,需要继续握手
     if (sslerr == SSL_ERROR_WANT_READ) {
         c->read->ready = 0;

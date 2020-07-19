@@ -955,7 +955,7 @@ ngx_configure_listening_sockets(ngx_cycle_t *cycle)
 
           /* 
         TCP_DEFER_ACCEPT 优化 使用TCP_DEFER_ACCEPT可以减少用户程序hold的连接数,也可以减少用户调用epoll_ctl和epoll_wait的次数,从而提高了程序的性能.
-        设置listen套接字的TCP_DEFER_ACCEPT选项后, 只当一个链接有数据时是才会从accpet中返回（而不是三次握手完成). 所以节省了一次读第一个http请求包的过程,减少了系统调用
+        设置listen套接字的TCP_DEFER_ACCEPT选项后, 只当一个链接有数据时是才会从accpet中返回(而不是三次握手完成). 所以节省了一次读第一个http请求包的过程,减少了系统调用
           
         查询资料,TCP_DEFER_ACCEPT是一个很有趣的选项,
         Linux 提供的一个特殊 setsockopt ,　在 accept 的 socket 上面,只有当实际收到了数据,才唤醒正在 accept 的进程,可以减少一些无聊的上下文切换. 代码如下.
@@ -1265,7 +1265,7 @@ ngx_close_connection(ngx_connection_t *c)
     }
 
     /*
-     调用ngx_del_conn宏（或者ngx_del_event宏）将读/写事件从epoll中移除. 实际上就是调用ngx_event_actions_t接口
+     调用ngx_del_conn宏(或者ngx_del_event宏)将读/写事件从epoll中移除. 实际上就是调用ngx_event_actions_t接口
      中的del_conn方法,当事件模块是epoll模块时,就是从epoll中移除这个连接的读/写事件. 同时,如果这个事件在ngx_posted_accept_events或
      者ngx_posted_events队列中,还需要调用ngx_delete_posted_event宏把事件从post事件队列中移除.
      */

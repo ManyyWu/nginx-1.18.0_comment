@@ -70,7 +70,7 @@ static ngx_int_t mytest_subrequest_post_handler(ngx_http_request_t *r,
     ngx_http_subrequest_mytest_ctx_t* myctx = ngx_http_get_module_ctx(pr, ngx_http_subrequest_mytest_module);
 
     pr->headers_out.status = r->headers_out.status;
-    //如果返回NGX_HTTP_OK（也就是200）意味着访问新浪服务器成功,接着将开始解析http包体
+    //如果返回NGX_HTTP_OK(也就是200)意味着访问新浪服务器成功,接着将开始解析http包体
     if (r->headers_out.status == NGX_HTTP_OK)
     {
         int flag = 0;

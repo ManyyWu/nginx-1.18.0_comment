@@ -20,9 +20,9 @@ typedef void *            ngx_buf_tag_t;
 typedef struct ngx_buf_s  ngx_buf_t; //从内存池中分配ngx_buf_t空间,通过ngx_chain_s和pool关联,并初始化其中的各个变量初值函数为ngx_create_temp_buf
 /*
 ngx_buf_t是一种基本数据结构,本质上它提供的仅仅是一些指针成员和标志位. 对于HTTP模块来说,需要注意HTTP框架、事件框架是如何设置
-和使用pos、last等指针以及如何处理这些标志位的,上述说明只是最常见的用法. （如果我们自定义一个ngx_buf_t结构体,不应当受限于上
+和使用pos、last等指针以及如何处理这些标志位的,上述说明只是最常见的用法. (如果我们自定义一个ngx_buf_t结构体,不应当受限于上
 述用法,而应该根据业务需求自行定义. 例如用一个ngx_buf_t缓冲区转发上下游TCP流时,pos会指向将要发送到下游的TCP流起
-始地址,而last会指向预备接收上游TCP流的缓冲区起始地址. ）
+始地址,而last会指向预备接收上游TCP流的缓冲区起始地址. )
 */
 /*
 实际上,Nginx还封装了一个生成ngx_buf_t的简便方法,它完全等价于上面的6行语句,如下所示.
@@ -93,7 +93,7 @@ struct ngx_buf_s { //可以参考ngx_create_temp_buf         函数空间在ngx_
     */ //为1时表示该buf所包含的内容是在文件中.    输出数据的打印可以在ngx_http_write_filter中查看调试信息
     unsigned         in_file:1;//标志位,为1时表示这段缓冲区处理的是文件而不是内存,说明包体全部存入文件中,需要配置"client_body_in_file_only" on | clean
 
-    //遇到有flush字段被设置为1的的buf的chain,则该chain的数据即便不是最后结束的数据（last_buf被设置,标志所有要输出的内容都完了）,
+    //遇到有flush字段被设置为1的的buf的chain,则该chain的数据即便不是最后结束的数据(last_buf被设置,标志所有要输出的内容都完了),
     //也会进行输出,不会受postpone_output配置的限制,但是会受到发送速率等其他条件的限制.
     ////置1了表示该buf需要马上发送出去,参考ngx_http_write_filter -> if (!last && !flush && in && size < (off_t) clcf->postpone_output) {
     unsigned         flush:1;//标志位,为1时表示需要执行flush操作  标示需要立即发送缓冲的所有数据;
@@ -132,7 +132,7 @@ struct ngx_chain_s {
 buf指向当前的ngx_buf_t缓冲区,next则用来指向下一个ngx_chain_t. 如果这是最后一个ngx_chain_t,则需要把next置为NULL.
 
 在向用户发送HTTP 包体时,就要传入ngx_chain_t链表对象,注意,如果是最后一个ngx_chain_t,那么必须将next置为NULL,
-否则永远不会发送成功,而且这个请求将一直不会结束（Nginx框架的要求）.
+否则永远不会发送成功,而且这个请求将一直不会结束(Nginx框架的要求).
 */
 struct ngx_chain_s {
     ngx_buf_t    *buf;

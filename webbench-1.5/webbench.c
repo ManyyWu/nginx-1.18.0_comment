@@ -27,7 +27,7 @@
 /* values */
 volatile int timerexpired=0;//判断压测时长是否已经到达设定的时间  时间到后进程就会退出
 int speed=0;//记录进程成功得到服务器响应的数量  成功建立连接并发送数据(如果不带-f则还必须read服务端数据成功才能加1)
-int failed=0;//记录失败的数量（speed表示成功数,failed表示失败数）  一次连接失败 或者读写失败都+1
+int failed=0;//记录失败的数量(speed表示成功数,failed表示失败数)  一次连接失败 或者读写失败都+1
 int bytes=0; //记录进程成功读取的字节数  通过读取服务端的回应来计算
 /* globals */
 int http10=1; /* 0 - http/0.9, 1 - http/1.0, 2 - http/1.1 */ //http版本,0表示http0.9,1表示http1.0,2表示http1.1

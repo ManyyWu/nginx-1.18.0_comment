@@ -16,7 +16,7 @@ error_log ar/loginx/error.log info;
 #进程文件
 pid ar/runinx.pid;
  
-#一个nginx进程打开的最多文件描述符数目,理论值应该是最多打开文件数（系统的值ulimit -n）与nginx进程数相除,但是nginx分配请求并不均匀,所以建议与ulimit -n的值保持一致.
+#一个nginx进程打开的最多文件描述符数目,理论值应该是最多打开文件数(系统的值ulimit -n)与nginx进程数相除,但是nginx分配请求并不均匀,所以建议与ulimit -n的值保持一致.
 worker_rlimit_nofile 65535;
  
 #工作模式与连接数上限
@@ -24,7 +24,7 @@ events
 {
 #参考事件模型,use [ kqueue | rtsig | epoll | /dev/poll | select | poll ]; epoll模型是Linux 2.6以上版本内核中的高性能网络I/O模型,如果跑在FreeBSD上面,就用kqueue模型.
 use epoll;
-#单个进程最大连接数（最大连接数=连接数*进程数）
+#单个进程最大连接数(最大连接数=连接数*进程数)
 worker_connections 65535;
 }
  
@@ -57,7 +57,7 @@ fastcgi_temp_file_write_size 128k;
 gzip on; #开启gzip压缩输出
 gzip_min_length 1k; #最小压缩文件大小
 gzip_buffers 4 16k; #压缩缓冲区
-gzip_http_version 1.0; #压缩版本（默认1.1,前端如果是squid2.5请使用1.0）
+gzip_http_version 1.0; #压缩版本(默认1.1,前端如果是squid2.5请使用1.0)
 gzip_comp_level 2; #压缩等级
 gzip_types text/plain application/x-javascript text/css application/xml;
 #压缩类型,默认就已经包含textml,所以下面就不用再写了,写上去也不会有问题,但是会有一个warn.
@@ -117,9 +117,9 @@ client_body_buffer_size 128k; #缓冲区代理缓冲用户端请求的最大字�
 proxy_connect_timeout 90; #nginx跟后端服务器连接超时时间(代理连接超时)
 proxy_send_timeout 90; #后端服务器数据回传时间(代理发送超时)
 proxy_read_timeout 90; #连接成功后,后端服务器响应时间(代理接收超时)
-proxy_buffer_size 4k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小
+proxy_buffer_size 4k; #设置代理服务器(nginx)保存用户头信息的缓冲区大小
 proxy_buffers 4 32k; #proxy_buffers缓冲区,网页平均在32k以下的设置
-proxy_busy_buffers_size 64k; #高负荷下缓冲大小（proxy_buffers*2）
+proxy_busy_buffers_size 64k; #高负荷下缓冲大小(proxy_buffers*2)
 proxy_temp_file_write_size 64k;
 #设定缓存文件夹大小,大于这个值,将从upstream服务器传
 }
@@ -184,7 +184,7 @@ location ~ .*.(js|css)?$
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_EVENT_CONF      ┃  配置项可以出现在events{}块内                      ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃NGX_MAIL_MAIN_CONF  ┃  配置项可以出现在mail{}块或者imap{）块内           ┃
+┃                  ┃NGX_MAIL_MAIN_CONF  ┃  配置项可以出现在mail{}块或者imap{)块内           ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在server{}块内,然而该server{}块    ┃
 ┃                  ┃NGX_MAIL_SRV_CONF   ┃                                                    ┃
@@ -192,29 +192,29 @@ location ~ .*.(js|css)?$
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_HTTP_MAIN_CONF  ┃  配置项可以出现在http{}块内                        ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃NGX_HTTP_SRV_CONF   ┃  配置项可以出现在server{）块肉,然而该server块必   ┃
-┃                  ┃                    ┃须属于http{）块                                     ┃
+┃                  ┃NGX_HTTP_SRV_CONF   ┃  配置项可以出现在server{)块肉,然而该server块必   ┃
+┃                  ┃                    ┃须属于http{)块                                     ┃
 ┃  配置项可以在哪  ┃                    ┃                                                    ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在location{}块内,然而该location块  ┃
-┃些{）配置块中出现 ┃NGX_HTTP_LOC_CONF   ┃                                                    ┃
-┃                  ┃                    ┃必须属于http{）块                                   ┃
+┃些{)配置块中出现 ┃NGX_HTTP_LOC_CONF   ┃                                                    ┃
+┃                  ┃                    ┃必须属于http{)块                                   ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在upstream{}块内,然而该upstream    ┃
 ┃                  ┃NGX_HTTP_UPS_CONF   ┃                                                    ┃
-┃                  ┃                    ┃块必须属于http{）块                                 ┃
+┃                  ┃                    ┃块必须属于http{)块                                 ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在server块内的if{}块中. 目前仅有    ┃
 ┃                  ┃NGX_HTTP_SIF_CONF   ┃                                                    ┃
-┃                  ┃                    ┃rewrite模块会使用,该if块必须属于http{）块          ┃
+┃                  ┃                    ┃rewrite模块会使用,该if块必须属于http{)块          ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                    ┃  配置项可以出现在location块内的if{）块中. 目前仅   ┃
+┃                  ┃                    ┃  配置项可以出现在location块内的if{)块中. 目前仅   ┃
 ┃                  ┃NGX_HTTP_LIF_CONF   ┃                                                    ┃
-┃                  ┃                    ┃有rewrite模块会使用,该if块必须属于http{）块        ┃
+┃                  ┃                    ┃有rewrite模块会使用,该if块必须属于http{)块        ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                    ┃  配置项可以出现在limit_except{）块内,然而该limit- ┃
+┃                  ┃                    ┃  配置项可以出现在limit_except{)块内,然而该limit- ┃
 ┃                  ┃NGX_HTTP_LMT_CONF   ┃                                                    ┃
-┃                  ┃                    ┃except块必须属于http{）块                           ┃
+┃                  ┃                    ┃except块必须属于http{)块                           ┃
 ┣━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_CONF_NOARGS     ┃  配置项不携带任何参数                              ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
@@ -248,7 +248,7 @@ location ~ .*.(js|css)?$
 ┣━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX CONF ARGS NUMBER  ┃  目前未使用,无意义                                ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                      ┃  配置项定义了一种新的{）块. 例如,http、server、   ┃
+┃                  ┃                      ┃  配置项定义了一种新的{)块. 例如,http、server、   ┃
 ┃                  ┃NGX CONF BLOCK        ┃location等配置,它们的type都必须定义为NGX二CONF     ┃
 ┃                  ┃                      ┃ BLOCK                                              ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
@@ -263,8 +263,8 @@ location ~ .*.(js|css)?$
 ┃                  ┃NGX CONF 2MORE        ┃  配置项携带的参数个数必须超过2个                   ┃
 ┃  限制配置项后的  ┃                      ┃                                                    ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃参数出现的形式    ┃                      ┃  表示当前配置项可以出现在任意块中（包括不属于任    ┃
-┃                  ┃                      ┃何块的全局配置）,它仅用于配合其他配置项使用. type  ┃
+┃参数出现的形式    ┃                      ┃  表示当前配置项可以出现在任意块中(包括不属于任    ┃
+┃                  ┃                      ┃何块的全局配置),它仅用于配合其他配置项使用. type  ┃
 ┃                  ┃                      ┃中未加NGX—CONF_ MULTI时,如果一个配置项出现在      ┃
 ┃                  ┃                      ┃type成员未标明的配置块中,那么Nginx会认为该配置     ┃
 ┃                  ┃                      ┃项非法,最后将导致Nginx启动失败. 但如果type中加     ┃
@@ -282,7 +282,7 @@ location ~ .*.(js|css)?$
   成员皆为指针的数组,第2个子数组中的成员指针才会指向各模块生成的配置结构体. 这正是为了事件模
   块、http模块、mail模块而设计的,这有利于不同于NGX CORE MODULE类型的
   特定模块解析配置项. 然而,NGX CORE—MODULE类型的核心模块解析配置项时,配置项一定是全局的,
-  不会从属于任何{）配置块的,它不需要上述这种双数组设计. 解析标识为NGX DIRECT CONF类型的配
+  不会从属于任何{)配置块的,它不需要上述这种双数组设计. 解析标识为NGX DIRECT CONF类型的配
   置项时,会把void+十++类型的conf ctx强制转换为void~+,也就是说,此时,在conf ctx指向的指针数组
   中,每个成员指针不再指向其他数组,直接指向核心模块生成的配置鲒构体. 因此,NGX_ DIRECT__ CONF
   仅由NGX CORE MODULE类型的核心模块使用,而且配置项只应该出现在全局配置中.
@@ -412,9 +412,9 @@ Nginx还定义了一种基础类型的模块：核心模块,它的模块类型�
 
 #define NGX_MAX_CONF_ERRSTR  1024
 /*
-Nginx安装完毕后,会有响应的安装目录,安装目录里nginx.conf为nginx的主配置文件,ginx主配置文件分为4部分,main（全局配置）、server（主机设置）、upstream（负载均衡服务器设）和location（URL匹配特定位置的设置）,这四者关系为：server继承main,location继承server,upstream既不会继承其他设置也不会被继承.
+Nginx安装完毕后,会有响应的安装目录,安装目录里nginx.conf为nginx的主配置文件,ginx主配置文件分为4部分,main(全局配置)、server(主机设置)、upstream(负载均衡服务器设)和location(URL匹配特定位置的设置),这四者关系为：server继承main,location继承server,upstream既不会继承其他设置也不会被继承.
 
-一、Nginx的main（全局配置）文件
+一、Nginx的main(全局配置)文件
 
 [root@rhel6u3-7 server]# vim /usr/local/nginx/conf/nginx.conf 
 user nginx nginx; //指定nginx运行的用户及用户组为nginx,默认为nobody
@@ -499,19 +499,19 @@ index index.html index.htm;
 ┣━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  一般由NGX—CORE—MODULE类型的核心模块使用,       ┃
 ┃                  ┃                    ┃仅与下面的NGX_ MAIN—CONF同时设置,表示模块需       ┃
-┃  处理配置项时获  ┃NGX_DIRECT_CONF     ┃要解析不属于任何{）内的全局配置项. 它实际上会指定   ┃
+┃  处理配置项时获  ┃NGX_DIRECT_CONF     ┃要解析不属于任何{)内的全局配置项. 它实际上会指定   ┃
 ┃取当前配置块的方  ┃                    ┃set方法里的第3个参数conf的值,使之指向每个模块解    ┃
 ┃式                ┃                    ┃析全局配置项的配置结构体①                          ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_ANY_CONF        ┃  目前未使用,设置与否均无意义                      ┃
 ┣━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                    ┃  配置项可以出现在全局配置中,即不属于任何{）配置   ┃
+┃                  ┃                    ┃  配置项可以出现在全局配置中,即不属于任何{)配置   ┃
 ┃                  ┃NGX_MAIN_CONF       ┃                                                    ┃
 ┃                  ┃                    ┃块                                                  ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_EVENT_CONF      ┃  配置项可以出现在events{}块内                      ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃NGX_MAIL_MAIN_CONF  ┃  配置项可以出现在mail{}块或者imap{）块内           ┃
+┃                  ┃NGX_MAIL_MAIN_CONF  ┃  配置项可以出现在mail{}块或者imap{)块内           ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在server{}块内,然而该server{}块    ┃
 ┃                  ┃NGX_MAIL_SRV_CONF   ┃                                                    ┃
@@ -519,29 +519,29 @@ index index.html index.htm;
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_HTTP_MAIN_CONF  ┃  配置项可以出现在http{}块内                        ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃NGX_HTTP_SRV_CONF   ┃  配置项可以出现在server{）块肉,然而该server块必   ┃
-┃                  ┃                    ┃须属于http{）块                                     ┃
+┃                  ┃NGX_HTTP_SRV_CONF   ┃  配置项可以出现在server{)块肉,然而该server块必   ┃
+┃                  ┃                    ┃须属于http{)块                                     ┃
 ┃  配置项可以在哪  ┃                    ┃                                                    ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在location{}块内,然而该location块  ┃
-┃些{）配置块中出现 ┃NGX_HTTP_LOC_CONF   ┃                                                    ┃
-┃                  ┃                    ┃必须属于http{）块                                   ┃
+┃些{)配置块中出现 ┃NGX_HTTP_LOC_CONF   ┃                                                    ┃
+┃                  ┃                    ┃必须属于http{)块                                   ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在upstream{}块内,然而该upstream    ┃
 ┃                  ┃NGX_HTTP_UPS_CONF   ┃                                                    ┃
-┃                  ┃                    ┃块必须属于http{）块                                 ┃
+┃                  ┃                    ┃块必须属于http{)块                                 ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃                    ┃  配置项可以出现在server块内的if{}块中. 目前仅有    ┃
 ┃                  ┃NGX_HTTP_SIF_CONF   ┃                                                    ┃
-┃                  ┃                    ┃rewrite模块会使用,该if块必须属于http{）块          ┃
+┃                  ┃                    ┃rewrite模块会使用,该if块必须属于http{)块          ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                    ┃  配置项可以出现在location块内的if{）块中. 目前仅   ┃
+┃                  ┃                    ┃  配置项可以出现在location块内的if{)块中. 目前仅   ┃
 ┃                  ┃NGX_HTTP_LIF_CONF   ┃                                                    ┃
-┃                  ┃                    ┃有rewrite模块会使用,该if块必须属于http{）块        ┃
+┃                  ┃                    ┃有rewrite模块会使用,该if块必须属于http{)块        ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                    ┃  配置项可以出现在limit_except{）块内,然而该limit- ┃
+┃                  ┃                    ┃  配置项可以出现在limit_except{)块内,然而该limit- ┃
 ┃                  ┃NGX_HTTP_LMT_CONF   ┃                                                    ┃
-┃                  ┃                    ┃except块必须属于http{）块                           ┃
+┃                  ┃                    ┃except块必须属于http{)块                           ┃
 ┣━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX_CONF_NOARGS     ┃  配置项不携带任何参数                              ┃
 ┃                  ┣━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
@@ -575,7 +575,7 @@ index index.html index.htm;
 ┣━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                  ┃NGX CONF ARGS NUMBER  ┃  目前未使用,无意义                                ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                  ┃                      ┃  配置项定义了一种新的{）块. 例如,http、server、   ┃
+┃                  ┃                      ┃  配置项定义了一种新的{)块. 例如,http、server、   ┃
 ┃                  ┃NGX CONF BLOCK        ┃location等配置,它们的type都必须定义为NGX二CONF     ┃
 ┃                  ┃                      ┃ BLOCK                                              ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
@@ -590,8 +590,8 @@ index index.html index.htm;
 ┃                  ┃NGX CONF 2MORE        ┃  配置项携带的参数个数必须超过2个                   ┃
 ┃  限制配置项后的  ┃                      ┃                                                    ┃
 ┃                  ┣━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃参数出现的形式    ┃                      ┃  表示当前配置项可以出现在任意块中（包括不属于任    ┃
-┃                  ┃                      ┃何块的全局配置）,它仅用于配合其他配置项使用. type  ┃
+┃参数出现的形式    ┃                      ┃  表示当前配置项可以出现在任意块中(包括不属于任    ┃
+┃                  ┃                      ┃何块的全局配置),它仅用于配合其他配置项使用. type  ┃
 ┃                  ┃                      ┃中未加NGX—CONF_ MULTI时,如果一个配置项出现在      ┃
 ┃                  ┃                      ┃type成员未标明的配置块中,那么Nginx会认为该配置     ┃
 ┃                  ┃                      ┃项非法,最后将导致Nginx启动失败. 但如果type中加     ┃
@@ -609,7 +609,7 @@ index index.html index.htm;
   成员皆为指针的数组,第2个子数组中的成员指针才会指向各模块生成的配置结构体. 这正是为了事件模
   块、http模块、mail模块而设计的,这有利于不同于NGX CORE MODULE类型的
   特定模块解析配置项. 然而,NGX CORE—MODULE类型的核心模块解析配置项时,配置项一定是全局的,
-  不会从属于任何{）配置块的,它不需要上述这种双数组设计. 解析标识为NGX DIRECT CONF类型的配
+  不会从属于任何{)配置块的,它不需要上述这种双数组设计. 解析标识为NGX DIRECT CONF类型的配
   置项时,会把void+十++类型的conf ctx强制转换为void~+,也就是说,此时,在conf ctx指向的指针数组
   中,每个成员指针不再指向其他数组,直接指向核心模块生成的配置鲒构体. 因此,NGX_ DIRECT__ CONF
   仅由NGX CORE MODULE类型的核心模块使用,而且配置项只应该出现在全局配置中.
@@ -620,13 +620,13 @@ index index.html index.htm;
 
 char*(*set)(ngx_conf_t *cf, ngx_commandj 'vcmd,void *conf)
     关于set回调方法,在处理mytest配置项时已经使用过,其中mytest配置项是
-不带参数的. 如果处理配置项,我们既可以自己实现一个回调方法来处理配置项（）,也可以使用Nginx预设的14个解析配置项方法,这会少
+不带参数的. 如果处理配置项,我们既可以自己实现一个回调方法来处理配置项(),也可以使用Nginx预设的14个解析配置项方法,这会少
 写许多代码,
 ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃    预设方法名              ┃    行为                                                                      ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                            ┃  如果nginx．conf文件中某个配置项的参数是on或者off（即希望配置项表达打开      ┃
-┃                            ┃或者关闭某个功能的意思）,而且在Nginx模块的代码中使用ngx_flag_t变量来保       ┃
+┃                            ┃  如果nginx．conf文件中某个配置项的参数是on或者off(即希望配置项表达打开      ┃
+┃                            ┃或者关闭某个功能的意思),而且在Nginx模块的代码中使用ngx_flag_t变量来保       ┃
 ┃ngx_conf_set_flag_slot      ┃存这个配置项的参数,就可以将set回调方法设为ngx_conf_set_flag_slot. 当nginx.   ┃
 ┃                            ┃conf文件中参数是on时,代码中的ngx_flag_t类型变量将设为1,参数为off时则        ┃
 ┃                            ┃设为O                                                                         ┃
@@ -636,7 +636,7 @@ char*(*set)(ngx_conf_t *cf, ngx_commandj 'vcmd,void *conf)
 ┃                            ┃存这个配置项的参数,则可以使用ngx_conf_set_ str slot方法                      ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                            ┃  如果这个配置项会出现多次,每个配置项后面都跟着1个参数,而在程序中我们       ┃
-┃                            ┃希望仅用一个ngx_array_t动态数组（           ）来存储所有的参数,且数组中      ┃
+┃                            ┃希望仅用一个ngx_array_t动态数组(           )来存储所有的参数,且数组中      ┃
 ┃ngx_conf_set_str_array_slot ┃                                                                              ┃
 ┃                            ┃的每个参数都以ngx_str_t来存储,那么预设的ngx_conf_set_str_array_slot有法可    ┃
 ┃                            ┃以帮我们做到                                                                  ┃
@@ -674,15 +674,15 @@ char*(*set)(ngx_conf_t *cf, ngx_commandj 'vcmd,void *conf)
 ┃                            ┃后会把配置项后的参数转化成以秒为单位的数字                                    ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                            ┃  配置项后必须携带一两个参数,第1个参数是数字,第2个参数表示空间大小.         ┃
-┃                            ┃例如,“gzip_buffers 4 8k;”（通常用来表示有多少个ngx_buf_t缓冲区）,其中第1  ┃
+┃                            ┃例如,“gzip_buffers 4 8k;”(通常用来表示有多少个ngx_buf_t缓冲区),其中第1  ┃
 ┃                            ┃个参数不可以携带任何单位,第2个参数不带任何单位时表示Byte,如果以k或          ┃
 ┃ngx_conf_set bufs slot      ┃者K作为单位,则表示Kilobyte,如果以m或者M作为单位,则表示Megabyte.            ┃
 ┃                            ┃ngx_conf_set- bufs—slot解析后会把配置项后的两个参数转化成ngx_bufs_t结构体下  ┃
-┃                            ┃的两个成员. 这个配置项对应于Nginx最喜欢用的多缓冲区的解决方案（如接收连       ┃
-┃                            ┃接对端发来的TCP流）                                                           ┃
+┃                            ┃的两个成员. 这个配置项对应于Nginx最喜欢用的多缓冲区的解决方案(如接收连       ┃
+┃                            ┃接对端发来的TCP流)                                                           ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                            ┃  配置项后必须携带1个参数,其取值范围必须是我们设定好的字符串之一（就像       ┃
-┃                            ┃C语言中的枚举一样）. 首先,我们要用ngx_conf_enum_t结构定义配置项的取值范      ┃
+┃                            ┃  配置项后必须携带1个参数,其取值范围必须是我们设定好的字符串之一(就像       ┃
+┃                            ┃C语言中的枚举一样). 首先,我们要用ngx_conf_enum_t结构定义配置项的取值范      ┃
 ┃ngx_conf_set_enum slot      ┃                                                                              ┃
 ┃                            ┃围,并设定每个值对应的序列号. 然后,ngx_conf_set enum slot将会把配置项参      ┃
 ┃                            ┃数转化为对应的序列号                                                          ┃
@@ -709,18 +709,18 @@ ngx_uint_t  conf
 ┗━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
     为什么HTTP模块一定要设置conf的值呢？因为HTTP框架可以使用预设的14种方法
 自动地将解析出的配置项写入HTTP模块代码定义的结构体中,但HTTP模块中可能会定义
-3个结构体,分别用于存储main、srv、loc级别的配置项（对应于create_main_conf、create_srv_conf、
-create_loc_conf方法创建的结构体）,而HTTP框架自动解析时需要知道应把解析
+3个结构体,分别用于存储main、srv、loc级别的配置项(对应于create_main_conf、create_srv_conf、
+create_loc_conf方法创建的结构体),而HTTP框架自动解析时需要知道应把解析
 出的配置项值写入哪个结构体中,这将由conf成员完成.
-    因此,对conf的设置是与ngx_http_module_t实现的回调方法（ ）相
+    因此,对conf的设置是与ngx_http_module_t实现的回调方法( )相
 关的. 如果用于存储这个配置项的数据结构是由create_main_conf回调方法完成的,那么必
 须把conf设置为NGX_HTTP_MAIN_CONF_OFFSET. 同样,如果这个配置项所属的数据结
 构是由create_srv_conf回调方法完成的,那么必须把conf设置为NGX_HTTP_SRV_CONF_OFFSET.
 可如果create_loc_conf负责生成存储这个配置项的数据结构,就得将conf设置为
 NGX_HTTP_LOC_CONF_OFFSET.
-    目前,功能较为简单的HTTP模块都只实现了create_loc_conf回调方法,对于http{）、
-server{}块内出现的同名配置项,都是并入某个location{）内create_loc_conf方法产生的结
-构体中的（  ）. 当我们希望同时出现在http{）、server{）、
+    目前,功能较为简单的HTTP模块都只实现了create_loc_conf回调方法,对于http{)、
+server{}块内出现的同名配置项,都是并入某个location{)内create_loc_conf方法产生的结
+构体中的(  ). 当我们希望同时出现在http{)、server{)、
 location{)块的同名配置项,在HTTP模块的代码中保存于不同的变量中时,就需要实现
 create_main_conf方法、create_srv_conf方法产生新的结构体,从而以不同的结构体独立保存不
 同级别的配置项,而不是全部合并到某个location下create_loc_conf方法生戍的结构体中.
@@ -728,7 +728,7 @@ create_main_conf方法、create_srv_conf方法产生新的结构体,从而以不
 
 ngx_uint_t offset
   offset表示当前配置项在整个存储配置项的结构体中的偏移位置(以字节(Byte)为单
-位）. 举个例子,在32位机器上,int（整型）类型长度是4字节,那么看下面这个数据结构：
+位). 举个例子,在32位机器上,int(整型)类型长度是4字节,那么看下面这个数据结构：
 	typedef struct {
 		int a;
 		int b;
@@ -747,8 +747,8 @@ offsetof将0地址转换成type结构体类型的指针,并在访问member成员
 的指针,这个指针相对于0地址来说自然就是成员相对于结构体的偏移量了.
     设置offset有什么作用呢？如果使用Nginx预设的解析配置项方法,就必须设置offset,
 这样Nginx首先通过conf成员找到应该用哪个结构体来存放,然后通过offset成员找到这个
-结构体中的相应成员,以便存放该配置. 如果是自定义的专用配置项解析方法（只解析某一
-个配置项）,则可以不设置offset的值.
+结构体中的相应成员,以便存放该配置. 如果是自定义的专用配置项解析方法(只解析某一
+个配置项),则可以不设置offset的值.
 
 (6) void  *post
     post指针有许多用途,从它被设计成void *就可以看出.
@@ -783,11 +783,11 @@ post也可以.
 ┃                                                                          ┃ngx_conf_set sec slot       ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
 ┃  指向ngx_conf_enum_t数组,表示当前配置项的参数必须设置为ngx_conf_        ┃                            ┃
-┃enumt规定的值（类似枚举）. 注意,使用ngx_conf_set_enum_slot时必须设       ┃ngx_conf_set_enum_slot      ┃
+┃enumt规定的值(类似枚举). 注意,使用ngx_conf_set_enum_slot时必须设       ┃ngx_conf_set_enum_slot      ┃
 ┃置定义1个ngx_conf_enum_t数组,并将post成员指向该数组                      ┃                            ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
 ┃  揩向ngx_conf_bitmask_t数组,表示当前配置项的参数必须设置为ngx_          ┃                            ┃
-┃conf_bitmask_t规定的值（类似枚举）. 注意,使用ngx_conf_set bitmask slot   ┃ngx_conf_set_bitmask_slot   ┃
+┃conf_bitmask_t规定的值(类似枚举). 注意,使用ngx_conf_set bitmask slot   ┃ngx_conf_set_bitmask_slot   ┃
 ┃时必须设置定义1个ngx_conf_bitmask_t数组,并将post成员指向该数组           ┃                            ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
 ┃                                                                          ┃ngx_conf_set bufs slot      ┃
@@ -804,7 +804,7 @@ typedef char *(*ngx_conf_post_handler_pt) (ngx_conf_t *cf,
 typedef struct {
     ngx_conf_post_handler_pt  post_handler;
 } ngx_conf_post_t;
-    如果需要在解析完配置项（表4-4中列出的前9个预设方法）后回调某个方法,就要实
+    如果需要在解析完配置项(表4-4中列出的前9个预设方法)后回调某个方法,就要实
 现上面昀ngx_conf_post_handler_pt,并将包含post_handler的ngx_conf_post_t结构体传给
 post指针.
     目前,ngx_conf_post_t结构体提供的这个功能没有官方Nginx模块使用,因为它限制过
@@ -822,7 +822,7 @@ struct ngx_command_s { //所有配置的最初源头在ngx_init_cycle
     ngx_str_t             name;//配置项名称,如"gzip"
     /*配置项类型,type将指定配置项可以出现的位置. 例如,出现在server{}或location{}中,以及它可以携带的参数个数*/
     /*
-    type决定这个配置项可以在哪些块（如http、server、location、if、upstream块等）
+    type决定这个配置项可以在哪些块(如http、server、location、if、upstream块等)
 中出现,以及可以携带的参数类型和个数等.
 注意,type可以同时取多个值,各值之间用|符号连接,例如,type可以取
 值为NGX_TTP_MAIN_CONF | NGX_HTTP_SRV_CONFI | NGX_HTTP_LOC_CONF | NGX_CONF_TAKE.

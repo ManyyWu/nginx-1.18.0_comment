@@ -9,7 +9,7 @@ HTTP协议的主要特点可概括如下：
 5.无状态：HTTP协议是无状态协议. 无状态是指协议对于事务处理没有记忆能力. 缺少状态意味着如果后续处理需要前面的信息,则它必须重传,这样可能导致每次连接传送的数据量增大. 另一方面,在服务器不需要先前信息时它的应答就较快.
  
 一、HTTP协议详解之URL篇
-http（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议,常基于TCP的连接方式,HTTP1.1版本中给出一种持续连接的机制,绝大多数的Web开发,都是构建在HTTP协议之上的Web应用.
+http(超文本传输协议)是一个基于请求与响应模式的、无状态的、应用层的协议,常基于TCP的连接方式,HTTP1.1版本中给出一种持续连接的机制,绝大多数的Web开发,都是构建在HTTP协议之上的Web应用.
 HTTP URL (URL是一种特殊类型的URI,包含了用于查找某个资源的足够的信息)的格式如下：
 http://host[":"port][abs_path]
 http表示要通过HTTP协议来定位网络资源;host表示合法的Internet主机域名或者IP地址;port指定一个端口号,为空则使用缺省端口 80;abs_path指定请求资源的URI;如果URL中没有给出abs_path,那么当它作为请求URI时,必须以"/"的形式给出,通常这个工作 浏览器自动帮我们完成.
@@ -21,8 +21,8 @@ eg:
 二、HTTP协议详解之请求篇
     http请求由三部分组成,分别是：请求行、消息报头、请求正文
 1、请求行以一个方法符号开头,以空格分开,后面跟着请求的URI和协议的版本,格式如下：Method Request-URI HTTP-Version CRLF
-其中 Method表示请求方法;Request-URI是一个统一资源标识符;HTTP-Version表示请求的HTTP协议版本;CRLF表示回车和换行（除了作为结尾的CRLF外,不允许出现单独的CR或LF字符）.
-请求方法（所有方法全为大写）有多种,各个方法的解释如下：
+其中 Method表示请求方法;Request-URI是一个统一资源标识符;HTTP-Version表示请求的HTTP协议版本;CRLF表示回车和换行(除了作为结尾的CRLF外,不允许出现单独的CR或LF字符).
+请求方法(所有方法全为大写)有多种,各个方法的解释如下：
 GET     请求获取Request-URI所标识的资源
 POST    在Request-URI所标识的资源后附加新的数据
 HEAD    请求获取由Request-URI所标识的资源的响应消息报头
@@ -67,21 +67,21 @@ HTTP-Version Status-Code Reason-Phrase CRLF
 404 Not Found  //请求资源不存在,eg：输入了错误的URL
 500 Internal Server Error //服务器发生不可预期的错误
 503 Server Unavailable  //服务器当前不能处理客户端的请求,一段时间后可能恢复正常
-eg：HTTP/1.1 200 OK （CRLF）
+eg：HTTP/1.1 200 OK (CRLF)
 2、响应报头后述
 3、响应正文就是服务器返回的资源的内容 
  
 四、HTTP协议详解之消息报头篇
-    HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成. 请求消息和响应消息都是由开始行（对于请求消息,开始行就是请求行,对于响应消息,开始行就是状态行）,消息报头（可选）,空行（只有CRLF的行）,消息正文（可选）组成.
+    HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成. 请求消息和响应消息都是由开始行(对于请求消息,开始行就是请求行,对于响应消息,开始行就是状态行),消息报头(可选),空行(只有CRLF的行),消息正文(可选)组成.
 HTTP消息报头包括普通报头、请求报头、响应报头、实体报头.
 每一个报头域都是由名字+"："+空格+值 组成,消息报头域的名字是大小写无关的.
 1、普通报头
 在普通报头中,有少数报头域用于所有的请求和响应消息,但并不用于被传输的实体,只用于传输的消息.
 eg：
-Cache-Control   用于指定缓存指令,缓存指令是单向的（响应中出现的缓存指令在请求中未必会出现）,且是独立的（一个消息的缓存指令不会影响另一个消息处理的缓存机制）,HTTP1.0使用的类似的报头域为Pragma.
-请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached;
+Cache-Control   用于指定缓存指令,缓存指令是单向的(响应中出现的缓存指令在请求中未必会出现),且是独立的(一个消息的缓存指令不会影响另一个消息处理的缓存机制),HTTP1.0使用的类似的报头域为Pragma.
+请求时的缓存指令包括：no-cache(用于指示请求或响应消息不能缓存)、no-store、max-age、max-stale、min-fresh、only-if-cached;
 响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage.
-eg：为了指示IE浏览器（客户端）不要缓存页面,服务器端的JSP程序可以编写如下：response.sehHeader("Cache-Control","no-cache");
+eg：为了指示IE浏览器(客户端)不要缓存页面,服务器端的JSP程序可以编写如下：response.sehHeader("Cache-Control","no-cache");
 //response.setHeader("Pragma","no-cache");作用相当于上述代码,通常两者//合用
 这句代码将在发送的响应消息中设置普通报头域：Cache-Control:no-cache
 
@@ -99,8 +99,8 @@ Accept-Encoding请求报头域类似于Accept,但是它是用于指定可接受�
 Accept-Language
 Accept-Language请求报头域类似于Accept,但是它是用于指定一种自然语言. eg：Accept-Language:zh-cn.如果请求消息中没有设置这个报头域,服务器假定客户端对各种语言都可以接受.
 Authorization
-Authorization请求报头域主要用于证明客户端有权查看某个资源. 当浏览器访问一个页面时,如果收到服务器的响应代码为401（未授权）,可以发送一个包含Authorization请求报头域的请求,要求服务器对其进行验证.
-Host（发送请求时,该报头域是必需的）
+Authorization请求报头域主要用于证明客户端有权查看某个资源. 当浏览器访问一个页面时,如果收到服务器的响应代码为401(未授权),可以发送一个包含Authorization请求报头域的请求,要求服务器对其进行验证.
+Host(发送请求时,该报头域是必需的)
 Host请求报头域主要用于指定被请求资源的Internet主机和端口号,它通常从HTTP URL中提取出来的,eg：
 我们在浏览器中输入：http://www.guet.edu.cn/index.html
 浏览器发送的请求消息中,就会包含Host请求报头域,如下：
@@ -129,11 +129,11 @@ Server响应报头域包含了服务器用来处理请求的软件信息. 与Use
 Server响应报头域的一个例子：
 Server：Apache-Coyote/1.1
 WWW-Authenticate
-WWW-Authenticate响应报头域必须被包含在401（未授权的）响应消息中,客户端收到401响应消息时候,并发送Authorization报头域请求服务器对其进行验证时,服务端响应报头就包含该报头域.
+WWW-Authenticate响应报头域必须被包含在401(未授权的)响应消息中,客户端收到401响应消息时候,并发送Authorization报头域请求服务器对其进行验证时,服务端响应报头就包含该报头域.
 eg：WWW-Authenticate:Basic realm="Basic Auth Test!"  //可以看出服务器对请求资源采用的是基本验证机制.
 
 4、实体报头
-请求和响应消息都可以传送一个实体. 一个实体由实体报头域和实体正文组成,但并不是说实体报头域和实体正文要在一起发送,可以只发送实体报头域. 实体报头定义了关于实体正文（eg：有无实体正文）和请求所标识的资源的元信息.
+请求和响应消息都可以传送一个实体. 一个实体由实体报头域和实体正文组成,但并不是说实体报头域和实体正文要在一起发送,可以只发送实体报头域. 实体报头定义了关于实体正文(eg：有无实体正文)和请求所标识的资源的元信息.
 常用的实体报头
 Content-Encoding
 Content-Encoding实体报头域被用作媒体类型的修饰符,它的值指示了已经被应用到实体正文的附加内容的编码,因而要获得Content- Type报头域中所引用的媒体类型,必须采用相应的解码机制. Content-Encoding这样用于记录文档的压缩方法,eg：Content- Encoding：gzip
@@ -150,7 +150,7 @@ Last-Modified
 Last-Modified实体报头域用于指示资源的最后修改日期和时间.
 Expires
 Expires实体报头域给出响应过期的日期和时间. 为了让代理服务器或浏览器在一段时间以后更新缓存中(再次访问曾访问过的页面时,直接从缓存中加载, 缩短响应时间和降低服务器负载)的页面,我们可以使用Expires实体报头域指定页面过期的时间. eg：Expires：Thu,15 Sep 2006 16:23:12 GMT
-HTTP1.1的客户端和缓存必须将其他非法的日期格式（包括0）看作已经过期. eg：为了让浏览器不要缓存页面,我们也可以利用Expires实体报头域,设置为0,jsp中程序如下：response.setDateHeader("Expires","0");
+HTTP1.1的客户端和缓存必须将其他非法的日期格式(包括0)看作已经过期. eg：为了让浏览器不要缓存页面,我们也可以利用Expires实体报头域,设置为0,jsp中程序如下：response.setDateHeader("Expires","0");
  
 五、利用telnet观察http协议的通讯过程
     实验目的及原理：
@@ -226,10 +226,10 @@ HTTP及其代理的常用端口80、3128和8080在network部分用port标签进�
 http://www.cnpaf.net/Class/HTTP/0532918532667330.html
 
 4、利用HTTP协议的特性进行拒绝服务攻击的一些构思
-服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求（毕竟客户端的正常请求比率非常之小）,此时从正常客户的角度看来,服务器失去响应,这种情况我们称作：服务器端受到了SYNFlood攻击（SYN洪水攻击）.
+服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求(毕竟客户端的正常请求比率非常之小),此时从正常客户的角度看来,服务器失去响应,这种情况我们称作：服务器端受到了SYNFlood攻击(SYN洪水攻击).
 而Smurf、TearDrop等是利用ICMP报文来Flood和IP碎片攻击的. 本文用"正常连接"的方法来产生拒绝服务攻击.
 19端口在早期已经有人用来做Chargen攻击了,即Chargen_Denial_of_Service,但是！他们用的方法是在两台Chargen 服务器之间产生UDP连接,让服务器处理过多信息而DOWN掉,那么,干掉一台WEB服务器的条件就必须有2个：1.有Chargen服务2.有HTTP 服务
-方法：攻击者伪造源IP给N台Chargen发送连接请求（Connect）,Chargen接收到连接后就会返回每秒72字节的字符流（实际上根据网络实际情况,这个速度更快）给服务器.
+方法：攻击者伪造源IP给N台Chargen发送连接请求(Connect),Chargen接收到连接后就会返回每秒72字节的字符流(实际上根据网络实际情况,这个速度更快)给服务器.
 
 5、Http指纹识别技术
    Http指纹识别的原理大致上也是相同的：记录不同服务器对Http协议执行中的微小差别进行识别.Http指纹识别比TCP/IP堆栈指纹识别复杂许 多,理由是定制Http服务器的配置文件、增加插件或组件使得更改Http的响应信息变的很容易,这样使得识别变的困难;然而定制TCP/IP堆栈的行为 需要对核心层进行修改,所以就容易识别.

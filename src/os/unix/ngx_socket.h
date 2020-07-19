@@ -88,7 +88,7 @@ int shutdown(int sockfd,int howto);  //返回成功为0,出错为-1.    该函�
 
     3.SHUT_RDWR：值为2,连接的读和写都关闭.
 
-    终止网络连接的通用方法是调用close函数. 但使用shutdown能更好的控制断连过程（使用第二个参数）.
+    终止网络连接的通用方法是调用close函数. 但使用shutdown能更好的控制断连过程(使用第二个参数).
 
 3.两函数的区别
     close与shutdown的区别主要表现在：
