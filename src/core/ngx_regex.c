@@ -102,7 +102,7 @@ ngx_regex_compile(ngx_regex_compile_t *rc)
 
     ngx_regex_malloc_init(rc->pool);
 
-    //正则表达式在使用之前要经过编译。编译的目的是将正则表达式的pattern转换成PCRE引擎能够识别的结构（struct real_pcre）。
+    //正则表达式在使用之前要经过编译. 编译的目的是将正则表达式的pattern转换成PCRE引擎能够识别的结构（struct real_pcre）.
     re = pcre_compile((const char *) rc->pattern.data, (int) rc->options,
                       &errstr, &erroff, NULL);
 

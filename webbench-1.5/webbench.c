@@ -27,10 +27,10 @@
 /* values */
 volatile int timerexpired=0;//判断压测时长是否已经到达设定的时间  时间到后进程就会退出
 int speed=0;//记录进程成功得到服务器响应的数量  成功建立连接并发送数据(如果不带-f则还必须read服务端数据成功才能加1)
-int failed=0;//记录失败的数量（speed表示成功数，failed表示失败数）  一次连接失败 或者读写失败都+1
+int failed=0;//记录失败的数量（speed表示成功数,failed表示失败数）  一次连接失败 或者读写失败都+1
 int bytes=0; //记录进程成功读取的字节数  通过读取服务端的回应来计算
 /* globals */
-int http10=1; /* 0 - http/0.9, 1 - http/1.0, 2 - http/1.1 */ //http版本，0表示http0.9，1表示http1.0，2表示http1.1
+int http10=1; /* 0 - http/0.9, 1 - http/1.0, 2 - http/1.1 */ //http版本,0表示http0.9,1表示http1.0,2表示http1.1
 /* Allow: GET, HEAD, OPTIONS, TRACE */
 int keepalive = 1;
 #define METHOD_GET 0 
@@ -38,13 +38,13 @@ int keepalive = 1;
 #define METHOD_OPTIONS 2
 #define METHOD_TRACE 3
 #define PROGRAM_VERSION "1.5"
-int method=METHOD_GET;//默认请求方式为GET，也支持HEAD、OPTIONS、TRACE
-int clients=1;//并发数目，默认只有1个进程发请求，通过-c参数设置
-int force=0;//是否需要等待读取从server返回的数据，0表示要等待读取
-int force_reload=0;//是否使用缓存，1表示不缓存，0表示可以缓存页面
+int method=METHOD_GET;//默认请求方式为GET,也支持HEAD、OPTIONS、TRACE
+int clients=1;//并发数目,默认只有1个进程发请求,通过-c参数设置
+int force=0;//是否需要等待读取从server返回的数据,0表示要等待读取
+int force_reload=0;//是否使用缓存,1表示不缓存,0表示可以缓存页面
 int proxyport=80;//代理服务器的端口
 char *proxyhost=NULL;//代理服务器的ip
-int benchtime=30;//压测时间，默认30秒，通过-t参数设置
+int benchtime=30;//压测时间,默认30秒,通过-t参数设置
 int max_request = 0;
 /* internal */
 int mypipe[2];//使用管道进行父进程和子进程的通信
@@ -215,7 +215,7 @@ int main(int argc, char *argv[])
 }
 
 /*
-这个函数主要操作全局变量char request[REQUEST_SIZE]，根据url填充其内容。一个典型的http GET请求如下：
+这个函数主要操作全局变量char request[REQUEST_SIZE],根据url填充其内容. 一个典型的http GET请求如下：
 
 GET /test.jpg HTTP/1.1
 User-Agent: WebBench 1.5
@@ -223,8 +223,8 @@ Host:192.168.10.1
 Pragma: no-cache
 Connection: closebuild_request
 
-函数的目的就是要把类似于以上这一大坨信息全部存到全局变量request[REQUEST_SIZE]中，其中换行操作使用的是”\r\n”。而以上这
-一大坨信息的具体内容是要根据命令行输入的参数，以及url来确定的
+函数的目的就是要把类似于以上这一大坨信息全部存到全局变量request[REQUEST_SIZE]中,其中换行操作使用的是”\r\n”. 而以上这
+一大坨信息的具体内容是要根据命令行输入的参数,以及url来确定的
 */
 void build_request(const char *url)
 {
@@ -378,7 +378,7 @@ static int bench(void) //所有的压测都在bench函数实现
 	  return 3;
   }
 
-  if(pid== (pid_t) 0)//如果是子进程，调用benchcore进行测试
+  if(pid== (pid_t) 0)//如果是子进程,调用benchcore进行测试
   {
     /* I am a child */
     if(proxyhost==NULL)
@@ -397,7 +397,7 @@ static int bench(void) //所有的压测都在bench函数实现
 	 fprintf(f,"%d %d %d\n",speed,failed,bytes);
 	 fclose(f);
 	 return 0;
-  } else {  //如果是父进程，则从管道读取子进程输出，并作汇总
+  } else {  //如果是父进程,则从管道读取子进程输出,并作汇总
 	  f=fdopen(mypipe[0],"r");
 	  if(f==NULL) 
 	  {
@@ -411,7 +411,7 @@ static int bench(void) //所有的压测都在bench函数实现
 
 	  while(1)
 	  {
-		  pid=fscanf(f,"%d %d %d",&i,&j,&k);  //从管道读取数据，fscanf为阻塞式函数
+		  pid=fscanf(f,"%d %d %d",&i,&j,&k);  //从管道读取数据,fscanf为阻塞式函数
 		  if(pid<2)
                   {
                        fprintf(stderr,"Some of our childrens died.\n");
@@ -422,7 +422,7 @@ static int bench(void) //所有的压测都在bench函数实现
 		  bytes+=k;
 		  /* fprintf(stderr,"*Knock* %d %d read=%d\n",speed,failed,pid); */
 		  if(--clients==0) 
-		    break;//这句用于记录已经读了多少个子进程的数据，读完就退出
+		    break;//这句用于记录已经读了多少个子进程的数据,读完就退出
 	  }
 	  fclose(f);
 
@@ -449,7 +449,7 @@ void benchcore(const char *host,const int port,const char *req)
  /* setup alarm signal handler */
  sa.sa_handler=alarm_handler;
  sa.sa_flags=0;
- if(sigaction(SIGALRM,&sa,NULL)) //定时器超时设置，超时退出
+ if(sigaction(SIGALRM,&sa,NULL)) //定时器超时设置,超时退出
     exit(3);
  alarm(benchtime); //开始计时
 

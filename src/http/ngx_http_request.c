@@ -80,9 +80,9 @@ static char *ngx_http_client_errors[] = {
     "client sent invalid method in HTTP/0.9 request"
 };
 
-//把ngx_http_headers_in中的所有成员做hash运算，然后存放到cmcf->headers_in_hash中，见ngx_http_init_headers_in_hash
+//把ngx_http_headers_in中的所有成员做hash运算,然后存放到cmcf->headers_in_hash中,见ngx_http_init_headers_in_hash
 ngx_http_header_t  ngx_http_headers_in[] = {  
-//通过ngx_http_variable_header函数获取ngx_http_core_variables中相关变量的值，这些值的来源就是ngx_http_headers_in中的hander解析的客户端请求头部
+//通过ngx_http_variable_header函数获取ngx_http_core_variables中相关变量的值,这些值的来源就是ngx_http_headers_in中的hander解析的客户端请求头部
 
     { ngx_string("Host"), offsetof(ngx_http_headers_in_t, host),
                  ngx_http_process_host }, //ngx_http_process_request_headers中执行handler
@@ -128,9 +128,9 @@ ngx_http_header_t  ngx_http_headers_in[] = {
 实现断点续传功能的下载 
 
 一. 两个必要响应头Accept-Ranges、ETag
-        客户端每次提交下载请求时，服务端都要添加这两个响应头，以保证客户端和服务端将此下载识别为可以断点续传的下载：
-Accept-Ranges：告知下载客户端这是一个可以恢复续传的下载，存放本次下载的开始字节位置、文件的字节大小；
-ETag：保存文件的唯一标识（我在用的文件名+文件最后修改时间，以便续传请求时对文件进行验证）；
+        客户端每次提交下载请求时,服务端都要添加这两个响应头,以保证客户端和服务端将此下载识别为可以断点续传的下载：
+Accept-Ranges：告知下载客户端这是一个可以恢复续传的下载,存放本次下载的开始字节位置、文件的字节大小；
+ETag：保存文件的唯一标识（我在用的文件名+文件最后修改时间,以便续传请求时对文件进行验证）；
 参考http://www.cnblogs.com/diyunpeng/archive/2011/12/29/2305702.html
 */
     { ngx_string("Range"), offsetof(ngx_http_headers_in_t, range),
@@ -213,11 +213,11 @@ ETag：保存文件的唯一标识（我在用的文件名+文件最后修改时
     { ngx_null_string, 0, NULL }
 };
 
-//设置ngx_listening_t的handler，这个handler会在监听到客户端连接时被调用，具体就是在ngx_event_accept函数中，ngx_http_init_connection函数顾名思义，就是初始化这个新建的连接
+//设置ngx_listening_t的handler,这个handler会在监听到客户端连接时被调用,具体就是在ngx_event_accept函数中,ngx_http_init_connection函数顾名思义,就是初始化这个新建的连接
 void
 ngx_http_init_connection(ngx_connection_t *c) 
-//当建立连接后开辟ngx_http_connection_t结构，这里面存储该服务器端ip:port所在server{}上下文配置信息，和server_name信息等，然后让
-//ngx_connection_t->data指向该结构，这样就可以通过ngx_connection_t->data获取到服务器端的serv loc 等配置信息以及该server{}中的server_name信息
+//当建立连接后开辟ngx_http_connection_t结构,这里面存储该服务器端ip:port所在server{}上下文配置信息,和server_name信息等,然后让
+//ngx_connection_t->data指向该结构,这样就可以通过ngx_connection_t->data获取到服务器端的serv loc 等配置信息以及该server{}中的server_name信息
 
 {
     ngx_uint_t              i;
@@ -232,15 +232,15 @@ ngx_http_init_connection(ngx_connection_t *c)
     ngx_http_in6_addr_t    *addr6;
 #endif
 
-    //注意ngx_connection_t和ngx_http_connection_t的区别，前者是建立连接accept前使用的结构，后者是连接成功后使用的结构
+    //注意ngx_connection_t和ngx_http_connection_t的区别,前者是建立连接accept前使用的结构,后者是连接成功后使用的结构
     hc = ngx_pcalloc(c->pool, sizeof(ngx_http_connection_t));
     if (hc == NULL) {
         ngx_http_close_connection(c);
         return;
     }
 
-    //在服务器端accept客户端连接成功(ngx_event_accept)后，会通过ngx_get_connection从连接池获取一个ngx_connection_t结构，也就是每个客户端连接对于一个ngx_connection_t结构，
-    //并且为其分配一个ngx_http_connection_t结构，ngx_connection_t->data = ngx_http_connection_t，见ngx_http_init_connection
+    //在服务器端accept客户端连接成功(ngx_event_accept)后,会通过ngx_get_connection从连接池获取一个ngx_connection_t结构,也就是每个客户端连接对于一个ngx_connection_t结构,
+    //并且为其分配一个ngx_http_connection_t结构,ngx_connection_t->data = ngx_http_connection_t,见ngx_http_init_connection
     c->data = hc;
 
     /* find the server configuration for the address:port */
@@ -254,7 +254,7 @@ ngx_http_init_connection(ngx_connection_t *c)
          * is an "*:port" wildcard so getsockname() in ngx_http_server_addr()
          * is required to determine a server address
          */
-        //说明listen ip:port存在几条没有bind选项，并且存在通配符配置，如listen *:port,那么就需要通过ngx_connection_local_sockaddr来确定
+        //说明listen ip:port存在几条没有bind选项,并且存在通配符配置,如listen *:port,那么就需要通过ngx_connection_local_sockaddr来确定
     //究竟客户端是和那个本地ip地址建立的连接
         if (ngx_connection_local_sockaddr(c, NULL, 0) != NGX_OK) { //
             ngx_http_close_connection(c);
@@ -288,8 +288,8 @@ ngx_http_init_connection(ngx_connection_t *c)
             addr = port->addrs; 
 
             /* the last address is "*" */
-            //根据上面的ngx_connection_local_sockaddr函数获取到客户端连接到本地，本地IP地址获取到后，遍历ngx_http_port_t找到对应
-            //的IP地址和端口，然后赋值给ngx_http_connection_t->addr_conf，这里面存储有server_name配置信息以及该ip:port对应的上下文信息
+            //根据上面的ngx_connection_local_sockaddr函数获取到客户端连接到本地,本地IP地址获取到后,遍历ngx_http_port_t找到对应
+            //的IP地址和端口,然后赋值给ngx_http_connection_t->addr_conf,这里面存储有server_name配置信息以及该ip:port对应的上下文信息
             for (i = 0; i < port->naddrs - 1; i++) {
                 if (addr[i].addr == sin->sin_addr.s_addr) {
                     break;
@@ -297,8 +297,8 @@ ngx_http_init_connection(ngx_connection_t *c)
             }
 
           /*
-                这里也体现了在ngx_http_init_connection中获取http{}上下文ctx，如果客户端请求中带有host参数，则会继续在ngx_http_set_virtual_server
-                中重新获取对应的server{}和location{}，如果客户端请求不带host头部行，则使用默认的server{},见 ngx_http_init_connection  
+                这里也体现了在ngx_http_init_connection中获取http{}上下文ctx,如果客户端请求中带有host参数,则会继续在ngx_http_set_virtual_server
+                中重新获取对应的server{}和location{},如果客户端请求不带host头部行,则使用默认的server{},见 ngx_http_init_connection
             */
             hc->addr_conf = &addr[i].conf;
 
@@ -349,7 +349,7 @@ ngx_http_init_connection(ngx_connection_t *c)
     c->write->handler = ngx_http_empty_handler;
 
 #if (NGX_HTTP_V2) 
-    /* 这里放在SSL的前面是，如果没有配置SSL，则直接不用进行SSL协商而进行HTTP2处理ngx_http_v2_init */
+    /* 这里放在SSL的前面是,如果没有配置SSL,则直接不用进行SSL协商而进行HTTP2处理ngx_http_v2_init */
     if (hc->addr_conf->http2) {
         rev->handler = ngx_http_v2_init;
     }
@@ -375,13 +375,13 @@ ngx_http_init_connection(ngx_connection_t *c)
     }
 
     /*
-     如果新连接的读事件ngx_event_t结构体中的标志位ready为1，实际上表示这个连接对应的套接字缓存上已经有用户发来的数据，
-     这时就可调用上面说过的ngx_http_init_request方法处理请求。
+     如果新连接的读事件ngx_event_t结构体中的标志位ready为1,实际上表示这个连接对应的套接字缓存上已经有用户发来的数据,
+     这时就可调用上面说过的ngx_http_init_request方法处理请求.
      */
-    //这里只可能是当listen的时候添加了defered参数并且内核支持，在ngx_event_accept的时候才会置1，才可能执行下面的if里面的内容，否则不会只需if里面的内容
+    //这里只可能是当listen的时候添加了defered参数并且内核支持,在ngx_event_accept的时候才会置1,才可能执行下面的if里面的内容,否则不会只需if里面的内容
     if (rev->ready) {
         /* the deferred accept(), iocp */
-        if (ngx_use_accept_mutex) { //如果是配置了accept_mutex，则把该rev->handler延后处理，
+        if (ngx_use_accept_mutex) { //如果是配置了accept_mutex,则把该rev->handler延后处理,
         //实际上执行的地方为ngx_process_events_and_timers中的ngx_event_process_posted
             ngx_post_event(rev, &ngx_posted_events);
             return;
@@ -392,26 +392,26 @@ ngx_http_init_connection(ngx_connection_t *c)
     }
 
 /*
-在有些情况下，当TCP连接建立成功时同时也出现了可读事件（例如，在套接字listen配置时设置了deferred选项时，内核仅在套接字上确实收到请求时才会通知epoll
-调度事件的回调方法。当然，在大部分情况下，ngx_http_init_request方法和
+在有些情况下,当TCP连接建立成功时同时也出现了可读事件（例如,在套接字listen配置时设置了deferred选项时,内核仅在套接字上确实收到请求时才会通知epoll
+调度事件的回调方法. 当然,在大部分情况下,ngx_http_init_request方法和
 ngx_http_init_connection方法都是由两个事件（TCP连接建立成功事件和连接上的可读事件）触发调用的
 */
 
 /*
-调用ngx_add_timer方法把读事件添加到定时器中，设置的超时时间则是nginx.conf中client_header_timeout配置项指定的参数。
-也就是说，如果经过client_header_timeout时间后这个连接上还没有用户数据到达，则会由定时器触发调用读事件的ngx_http_init_request处理方法。
+调用ngx_add_timer方法把读事件添加到定时器中,设置的超时时间则是nginx.conf中client_header_timeout配置项指定的参数.
+也就是说,如果经过client_header_timeout时间后这个连接上还没有用户数据到达,则会由定时器触发调用读事件的ngx_http_init_request处理方法.
  */
-    ngx_add_timer(rev, c->listening->post_accept_timeout); //把接收事件添加到定时器中，当post_accept_timeout秒还没有客户端数据到来，就关闭连接
+    ngx_add_timer(rev, c->listening->post_accept_timeout); //把接收事件添加到定时器中,当post_accept_timeout秒还没有客户端数据到来,就关闭连接
     ngx_reusable_connection(c, 1);
 
-    if (ngx_handle_read_event(rev, 0) != NGX_OK) { //当下次有数据从客户端发送过来的时候，会在ngx_epoll_process_events把对应的ready置1。
+    if (ngx_handle_read_event(rev, 0) != NGX_OK) { //当下次有数据从客户端发送过来的时候,会在ngx_epoll_process_events把对应的ready置1.
         ngx_http_close_connection(c);
         return;
     }
 }
 
-//客户端建立连接后，只有第一次读取客户端数据到数据的时候，执行的handler指向该函数，因此当客户端连接建立成功后，只有第一次读取
-//客户端数据才会走该函数，如果在保活期内又收到客户端请求，则不会再走该函数，而是执行ngx_http_process_request_line，因为该函数
+//客户端建立连接后,只有第一次读取客户端数据到数据的时候,执行的handler指向该函数,因此当客户端连接建立成功后,只有第一次读取
+//客户端数据才会走该函数,如果在保活期内又收到客户端请求,则不会再走该函数,而是执行ngx_http_process_request_line,因为该函数
 //把handler指向了ngx_http_process_request_line
 static void
 ngx_http_wait_request_handler(ngx_event_t *rev)
@@ -428,7 +428,7 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
 
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http wait request handler");
 
-    if (rev->timedout) { //如果tcp连接建立后，等了client_header_timeout秒一直没有收到客户端的数据包过来，则关闭连接
+    if (rev->timedout) { //如果tcp连接建立后,等了client_header_timeout秒一直没有收到客户端的数据包过来,则关闭连接
         ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
         ngx_http_close_connection(c);
         return;
@@ -468,7 +468,7 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
         b->end = b->last + size;
     }
 
-    //这里如果一次没有把所有客户端的数据读取完，则在ngx_http_process_request_line中会继续读取
+    //这里如果一次没有把所有客户端的数据读取完,则在ngx_http_process_request_line中会继续读取
     //与ngx_http_read_request_header配合读
     n = c->recv(c, b->last, size);  //读取客户端来的数据    执行ngx_unix_recv
 
@@ -544,7 +544,7 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
     ngx_http_process_request_line(rev);
 }
 
-//只有在连接建立并接受到客户端第一次请求的时候才会创建ngx_connection_t，该结构一直持续到连接关闭才释放
+//只有在连接建立并接受到客户端第一次请求的时候才会创建ngx_connection_t,该结构一直持续到连接关闭才释放
 ngx_http_request_t *
 ngx_http_create_request(ngx_connection_t *c)
 {
@@ -588,7 +588,7 @@ ngx_http_alloc_request(ngx_connection_t *c)
     ngx_http_core_main_conf_t  *cmcf;
 
     hc = c->data;
-    //在ngx_http_wait_request_handler的时候，data指向ngx_http_connection_t,该函数返回后 c->data重新指向新开盘的ngx_http_request_t
+    //在ngx_http_wait_request_handler的时候,data指向ngx_http_connection_t,该函数返回后 c->data重新指向新开盘的ngx_http_request_t
     //之前c->data指向的ngx_http_connection_t用r->http_connection保存
 
     cscf = ngx_http_get_module_srv_conf(hc->conf_ctx, ngx_http_core_module);
@@ -606,10 +606,10 @@ ngx_http_alloc_request(ngx_connection_t *c)
 
     r->pool = pool;
 
-    //当连接建立成功后，当收到客户端的第一个请求的时候会通过ngx_http_wait_request_handler->ngx_http_create_request创建ngx_http_request_t
-    //同时把r->http_connection指向accept客户端连接成功时候创建的ngx_http_connection_t，这里面有存储server{}上下文ctx和server_name等信息
-    //该ngx_http_request_t会一直有效，除非关闭连接。因此该函数只会调用一次，也就是第一个客户端请求报文过来的时候创建，一直持续到连接关闭
-    r->http_connection = hc; //重新把c->data赋值给r->http_connection，这样r->http_connection就保存了ngx_http_connection_t信息
+    //当连接建立成功后,当收到客户端的第一个请求的时候会通过ngx_http_wait_request_handler->ngx_http_create_request创建ngx_http_request_t
+    //同时把r->http_connection指向accept客户端连接成功时候创建的ngx_http_connection_t,这里面有存储server{}上下文ctx和server_name等信息
+    //该ngx_http_request_t会一直有效,除非关闭连接. 因此该函数只会调用一次,也就是第一个客户端请求报文过来的时候创建,一直持续到连接关闭
+    r->http_connection = hc; //重新把c->data赋值给r->http_connection,这样r->http_connection就保存了ngx_http_connection_t信息
     r->signature = NGX_HTTP_MODULE;
     r->connection = c;
 
@@ -686,7 +686,7 @@ ngx_http_alloc_request(ngx_connection_t *c)
 
 
 #if (NGX_HTTP_SSL)
-/* 如果配置了需要支持ssl协议，则连接建立后会调用该handler处理后续ssl协商过程 */
+/* 如果配置了需要支持ssl协议,则连接建立后会调用该handler处理后续ssl协商过程 */
 static void
 ngx_http_ssl_handshake(ngx_event_t *rev)
 {
@@ -717,12 +717,12 @@ ngx_http_ssl_handshake(ngx_event_t *rev)
         return;
     }
 
-    size = hc->proxy_protocol ? sizeof(buf) : 1; //如果不是做proxy，则读1字节出来，看是什么协议
+    size = hc->proxy_protocol ? sizeof(buf) : 1; //如果不是做proxy,则读1字节出来,看是什么协议
 
     /*
-    MSG_PEEK标志会将套接字接收队列中的可读的数据拷贝到缓冲区，但不会使套接子接收队列中的数据减少，
-    常见的是：例如调用recv或read后，导致套接字接收队列中的数据被读取后而减少，而指定了MSG_PEEK标志，
-    可通过返回值获得可读数据长度，并且不会减少套接字接收缓冲区中的数据，所以可以供程序的其他部分继续读取。
+    MSG_PEEK标志会将套接字接收队列中的可读的数据拷贝到缓冲区,但不会使套接子接收队列中的数据减少,
+    常见的是：例如调用recv或read后,导致套接字接收队列中的数据被读取后而减少,而指定了MSG_PEEK标志,
+    可通过返回值获得可读数据长度,并且不会减少套接字接收缓冲区中的数据,所以可以供程序的其他部分继续读取.
     */
     n = recv(c->fd, (char *) buf, size, MSG_PEEK); 
 
@@ -824,7 +824,7 @@ ngx_http_ssl_handshake(ngx_event_t *rev)
             return;
         }
 
-        //http 平台的请求，如果是http平台的请求，就走一般流程返回错我信息
+        //http 平台的请求,如果是http平台的请求,就走一般流程返回错我信息
         ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0, "plain http");
 
         c->log->action = "waiting for request";
@@ -839,7 +839,7 @@ ngx_http_ssl_handshake(ngx_event_t *rev)
     ngx_http_close_connection(c);
 }
 
-//SSL或者TLS协商成功后，开始读取客户端包体了
+//SSL或者TLS协商成功后,开始读取客户端包体了
 static void
 ngx_http_ssl_handshake_handler(ngx_connection_t *c)
 {
@@ -1091,13 +1091,13 @@ failed:
 
 #endif
 /*
-这样的请求行长度是不定的，它与URI长度相关，这意味着在读事件被触发时，内核套接字缓冲区的大小未必足够接收到全部的HTTP请求行，由此可以得出结论：
-调用一次ngx_http_process_request_line方法不一定能够做完这项工作。所以，ngx_http_process_request_line方法也会作为读事件的回调方法，它可能会被
-epoll这个事件驱动机制多次调度，反复地接收TCP流并使用状态机解析它们，直到确认接收到了完整的HTTP请求行，这个阶段才算完成，才会进入下一个阶段接收HTTP头部。
+这样的请求行长度是不定的,它与URI长度相关,这意味着在读事件被触发时,内核套接字缓冲区的大小未必足够接收到全部的HTTP请求行,由此可以得出结论：
+调用一次ngx_http_process_request_line方法不一定能够做完这项工作. 所以,ngx_http_process_request_line方法也会作为读事件的回调方法,它可能会被
+epoll这个事件驱动机制多次调度,反复地接收TCP流并使用状态机解析它们,直到确认接收到了完整的HTTP请求行,这个阶段才算完成,才会进入下一个阶段接收HTTP头部.
 */
 /*
-在接收完HTTP头部，第一次在业务上处理HTTP请求时，HTTP框架提供的处理方法是ngx_http_process_request。但如果该方法无法一次处
-理完该请求的全部业务，在归还控制权到epoll事件模块后，该请求再次被回调时，将通过ngx_http_request_handler方法来处理
+在接收完HTTP头部,第一次在业务上处理HTTP请求时,HTTP框架提供的处理方法是ngx_http_process_request. 但如果该方法无法一次处
+理完该请求的全部业务,在归还控制权到epoll事件模块后,该请求再次被回调时,将通过ngx_http_request_handler方法来处理
 */
 static void
 ngx_http_process_request_line(ngx_event_t *rev) //ngx_http_process_request_line方法来接收HTTP请求行
@@ -1114,8 +1114,8 @@ ngx_http_process_request_line(ngx_event_t *rev) //ngx_http_process_request_line�
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, rev->log, 0,
                    "http process request line");
     /*
-     检查这个读事件是否已经超时，超时时间仍然是nginx.conf配置文件中指定的client_header_timeout。如果ngx_event_t事件的timeout标志为1，
-     则认为接收HTTP请求已经超时，调用ngx_http_close_request方法关闭请求，同时由ngx_http_process_request_line方法中返回。
+     检查这个读事件是否已经超时,超时时间仍然是nginx.conf配置文件中指定的client_header_timeout. 如果ngx_event_t事件的timeout标志为1,
+     则认为接收HTTP请求已经超时,调用ngx_http_close_request方法关闭请求,同时由ngx_http_process_request_line方法中返回.
      */
     if (rev->timedout) {
         ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
@@ -1126,16 +1126,16 @@ ngx_http_process_request_line(ngx_event_t *rev) //ngx_http_process_request_line�
 
     rc = NGX_AGAIN;
 
-//读取一行数据，分析出请求行中包含的method、uri、http_version信息。然后再一行一行处理请求头，并根据请求method与请求头的信息来决定
-//是否有请求体以及请求体的长度，然后再去读取请求体
+//读取一行数据,分析出请求行中包含的method、uri、http_version信息. 然后再一行一行处理请求头,并根据请求method与请求头的信息来决定
+//是否有请求体以及请求体的长度,然后再去读取请求体
     for ( ;; ) {
 
         if (rc == NGX_AGAIN) {
             n = ngx_http_read_request_header(r);
 
             if (n == NGX_AGAIN || n == NGX_ERROR) { 
-            //如果内核中的数据已经读完，但这时候头部字段还没有解析完毕，则把控制器交还给HTTP，当数据到来的时候触发
-            //ngx_http_process_request_line，因为该函数外面rev->handler = ngx_http_process_request_line;
+            //如果内核中的数据已经读完,但这时候头部字段还没有解析完毕,则把控制器交还给HTTP,当数据到来的时候触发
+            //ngx_http_process_request_line,因为该函数外面rev->handler = ngx_http_process_request_line;
                 break;
             }
         }
@@ -1999,8 +1999,8 @@ ngx_http_process_request_header(ngx_http_request_t *r)
     }
 
     /* 
-	用户请求的HTTP版本小于1.0（如HTTP 0.9版本），其处理过程将与HTTP l.0和HTTP l.1的完全不同，它不会有接收HTTP
-    头部这一步骤。这时将会调用ngx_http_find_virtual_server方法寻找到相应的虚拟主机
+	用户请求的HTTP版本小于1.0（如HTTP 0.9版本）,其处理过程将与HTTP l.0和HTTP l.1的完全不同,它不会有接收HTTP
+    头部这一步骤. 这时将会调用ngx_http_find_virtual_server方法寻找到相应的虚拟主机
 	*/
     if (r->headers_in.host == NULL && r->http_version > NGX_HTTP_VERSION_10) {
         ngx_log_error(NGX_LOG_INFO, r->connection->log, 0,

@@ -52,16 +52,16 @@ static ngx_conf_post_handler_pt  ngx_http_accesskey_signature_p =
     ngx_http_accesskey_signature;
 
 /*
-我的实现防盗链的做法，也是参考该位前辈的文章。基本原理就是就是一句话：通过判断request请求头的refer是否来源于本站。（当然请求头是来自于客户端的，
-是可伪造的，暂不在本文讨论范围内）。
+我的实现防盗链的做法,也是参考该位前辈的文章. 基本原理就是就是一句话：通过判断request请求头的refer是否来源于本站. （当然请求头是来自于客户端的,
+是可伪造的,暂不在本文讨论范围内）.
 
-2．  首先我们去了解下什么是HTTP Referer。简言之，HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉
-服务器我是从哪个页面链接过来的，服务器籍此可以获得一些信息用于处理。比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计
-出每天有多少用户点击我主页上的链接访问他的网站。（注：该文所有用的站点均假设以 http://blog.csdn.net为例）
+2．  首先我们去了解下什么是HTTP Referer. 简言之,HTTP Referer是header的一部分,当浏览器向web服务器发送请求的时候,一般会带上Referer,告诉
+服务器我是从哪个页面链接过来的,服务器籍此可以获得一些信息用于处理. 比如从我主页上链接到一个朋友那里,他的服务器就能够从HTTP Referer中统计
+出每天有多少用户点击我主页上的链接访问他的网站. （注：该文所有用的站点均假设以 http://blog.csdn.net为例）
 
 假如我们要访问资源：http://blog.csdn.net/Beacher_Ma 有两种情况：
-1．  我们直接在浏览器上输入该网址。那么该请求的HTTP Referer 就为null
-2．  如果我们在其他其他页面中，通过点击，如 http://www.csdn.net 上有一个 http://blog.csdn.net/Beacher_Ma 这样的链接，那么该请求的HTTP Referer 
+1．  我们直接在浏览器上输入该网址. 那么该请求的HTTP Referer 就为null
+2．  如果我们在其他其他页面中,通过点击,如 http://www.csdn.net 上有一个 http://blog.csdn.net/Beacher_Ma 这样的链接,那么该请求的HTTP Referer
 就为http://www.csdn.net 
 */
 
@@ -80,7 +80,7 @@ rewrite ^/ http://www.jb51.net/retrun.html;
 第一行：gif|jpg|png|swf|flv 
 表示对gif、jpg、png、swf、flv后缀的文件实行防盗链 
 第二行： 表示对www.ingnix.com这2个来路进行判断 
-if{}里面内容的意思是，如果来路不是指定来路就跳转到http://www.jb51.net/retrun.html页面，当然直接返回403也是可以的。 
+if{}里面内容的意思是,如果来路不是指定来路就跳转到http://www.jb51.net/retrun.html页面,当然直接返回403也是可以的.
 
 二：针对图片目录防止盗链 
 
@@ -99,10 +99,10 @@ if ($invalid_referer) {return 403;}
 
 实现方法如下：
 1. 下载NginxHttpAccessKeyModule模块文件：Nginx-accesskey-2.0.3.tar.gz；
-2. 解压此文件后，找到nginx-accesskey-2.0.3下的config文件。编辑此文件：替换其中的”$HTTP_ACCESSKEY_MODULE”为”ngx_http_accesskey_module”；
+2. 解压此文件后,找到nginx-accesskey-2.0.3下的config文件. 编辑此文件：替换其中的”$HTTP_ACCESSKEY_MODULE”为”ngx_http_accesskey_module”；
 3. 用一下参数重新编译nginx：
 ./configure --add-module=path/to/nginx-accesskey
-4. 修改nginx的conf文件，添加以下几行：
+4. 修改nginx的conf文件,添加以下几行：
 location /download {
   accesskey             on;
   accesskey_hashmethod  md5;
@@ -113,7 +113,7 @@ location /download {
 accesskey为模块开关；
 accesskey_hashmethod为加密方式MD5或者SHA-1；
 accesskey_arg为url中的关键字参数；
-accesskey_signature为加密值，此处为mypass和访问IP构成的字符串。
+accesskey_signature为加密值,此处为mypass和访问IP构成的字符串.
 
 访问测试脚本download.php：
 <?
@@ -123,10 +123,10 @@ $output_org_url="<a href=http://www.jb51.net/download/G3200507120520LM.rar>downl
 echo $output_add_key;
 echo $output_org_url;
 ?>
-访问第一个download_add_key链接可以正常下载，第二个链接download_org_path会返回403 Forbidden错误。
+访问第一个download_add_key链接可以正常下载,第二个链接download_org_path会返回403 Forbidden错误.
 
 */
-//ngx_http_secure_link_module现在可以代替ngx_http_accesskey_module，他们功能类似   ngx_http_secure_link_module Nginx的安全模块,免得别人拿webserver权限。
+//ngx_http_secure_link_module现在可以代替ngx_http_accesskey_module,他们功能类似   ngx_http_secure_link_module Nginx的安全模块,免得别人拿webserver权限.
 //ngx_http_referer_module具有普通防盗链功能
 static ngx_command_t  ngx_http_accesskey_commands[] = {
     { ngx_string("accesskey"), //on | off 为模块开关；
@@ -151,7 +151,7 @@ static ngx_command_t  ngx_http_accesskey_commands[] = {
       offsetof(ngx_http_accesskey_loc_conf_t, signature),
       &ngx_http_accesskey_signature_p },
 
-    { ngx_string("accesskey_arg"), // accesskey_signature   "mypass$remote_addr";为加密值，此处为mypass和访问IP构成的字符串。
+    { ngx_string("accesskey_arg"), // accesskey_signature   "mypass$remote_addr";为加密值,此处为mypass和访问IP构成的字符串.
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
       ngx_conf_set_str_slot,
       NGX_HTTP_LOC_CONF_OFFSET,
@@ -176,7 +176,7 @@ static ngx_http_module_t  ngx_http_accesskey_module_ctx = {
     ngx_http_accesskey_merge_loc_conf         /* merge location configuration */
 };
 
-//ngx_http_secure_link_module现在可以代替ngx_http_accesskey_module，他们功能类似   ngx_http_secure_link_module Nginx的安全模块,免得别人拿webserver权限。
+//ngx_http_secure_link_module现在可以代替ngx_http_accesskey_module,他们功能类似   ngx_http_secure_link_module Nginx的安全模块,免得别人拿webserver权限.
 //ngx_http_referer_module具有普通防盗链功能
 ngx_module_t  ngx_http_accesskey_module = {
     NGX_MODULE_V1,

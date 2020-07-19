@@ -1,15 +1,15 @@
 /*
-最近编写nginx模块的时候，发现worker进程老是打印:
+最近编写nginx模块的时候,发现worker进程老是打印:
 2025/02/13 13:11:03[                 ngx_signal_handler,   927]  [notice] 32580#32580: signal 17 (SIGCHLD) received
 为了定位
 nginx配置方法
 worker_rlimit_core  100M;
 working_directory   /path/to/cores/;
-注意这里一定要保证/path目录有读写权限，否则不会产生coredump文件
+注意这里一定要保证/path目录有读写权限,否则不会产生coredump文件
 
 
-也可以进行系统配置，见下面:
-ulimit -c 1024(限制文件大小) 或者unlimited ，这个要注意，如果不做限制，coredump文件会很大，吃掉很多磁盘空间
+也可以进行系统配置,见下面:
+ulimit -c 1024(限制文件大小) 或者unlimited ,这个要注意,如果不做限制,coredump文件会很大,吃掉很多磁盘空间
 
 cat /proc/sys/kernel/core_pattern 查看coredump文件存放路径
 
@@ -30,7 +30,7 @@ gdb programfile codedumpfile
 
 
 
-上面两句执行后，可以保证coredump文件为core-nginx
+上面两句执行后,可以保证coredump文件为core-nginx
 
 执行成功只有打印了:Segmentation fault (core dumped)才会有coredump文件产生
 打印:Segmentation fault 没有打印(core dumped)则不会参数coredump文件
@@ -52,7 +52,7 @@ root@root:/var/yyz#
 $grep signal error.log
 2012/12/24 16:39:56 [alert] 13661#0: worker process 13666 exited on signal 11  没有coredump文件产生
 
-如果在进程退出后，有coredump文件产生，则会打出如下日志：
+如果在进程退出后,有coredump文件产生,则会打出如下日志：
 $grep signal error.log
 2012/12/24 16:39:56 [alert] 13661#0: worker process 13666 exited on signal 11 (core dumped) 
 
@@ -66,16 +66,16 @@ gdb programfile codedumpfile
 2.core文件的名称和生成路径
 ----------------------------
 core文件生成路径:
-输入可执行文件运行命令的同一路径下。
- 若系统生成的core文件不带其他任何扩展名称，则全部命名为core。新的core文件生成将覆盖原来的core文件。
+输入可执行文件运行命令的同一路径下.
+ 若系统生成的core文件不带其他任何扩展名称,则全部命名为core. 新的core文件生成将覆盖原来的core文件.
 
-1）/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展。文件内容为1，表示添加pid作为扩展名，生成的core文件格式为core.xxxx；为0则表示生成的core文件同一命名为core。
+1）/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展. 文件内容为1,表示添加pid作为扩展名,生成的core文件格式为core.xxxx；为0则表示生成的core文件同一命名为core.
  可通过以下命令修改此文件：
 echo "1" > c
 
-2）proc/sys/kernel/core_pattern可以控制core文件保存位置和文件名格式。
+2）proc/sys/kernel/core_pattern可以控制core文件保存位置和文件名格式.
  可通过以下命令修改此文件：
-echo "/corefile/core-%e-%p-%t" > core_pattern，可以将core文件统一生成到/corefile目录下，产生的文件名为core-命令名-pid-时间戳
+echo "/corefile/core-%e-%p-%t" > core_pattern,可以将core文件统一生成到/corefile目录下,产生的文件名为core-命令名-pid-时间戳
  以下是参数列表:
  %p - insert pid into filename 添加pid
  %u - insert current uid into filename 添加当前uid
@@ -145,7 +145,7 @@ Reading symbols from /var/yyz/corefile/nginx...done.
 
 
 
-按照流程一路排查下去，发现Nginx访问日志里面有大量的http 504 err code
+按照流程一路排查下去,发现Nginx访问日志里面有大量的http 504 err code
 
 tail -f /var/log/messages  或者demsg查看是否有段错误
 
@@ -173,25 +173,25 @@ Nginx问题定位之监控进程异常退出
 Dec 25th, 2012 nginx  Posted by lifeibo | Comments 
 
 
-nginx在运行过程中是否稳定，是否有异常退出过？这里总结几项平时会用到的小技巧。
+nginx在运行过程中是否稳定,是否有异常退出过？这里总结几项平时会用到的小技巧.
 
-1. 在error.log中查看是否有signal项，如果有，看看signal是多少。
+1. 在error.log中查看是否有signal项,如果有,看看signal是多少.
 
-比如，这是一个异常退出的情况：
+比如,这是一个异常退出的情况：
 $grep signal error.log
 
 2012/12/24 16:39:56 [alert] 13661#0: worker process 13666 exited on signal 11
 
 
-如果在进程退出后，有coredump文件产生，则会打出如下日志：
+如果在进程退出后,有coredump文件产生,则会打出如下日志：
 $grep signal error.log
 
 2012/12/24 16:39:56 [alert] 13661#0: worker process 13666 exited on signal 11 (core dumped) 
 
 
-2. 简单方式，看进程号是否连续
+2. 简单方式,看进程号是否连续
 
-一般来说，在worker进程启动时，其进程号都是连续的（至少相差不是很远），如果有进程退出，其进程号就不一定连续。
+一般来说,在worker进程启动时,其进程号都是连续的（至少相差不是很远）,如果有进程退出,其进程号就不一定连续.
 $ps aux | grep nginx
 
 lizi      7223  0.0  0.0  74844  2024 ?        Ss   13:32   0:00 nginx: master process ./nginx
@@ -207,7 +207,7 @@ lizi      7300  0.0  0.0  78856  5468 ?        S    13:33   0:00 nginx: worker p
 lizi      7301  0.0  0.0  78856  5452 ?        S    13:33   0:00 nginx: worker process
 
 
-可以看到，10个worker进程，基本从7292到7301，进程号连续。
+可以看到,10个worker进程,基本从7292到7301,进程号连续.
  如下：
 $ps aux | grep nginx
 
@@ -218,16 +218,16 @@ nobody   19344 16659 24 10:18 ?        00:50:54 nginx: worker process
 nobody    25447 16659 28 07:41 ?        01:43:56 nginx: worker process 
 
 
-进程号已不再连续，说明nginx可能有工作进程异常退出。
+进程号已不再连续,说明nginx可能有工作进程异常退出.
 
-3. 查看dmesg系统消息。
+3. 查看dmesg系统消息.
 
 在man手册里面是这么描述dmesg的：
 DESCRIPTION
 dmesg is used to examine or control the kernel ring buffer.
 
 
-查看dmesg是检测系统运行状态的常用手段，通常可以帮我们排查很多问题。当然，如果有进程异常退出，dmesg也可以看到。
+查看dmesg是检测系统运行状态的常用手段,通常可以帮我们排查很多问题. 当然,如果有进程异常退出,dmesg也可以看到.
 $dmesg
 
 nginx[24721]: segfault at 0000000000000001 rip 0000000000000001 rsp 00007ffff58d8180 error 14
@@ -235,32 +235,32 @@ nginx[1729]: segfault at 0000000000000190 rip 00000000004c2d27 rsp 00007ffff58d8
 nginx[22002]: segfault at ffffffffffffffff rip 000000001c959744 rsp 00007fff43caac18 error 6
 
 
-rip表示程序退出时的ip寄存器内容，当没有core文件可用时，可根据此值以及反汇编来查找程序core的位置。
+rip表示程序退出时的ip寄存器内容,当没有core文件可用时,可根据此值以及反汇编来查找程序core的位置.
 
-4. 打开coredump文件。
+4. 打开coredump文件.
 
-一般我们在程序启动前，通过ulimit -c ulimited来设置core文件的大小，也可以修改/etc/security/limits.conf文件，添加如下信息：
+一般我们在程序启动前,通过ulimit -c ulimited来设置core文件的大小,也可以修改/etc/security/limits.conf文件,添加如下信息：
 admin               soft    core            1000000
 admin               hard    core            1000000
 
 
-也可以直接修改nginx的配置文件，添加如下配置项：
+也可以直接修改nginx的配置文件,添加如下配置项：
 worker_rlimit_core 10000m;
 
 
-而此时，在limit系统中，默认coredump文件会写在启动nginx时的目录，如果nginx在启动时worker进程的用户没有权限写到这个目录，进程在异常退出时，就无法产生coredump文件。由于nginx启动后，或者是由别人启动，我们无法知道nginx在启动时的目录，也就无法知道core文件的目录。我曾经碰到过这样的问题，通过日志查看，是coredump出来了，但却找不到coredump的文件。
+而此时,在limit系统中,默认coredump文件会写在启动nginx时的目录,如果nginx在启动时worker进程的用户没有权限写到这个目录,进程在异常退出时,就无法产生coredump文件. 由于nginx启动后,或者是由别人启动,我们无法知道nginx在启动时的目录,也就无法知道core文件的目录. 我曾经碰到过这样的问题,通过日志查看,是coredump出来了,但却找不到coredump的文件.
 
-这里有一个小技巧，查看/proc/pid/cwd可以看到进程的工作目录，而core文件会产生在工作目录。
+这里有一个小技巧,查看/proc/pid/cwd可以看到进程的工作目录,而core文件会产生在工作目录.
 
-nginx可以配置工作目录来改变默认的工作目录，于是，我们需要配置working_directory为目的工作目录，我们的core文件也会产生在这个目录。
+nginx可以配置工作目录来改变默认的工作目录,于是,我们需要配置working_directory为目的工作目录,我们的core文件也会产生在这个目录.
 working_directory /path/to/core;
 
 
-working_directory与编译时指定的--prefix=/path不同，后者表示在配置文件中所用的相对路径所生产的绝对路径。所以，working_directory不会影响到配置的引用路径，而仅仅是为了改变core文件的路径，当然nginx必须有写这个目录的权限，否则无法core出来。
+working_directory与编译时指定的--prefix=/path不同,后者表示在配置文件中所用的相对路径所生产的绝对路径. 所以,working_directory不会影响到配置的引用路径,而仅仅是为了改变core文件的路径,当然nginx必须有写这个目录的权限,否则无法core出来.
 
-所以，这里，我推荐的做法是，配置worker_rlimit_core与working_directory这两个指令，这样，就不需要修改操作系统的参数就可以正常core出来了。
+所以,这里,我推荐的做法是,配置worker_rlimit_core与working_directory这两个指令,这样,就不需要修改操作系统的参数就可以正常core出来了.
 
-以上这些是平时用到的一些技巧的总结，大家玩得开心！
+以上这些是平时用到的一些技巧的总结,大家玩得开心！
 
 
 
@@ -271,14 +271,14 @@ working_directory与编译时指定的--prefix=/path不同，后者表示在配�
 
 
 Linux环境下段错误的产生原因及调试方法小结
-最近在Linux环境下做C语言项目，由于是在一个原有项目基础之上进行二次开发，而且项目工程庞大复杂，出现了不少问题，其中遇到最多、花
-费时间最长的问题就是著名的“段错误”（Segmentation Fault）。借此机会系统学习了一下，这里对Linux环境下的段错误做个小结，方便以后
-同类问题的排查与解决。 
+最近在Linux环境下做C语言项目,由于是在一个原有项目基础之上进行二次开发,而且项目工程庞大复杂,出现了不少问题,其中遇到最多、花
+费时间最长的问题就是著名的“段错误”（Segmentation Fault）. 借此机会系统学习了一下,这里对Linux环境下的段错误做个小结,方便以后
+同类问题的排查与解决.
 
 1. 段错误是什么 
 
-一句话来说，段错误是指访问的内存超出了系统给这个程序所设定的内存空间，例如访问了不存在的内存地址、访问了系统保护的内存地址、访问了
-只读的内存地址等等情况。这里贴一个对于“段错误”的准确定义（参考Answers.com）： 
+一句话来说,段错误是指访问的内存超出了系统给这个程序所设定的内存空间,例如访问了不存在的内存地址、访问了系统保护的内存地址、访问了
+只读的内存地址等等情况. 这里贴一个对于“段错误”的准确定义（参考Answers.com）：
 
 A segmentation fault (often shortened to segfault) is a particular error condition that can occur during the operation of computer 
 software. In short, a segmentation fault occurs when a program attempts to access a memory location that it is not allowed to access, 
@@ -349,23 +349,23 @@ main();
 } 
 
 
-等等其他原因。 
+等等其他原因.
 
 3. 段错误信息的获取 
-程序发生段错误时，提示信息很少，下面有几种查看段错误的发生信息的途径。 
+程序发生段错误时,提示信息很少,下面有几种查看段错误的发生信息的途径.
 
 3.1 dmesg 
-dmesg可以在应用程序crash掉时，显示内核中保存的相关信息。如下所示，通过dmesg命令可以查看发生段错误的程序名称、引起段错误发生的
-内存地址、指令指针地址、堆栈指针地址、错误代码、错误原因等。以程序2.3为例： 
+dmesg可以在应用程序crash掉时,显示内核中保存的相关信息. 如下所示,通过dmesg命令可以查看发生段错误的程序名称、引起段错误发生的
+内存地址、指令指针地址、堆栈指针地址、错误代码、错误原因等. 以程序2.3为例：
 
 panfeng@ubuntu:~/segfault$ dmesg 
 [ 2329.479037] segfault3[2700]: segfault at 80484e0 ip 00d2906a sp bfbbec3c error 7 in libc-2.10.1.so[cb4000+13e000] 
 3.2 -g 
-使用gcc编译程序的源码时，加上-g参数，这样可以使得生成的二进制文件中加入可以用于gdb调试的有用信息。以程序2.3为例： 
+使用gcc编译程序的源码时,加上-g参数,这样可以使得生成的二进制文件中加入可以用于gdb调试的有用信息. 以程序2.3为例：
 
 panfeng@ubuntu:~/segfault$ gcc -g -o segfault3 segfault3.c 
 3.3 nm 
-使用nm命令列出二进制文件中的符号表，包括符号地址、符号类型、符号名等，这样可以帮助定位在哪里发生了段错误。以程序2.3为例： 
+使用nm命令列出二进制文件中的符号表,包括符号地址、符号类型、符号名等,这样可以帮助定位在哪里发生了段错误. 以程序2.3为例：
 
 复制代码 代码如下:
 
@@ -409,8 +409,8 @@ U memcpy@@GLIBC_2.0
 
 
 3.4 ldd 
-使用ldd命令查看二进制程序的共享链接库依赖，包括库的名称、起始地址，这样可以确定段错误到底是发生在了自己的程序中还是依赖的共享
-库中。以程序2.3为例： 
+使用ldd命令查看二进制程序的共享链接库依赖,包括库的名称、起始地址,这样可以确定段错误到底是发生在了自己的程序中还是依赖的共享
+库中. 以程序2.3为例：
 
 复制代码 代码如下:
 
@@ -423,15 +423,15 @@ libc.so.6 => /lib/tls/i686/cmov/libc.so.6 (0x00675000)
 
 4. 段错误的调试方法 
 4.1 使用printf输出信息 
-这个是看似最简单但往往很多情况下十分有效的调试方式，也许可以说是程序员用的最多的调试方式。简单来说，就是在程序的重要代码附近加上像
-printf这类输出信息，这样可以跟踪并打印出段错误在代码中可能出现的位置。 
+这个是看似最简单但往往很多情况下十分有效的调试方式,也许可以说是程序员用的最多的调试方式. 简单来说,就是在程序的重要代码附近加上像
+printf这类输出信息,这样可以跟踪并打印出段错误在代码中可能出现的位置.
 
-为了方便使用这种方法，可以使用条件编译指令#ifdef DEBUG和#endif把printf函数包起来。这样在程序编译时，如果加上-DDEBUG参数就能查看调
-试信息；否则不加该参数就不会显示调试信息。 
+为了方便使用这种方法,可以使用条件编译指令#ifdef DEBUG和#endif把printf函数包起来. 这样在程序编译时,如果加上-DDEBUG参数就能查看调
+试信息；否则不加该参数就不会显示调试信息.
 
 4.2 使用gcc和gdb 
 4.2.1 调试步骤 
-1、为了能够使用gdb调试程序，在编译阶段加上-g参数，以程序2.3为例： 
+1、为了能够使用gdb调试程序,在编译阶段加上-g参数,以程序2.3为例：
 
 panfeng@ubuntu:~/segfault$ gcc -g -o segfault3 segfault3.c 
 2、使用gdb命令调试程序： 
@@ -453,7 +453,7 @@ Reading symbols from /home/panfeng/segfault/segfault3...done.
 (gdb) 
 
 
-3、进入gdb后，运行程序： 
+3、进入gdb后,运行程序：
 
 复制代码 代码如下:
 
@@ -466,9 +466,9 @@ Program received signal SIGSEGV, Segmentation fault.
 (gdb) 
 
 
-从输出看出，程序2.3收到SIGSEGV信号，触发段错误，并提示地址0x001a306a、调用memcpy报的错，位于/lib/tls/i686/cmov/libc.so.6库中。 
+从输出看出,程序2.3收到SIGSEGV信号,触发段错误,并提示地址0x001a306a、调用memcpy报的错,位于/lib/tls/i686/cmov/libc.so.6库中.
 
-4、完成调试后，输入quit命令退出gdb： 
+4、完成调试后,输入quit命令退出gdb：
 
 复制代码 代码如下:
 
@@ -482,33 +482,33 @@ Quit anyway? (y or n) y
 
 
 4.2.2 适用场景 
-1、仅当能确定程序一定会发生段错误的情况下使用。 
+1、仅当能确定程序一定会发生段错误的情况下使用.
 
-2、当程序的源码可以获得的情况下，使用-g参数编译程序。 
+2、当程序的源码可以获得的情况下,使用-g参数编译程序.
 
-3、一般用于测试阶段，生产环境下gdb会有副作用：使程序运行减慢，运行不够稳定，等等。 
+3、一般用于测试阶段,生产环境下gdb会有副作用：使程序运行减慢,运行不够稳定,等等.
 
-4、即使在测试阶段，如果程序过于复杂，gdb也不能处理。 
+4、即使在测试阶段,如果程序过于复杂,gdb也不能处理.
 
 4.3 使用core文件和gdb 
-在4.2节中提到段错误会触发SIGSEGV信号，通过man 7 signal，可以看到SIGSEGV默认的handler会打印段错误出错信息，并产生core文件，由此
-我们可以借助于程序异常退出时生成的core文件中的调试信息，使用gdb工具来调试程序中的段错误。 
+在4.2节中提到段错误会触发SIGSEGV信号,通过man 7 signal,可以看到SIGSEGV默认的handler会打印段错误出错信息,并产生core文件,由此
+我们可以借助于程序异常退出时生成的core文件中的调试信息,使用gdb工具来调试程序中的段错误.
 
 4.3.1 调试步骤 
-1、在一些Linux版本下，默认是不产生core文件的，首先可以查看一下系统core文件的大小限制： 
+1、在一些Linux版本下,默认是不产生core文件的,首先可以查看一下系统core文件的大小限制：
 
 panfeng@ubuntu:~/segfault$ ulimit -c 
 0 
-2、可以看到默认设置情况下，本机Linux环境下发生段错误时不会自动生成core文件，下面设置下core文件的大小限制（单位为KB）： 
+2、可以看到默认设置情况下,本机Linux环境下发生段错误时不会自动生成core文件,下面设置下core文件的大小限制（单位为KB）：
 
 panfeng@ubuntu:~/segfault$ ulimit -c 1024 
 panfeng@ubuntu:~/segfault$ ulimit -c 
 1024 
-3、运行程序2.3，发生段错误生成core文件： 
+3、运行程序2.3,发生段错误生成core文件：
 
 panfeng@ubuntu:~/segfault$ ./segfault3 
 段错误 (core dumped) 
-4、加载core文件，使用gdb工具进行调试： 
+4、加载core文件,使用gdb工具进行调试：
 
 复制代码 代码如下:
 
@@ -535,29 +535,29 @@ Program terminated with signal 11, Segmentation fault.
 #0 0x0018506a in memcpy () from /lib/tls/i686/cmov/libc.6 
 
 
-从输出看出，同4.2.1中一样的段错误信息。 
+从输出看出,同4.2.1中一样的段错误信息.
 
-5、完成调试后，输入quit命令退出gdb： 
+5、完成调试后,输入quit命令退出gdb：
 
 (gdb) quit 
 4.3.2 适用场景 
-1、适合于在实际生成环境下调试程序的段错误（即在不用重新发生段错误的情况下重现段错误）。 
+1、适合于在实际生成环境下调试程序的段错误（即在不用重新发生段错误的情况下重现段错误）.
 
-2、当程序很复杂，core文件相当大时，该方法不可用。 
+2、当程序很复杂,core文件相当大时,该方法不可用.
 
 4.4 使用objdump 
 4.4.1 调试步骤 
-1、使用dmesg命令，找到最近发生的段错误输出信息： 
+1、使用dmesg命令,找到最近发生的段错误输出信息：
 
 panfeng@ubuntu:~/segfault$ dmesg 
 ... ... 
 [17257.502808] segfault3[3320]: segfault at 80484e0 ip 0018506a sp bfc1cd6c error 7 in libc-2.10.1.so[110000+13e000] 
-其中，对我们接下来的调试过程有用的是发生段错误的地址：80484e0和指令指针地址：0018506a。 
+其中,对我们接下来的调试过程有用的是发生段错误的地址：80484e0和指令指针地址：0018506a.
 
-2、使用objdump生成二进制的相关信息，重定向到文件中： 
+2、使用objdump生成二进制的相关信息,重定向到文件中：
 
 panfeng@ubuntu:~/segfault$ objdump -d ./segfault3 > segfault3Dump 
-其中，生成的segfault3Dump文件中包含了二进制文件的segfault3的汇编代码。 
+其中,生成的segfault3Dump文件中包含了二进制文件的segfault3的汇编代码.
 
 3、在segfault3Dump文件中查找发生段错误的地址： 
 
@@ -588,17 +588,17 @@ panfeng@ubuntu:~/segfault$ grep -n -A 10 -B 10 "80484e0" ./segfault3Dump
 141- 8048413: c3 ret 
 
 
-通过对以上汇编代码分析，得知段错误发生main函数，对应的汇编指令是movl $0x80484e0,0x1c(%esp)，接下来打开程序的源码，找到汇编指
-令对应的源码，也就定位到段错误了。 
+通过对以上汇编代码分析,得知段错误发生main函数,对应的汇编指令是movl $0x80484e0,0x1c(%esp),接下来打开程序的源码,找到汇编指
+令对应的源码,也就定位到段错误了.
 
 4.4.2 适用场景 
-1、不需要-g参数编译，不需要借助于core文件，但需要有一定的汇编语言基础。 
+1、不需要-g参数编译,不需要借助于core文件,但需要有一定的汇编语言基础.
 
-2、如果使用了gcc编译优化参数（-O1，-O2，-O3）的话，生成的汇编指令将会被优化，使得调试过程有些难度。 
+2、如果使用了gcc编译优化参数（-O1,-O2,-O3）的话,生成的汇编指令将会被优化,使得调试过程有些难度.
 
 4.5 使用catchsegv 
-catchsegv命令专门用来扑获段错误，它通过动态加载器（ld-linux.so）的预加载机制（PRELOAD）把一个事先写好的库（/lib/libSegFault.so）
-加载上，用于捕捉断错误的出错信息。 
+catchsegv命令专门用来扑获段错误,它通过动态加载器（ld-linux.so）的预加载机制（PRELOAD）把一个事先写好的库（/lib/libSegFault.so）
+加载上,用于捕捉断错误的出错信息.
 
 复制代码 代码如下:
 
@@ -651,15 +651,15 @@ bfb67000-bfb7c000 rw-p 00000000 00:00 0 [stack]
 
 
 5. 一些注意事项 
-1、出现段错误时，首先应该想到段错误的定义，从它出发考虑引发错误的原因。 
+1、出现段错误时,首先应该想到段错误的定义,从它出发考虑引发错误的原因.
 
-2、在使用指针时，定义了指针后记得初始化指针，在使用的时候记得判断是否为NULL。 
+2、在使用指针时,定义了指针后记得初始化指针,在使用的时候记得判断是否为NULL.
 
-3、在使用数组时，注意数组是否被初始化，数组下标是否越界，数组元素是否存在等。 
+3、在使用数组时,注意数组是否被初始化,数组下标是否越界,数组元素是否存在等.
 
-4、在访问变量时，注意变量所占地址空间是否已经被程序释放掉。 
+4、在访问变量时,注意变量所占地址空间是否已经被程序释放掉.
 
-5、在处理变量时，注意变量的格式控制是否合理等。 
+5、在处理变量时,注意变量的格式控制是否合理等.
 
 6. 参考资料列表 
 1、http://www.docin.com/p-105923877.html 

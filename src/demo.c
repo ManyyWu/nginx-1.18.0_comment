@@ -26,7 +26,7 @@ liubin 728 726 0 20:00 pts/4 00:00:00 nginx:worker process
 liubin 740 726 0 20:00 pts/4 00:00:00 nginx:dispatcher process 
 liubin 2714 726 0 20:30 pts/4 00:00:00 nginx:worker process
 
-//可以看到，杀掉745后，马上又起来新的2714进程
+//可以看到,杀掉745后,马上又起来新的2714进程
 */
 
 #define DefaultConfigFile "/var/conf/nginx_lunbo.conf"
@@ -34,16 +34,16 @@ liubin 2714 726 0 20:30 pts/4 00:00:00 nginx:worker process
 #define VERSION "1.0.0"
 
 /*
-在分析ngx_spawn_process()创建新进程时，先了解下进程属性。通俗点说就是进程挂了需不需要重启。
-在源码中，nginx_process.h中，有以下几种属性标识：
+在分析ngx_spawn_process()创建新进程时,先了解下进程属性. 通俗点说就是进程挂了需不需要重启.
+在源码中,nginx_process.h中,有以下几种属性标识：
 
 NGX_PROCESS_NORESPAWN    ：子进程退出时,父进程不会再次重启
 NGX_PROCESS_JUST_SPAWN   ：--
 NGX_PROCESS_RESPAWN      ：子进程异常退出时,父进程需要重启
 NGX_PROCESS_JUST_RESPAWN ：--
-NGX_PROCESS_DETACHED     ：热代码替换，暂时估计是用于在不重启Nginx的情况下进行软件升级
+NGX_PROCESS_DETACHED     ：热代码替换,暂时估计是用于在不重启Nginx的情况下进行软件升级
 
-NGX_PROCESS_JUST_RESPAWN标识最终会在ngx_spawn_process()创建worker进程时，将ngx_processes[s].just_spawn = 1，以此作为区别旧的worker进程的标记。
+NGX_PROCESS_JUST_RESPAWN标识最终会在ngx_spawn_process()创建worker进程时,将ngx_processes[s].just_spawn = 1,以此作为区别旧的worker进程的标记.
 */
 #define MAX_PROCESSES 128
 #define PROCESS_NORESPAWN     -1
@@ -58,14 +58,14 @@ char *ConfigFile = NULL;
 typedef void (*spawn_proc_pt) (void *data);
 typedef struct {
     pid_t           pid; //该进程pid
-    int                 status; //进程状态，通过sig_child获取
+    int                 status; //进程状态,通过sig_child获取
     //int        channel[2];
 
     spawn_proc_pt   proc; //创建进程时候的回调
     void               *data; //创建进程时候传递的参数
     char               *name; //进程名
 
-    unsigned            respawn:1; //PROCESS_RESPAWN 创建进程的时候释放指定需要master拉起一个新的进程，如果进程挂了
+    unsigned            respawn:1; //PROCESS_RESPAWN 创建进程的时候释放指定需要master拉起一个新的进程,如果进程挂了
     unsigned            just_spawn:1;
     unsigned            detached:1;
     unsigned            exiting:1;

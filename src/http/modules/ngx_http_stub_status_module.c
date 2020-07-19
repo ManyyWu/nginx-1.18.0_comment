@@ -46,7 +46,7 @@ static ngx_http_module_t  ngx_http_stub_status_module_ctx = {
 };
 
 /* 
-该模块在 auto/options文件中，通过下面的config选项把模块编译到nginx
+该模块在 auto/options文件中,通过下面的config选项把模块编译到nginx
     HTTP_STUB_STATUS=NO
     --with-http_stub_status_module)  HTTP_STUB_STATUS=YES       ;; 
 */ //提供简单的连接、读、写等统计查询功能

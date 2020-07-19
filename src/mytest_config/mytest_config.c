@@ -53,7 +53,7 @@ static ngx_conf_bitmask_t  test_bitmasks[] =
 };
 
 /*
-一下这些配置项中的st方法的conf参数就是用来保存解析出的配置信息的，在ngx_http_mytest_config_create_loc_conf创建
+一下这些配置项中的st方法的conf参数就是用来保存解析出的配置信息的,在ngx_http_mytest_config_create_loc_conf创建
 
 */ //
 static ngx_command_t  ngx_http_mytest_config_commands[] = //所有配置的源头在ngx_init_cycle
@@ -78,17 +78,17 @@ static ngx_command_t  ngx_http_mytest_config_commands[] = //所有配置的源�
     },
 
     /*
-    test_str_array配置项也只能出现在location{．．．}块内。如果有以下配置：
+    test_str_array配置项也只能出现在location{．．．}块内. 如果有以下配置：
     location ... {
         test_str_array      Content-Length ;
         test_str_array      Content-Encoding ;
     }
-    那么，my_str_array->nelts的值将是2，表示出现了两个test_str_array配置项。而且my_str_array->elts指向
-ngx_str_t类型组成的数组，这样就可以按以下方式访问这两个值。
+    那么,my_str_array->nelts的值将是2,表示出现了两个test_str_array配置项. 而且my_str_array->elts指向
+ngx_str_t类型组成的数组,这样就可以按以下方式访问这两个值.
 ngx_str_t*  pstr  =  mycf->my_str_array->elts ;
-于是，pstr[0]和pstr[l】可以取到参数值，分别是{len=14;data=“Content-Length”；}和
-{len=16;data=“Content-Encoding”；)。从这里可以看到，当处理HTTP头部这样的配置项
-时是很适合使用ngx_conf_set_str_array_slot预设方法的。
+于是,pstr[0]和pstr[l】可以取到参数值,分别是{len=14;data=“Content-Length”；}和
+{len=16;data=“Content-Encoding”；). 从这里可以看到,当处理HTTP头部这样的配置项
+时是很适合使用ngx_conf_set_str_array_slot预设方法的.
     */
     {
         ngx_string("test_str_array"),
@@ -100,22 +100,22 @@ ngx_str_t*  pstr  =  mycf->my_str_array->elts ;
     },
 
 /*
-    ngx_conf_set_keyval_slot与ngx_conf_set str_array_slot非常相似，唯一的不同点是
-    ngx_conf_set_str_array_slot要求同名配置项后的参数个数是1，而ngx_conf_set_keyval_
-    slot则要求配置项后的参数个数是2，分别袁示key/value。如果用ngx_array_t*类型的my_
-    keyval变量存储以test_keyval作为配置名的参数，则必须设置NGX_CONF_TAKE2，表示
+    ngx_conf_set_keyval_slot与ngx_conf_set str_array_slot非常相似,唯一的不同点是
+    ngx_conf_set_str_array_slot要求同名配置项后的参数个数是1,而ngx_conf_set_keyval_
+    slot则要求配置项后的参数个数是2,分别袁示key/value. 如果用ngx_array_t*类型的my_
+    keyval变量存储以test_keyval作为配置名的参数,则必须设置NGX_CONF_TAKE2,表示
     test_keyval后跟两个参数
     如果nginx.conf中出现以下配置项：
     location ... {
          test_keyval   Content-Type    image/png ;
          test_keyval   Content-Type    image/gif;
          test_keyval   Accept-Encoding gzip;
-    那么，ngx_array_t*类型的my_keyval将会有3个成员，每个成员的类型如T所示。
+    那么,ngx_array_t*类型的my_keyval将会有3个成员,每个成员的类型如T所示.
     typedef struct {
          ngx_str_t  key;
           ngx_str_t  value ;
     } ngx_keyval_t;
-    因此，通过遍历my_keyval就可以获取3个成员，分别是{"Content-Type”，“image/png"}、{"Content-Type”，“image/gif")、{"Accept-Encoding”，“gzip”)。
+    因此,通过遍历my_keyval就可以获取3个成员,分别是{"Content-Type”,“image/png"}、{"Content-Type”,“image/gif")、{"Accept-Encoding”,“gzip”).
 */
     {
         ngx_string("test_keyval"),
@@ -171,11 +171,11 @@ ngx_str_t*  pstr  =  mycf->my_str_array->elts ;
 
 /*
 Nginx中许多特有的数据结构都会用到两个概念：单个ngx_buf_t缓存区的空间大小和
-允许的缓存区个数。ngx_conf_set_bufs_slot就是用于设置它的，它要求配置项后必须携带两
-介参数，第1个参数是数字，通常会用来表示缓存区的个数：第2个参数表示单个缓存区的
-空间大小，它像ngx_conf_set_size_slot中的参数单位一样，可以不携带单位，也可以使用k
-或者K、m或者M作为单位，如“gzip_buffers 4 8k;”。我们用ngx_http_mytest_conf_t结构
-中的ngx_bufs_t my_bufs;来存储参数，ngx_bufs_t（12.1.3节ngx_http_upstream_conf_t结构
+允许的缓存区个数. ngx_conf_set_bufs_slot就是用于设置它的,它要求配置项后必须携带两
+介参数,第1个参数是数字,通常会用来表示缓存区的个数：第2个参数表示单个缓存区的
+空间大小,它像ngx_conf_set_size_slot中的参数单位一样,可以不携带单位,也可以使用k
+或者K、m或者M作为单位,如“gzip_buffers 4 8k;”. 我们用ngx_http_mytest_conf_t结构
+中的ngx_bufs_t my_bufs;来存储参数,ngx_bufs_t（12.1.3节ngx_http_upstream_conf_t结构
 体中的bufs成员就是应用ngx_bufs_t配置的一个非常好的例子）的定义很简单
 */
     {
@@ -247,11 +247,11 @@ static ngx_http_module_t  ngx_http_mytest_config_module_ctx =
     NULL,                              /* merge server configuration */
 
 /*
-这个会在http{} server{} location{}中分别调用一次，
-例如可以分别存储server外的test_str， server内location外的test_str, location内的test_str
+这个会在http{} server{} location{}中分别调用一次,
+例如可以分别存储server外的test_str, server内location外的test_str, location内的test_str
 
-//http{}中会调用main_conf srv_conf loc_conf分配空间，见ngx_http_core_server。server{}中会调用srv_conf loc_conf创建空间,
-见ngx_http_core_server， location{}中会创建loc_conf空间,见ngx_http_core_location
+//http{}中会调用main_conf srv_conf loc_conf分配空间,见ngx_http_core_server. server{}中会调用srv_conf loc_conf创建空间,
+见ngx_http_core_server, location{}中会创建loc_conf空间,见ngx_http_core_location
 */
     ngx_http_mytest_config_create_loc_conf, /* create location configuration */ 
 /* 
@@ -290,26 +290,26 @@ ngx_http_mytest_config_merge_loc_conf(ngx_conf_t *cf, void *parent, void *child)
 
 static char* ngx_conf_set_myconfig(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 {
-    //注意，参数conf就是http框架传给我们的，在ngx_http_mytest_create_loc_conf
+    //注意,参数conf就是http框架传给我们的,在ngx_http_mytest_create_loc_conf
 //回调方法中分配的结构体ngx_http_mytest_config_conf_t
     ngx_http_mytest_config_conf_t  *mycf = conf;
 
-    // cf->args是1个ngx_array_t队列，它的成员都是ngx_str_t结构。
-//我们用value指向ngx_array_t的elts内容，其中value[1]就是第1
-//个参数，同理value[2]是第2个参数
+    // cf->args是1个ngx_array_t队列,它的成员都是ngx_str_t结构.
+//我们用value指向ngx_array_t的elts内容,其中value[1]就是第1
+//个参数,同理value[2]是第2个参数
     ngx_str_t* value = cf->args->elts;
 
     //ngx_array_t的nelts表示参数的个数
     if (cf->args->nelts > 1)
     {
-        //直接赋值即可， ngx_str_t结构只是指针的传递
+        //直接赋值即可, ngx_str_t结构只是指针的传递
         mycf->my_config_str = value[1];
     }
     if (cf->args->nelts > 2)
     {
         //将字符串形式的第2个参数转为整型
         mycf->my_config_num = ngx_atoi(value[2].data, value[2].len);
-        //如果字符串转化整型失败，将报"invalid number"错误，
+        //如果字符串转化整型失败,将报"invalid number"错误,
 //nginx启动失败
         if (mycf->my_config_num == NGX_ERROR)
         {
@@ -380,8 +380,8 @@ void traversal(ngx_conf_t *cf, ngx_http_location_tree_node_t* node)
 
 //下面以test_str为例在屏幕上输出读取到的所有不同块的值
 /*
-cf空间始终在一个地方，就是ngx_init_cycle中的conf，使用中只是简单的修改conf中的ctx指向已经cmd_type类型，然后在解析当前{}后，重新恢复解析当前{}前的配置
-参考"http" "server" "location"ngx_http_block  ngx_http_core_server  ngx_http_core_location  ngx_http_core_location。说明了在不同的{}对相同的配置项的赋值是用不同变量存的
+cf空间始终在一个地方,就是ngx_init_cycle中的conf,使用中只是简单的修改conf中的ctx指向已经cmd_type类型,然后在解析当前{}后,重新恢复解析当前{}前的配置
+参考"http" "server" "location"ngx_http_block  ngx_http_core_server  ngx_http_core_location  ngx_http_core_location. 说明了在不同的{}对相同的配置项的赋值是用不同变量存的
 */
 
 ngx_int_t
