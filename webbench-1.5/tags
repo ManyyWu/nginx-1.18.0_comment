@@ -12,26 +12,26 @@ PROGRAM_VERSION	webbench.c	40;"	d	file:
 REQUEST_SIZE	webbench.c	52;"	d	file:
 Socket	socket.c	/^int Socket(const char *host, int clientPort)$/;"	f
 alarm_handler	webbench.c	/^static void alarm_handler(int signal)$/;"	f	file:
-bench	webbench.c	/^static int bench(void) \/\/ËùÓĞµÄÑ¹²â¶¼ÔÚbenchº¯ÊıÊµÏÖ$/;"	f	file:
+bench	webbench.c	/^static int bench(void) \/\/æ‰€æœ‰çš„å‹æµ‹éƒ½åœ¨benchå‡½æ•°å®ç°$/;"	f	file:
 benchcore	webbench.c	/^void benchcore(const char *host,const int port,const char *req)$/;"	f
-benchtime	webbench.c	/^int benchtime=30;\/\/Ñ¹²âÊ±¼ä£¬Ä¬ÈÏ30Ãë£¬Í¨¹ı-t²ÎÊıÉèÖÃ$/;"	v
+benchtime	webbench.c	/^int benchtime=30;\/\/å‹æµ‹æ—¶é—´ï¼Œé»˜è®¤30ç§’ï¼Œé€šè¿‡-tå‚æ•°è®¾ç½®$/;"	v
 build_request	webbench.c	/^void build_request(const char *url)$/;"	f
-bytes	webbench.c	/^int bytes=0; \/\/¼ÇÂ¼½ø³Ì³É¹¦¶ÁÈ¡µÄ×Ö½ÚÊı  Í¨¹ı¶ÁÈ¡·şÎñ¶ËµÄ»ØÓ¦À´¼ÆËã$/;"	v
-clients	webbench.c	/^int clients=1;\/\/²¢·¢ÊıÄ¿£¬Ä¬ÈÏÖ»ÓĞ1¸ö½ø³Ì·¢ÇëÇó£¬Í¨¹ı-c²ÎÊıÉèÖÃ$/;"	v
-failed	webbench.c	/^int failed=0;\/\/¼ÇÂ¼Ê§°ÜµÄÊıÁ¿£¨speed±íÊ¾³É¹¦Êı£¬failed±íÊ¾Ê§°ÜÊı£©  Ò»´ÎÁ¬½ÓÊ§°Ü »òÕß¶ÁĞ´Ê§°Ü¶¼+1$/;"	v
-force	webbench.c	/^int force=0;\/\/ÊÇ·ñĞèÒªµÈ´ı¶ÁÈ¡´Óserver·µ»ØµÄÊı¾İ£¬0±íÊ¾ÒªµÈ´ı¶ÁÈ¡$/;"	v
-force_reload	webbench.c	/^int force_reload=0;\/\/ÊÇ·ñÊ¹ÓÃ»º´æ£¬1±íÊ¾²»»º´æ£¬0±íÊ¾¿ÉÒÔ»º´æÒ³Ãæ$/;"	v
-host	webbench.c	/^char host[MAXHOSTNAMELEN];\/\/·şÎñÆ÷¶Ëip$/;"	v
-http10	webbench.c	/^int http10=1; \/* 0 - http\/0.9, 1 - http\/1.0, 2 - http\/1.1 *\/ \/\/http°æ±¾£¬0±íÊ¾http0.9£¬1±íÊ¾http1.0£¬2±íÊ¾http1.1$/;"	v
+bytes	webbench.c	/^int bytes=0; \/\/è®°å½•è¿›ç¨‹æˆåŠŸè¯»å–çš„å­—èŠ‚æ•°  é€šè¿‡è¯»å–æœåŠ¡ç«¯çš„å›åº”æ¥è®¡ç®—$/;"	v
+clients	webbench.c	/^int clients=1;\/\/å¹¶å‘æ•°ç›®ï¼Œé»˜è®¤åªæœ‰1ä¸ªè¿›ç¨‹å‘è¯·æ±‚ï¼Œé€šè¿‡-cå‚æ•°è®¾ç½®$/;"	v
+failed	webbench.c	/^int failed=0;\/\/è®°å½•å¤±è´¥çš„æ•°é‡ï¼ˆspeedè¡¨ç¤ºæˆåŠŸæ•°ï¼Œfailedè¡¨ç¤ºå¤±è´¥æ•°ï¼‰  ä¸€æ¬¡è¿æ¥å¤±è´¥ æˆ–è€…è¯»å†™å¤±è´¥éƒ½+1$/;"	v
+force	webbench.c	/^int force=0;\/\/æ˜¯å¦éœ€è¦ç­‰å¾…è¯»å–ä»serverè¿”å›çš„æ•°æ®ï¼Œ0è¡¨ç¤ºè¦ç­‰å¾…è¯»å–$/;"	v
+force_reload	webbench.c	/^int force_reload=0;\/\/æ˜¯å¦ä½¿ç”¨ç¼“å­˜ï¼Œ1è¡¨ç¤ºä¸ç¼“å­˜ï¼Œ0è¡¨ç¤ºå¯ä»¥ç¼“å­˜é¡µé¢$/;"	v
+host	webbench.c	/^char host[MAXHOSTNAMELEN];\/\/æœåŠ¡å™¨ç«¯ip$/;"	v
+http10	webbench.c	/^int http10=1; \/* 0 - http\/0.9, 1 - http\/1.0, 2 - http\/1.1 *\/ \/\/httpç‰ˆæœ¬ï¼Œ0è¡¨ç¤ºhttp0.9ï¼Œ1è¡¨ç¤ºhttp1.0ï¼Œ2è¡¨ç¤ºhttp1.1$/;"	v
 keepalive	webbench.c	/^int keepalive = 1;$/;"	v
 long_options	webbench.c	/^static const struct option long_options[]=$/;"	v	typeref:struct:option	file:
 main	webbench.c	/^int main(int argc, char *argv[])$/;"	f
 max_request	webbench.c	/^int max_request = 0;$/;"	v
-method	webbench.c	/^int method=METHOD_GET;\/\/Ä¬ÈÏÇëÇó·½Ê½ÎªGET£¬Ò²Ö§³ÖHEAD¡¢OPTIONS¡¢TRACE$/;"	v
-mypipe	webbench.c	/^int mypipe[2];\/\/Ê¹ÓÃ¹ÜµÀ½øĞĞ¸¸½ø³ÌºÍ×Ó½ø³ÌµÄÍ¨ĞÅ$/;"	v
-proxyhost	webbench.c	/^char *proxyhost=NULL;\/\/´úÀí·şÎñÆ÷µÄip$/;"	v
-proxyport	webbench.c	/^int proxyport=80;\/\/´úÀí·şÎñÆ÷µÄ¶Ë¿Ú$/;"	v
-request	webbench.c	/^char request[REQUEST_SIZE];\/\/ËùÒª·¢ËÍµÄhttpÇëÇó$/;"	v
-speed	webbench.c	/^int speed=0;\/\/¼ÇÂ¼½ø³Ì³É¹¦µÃµ½·şÎñÆ÷ÏìÓ¦µÄÊıÁ¿  ³É¹¦½¨Á¢Á¬½Ó²¢·¢ËÍÊı¾İ(Èç¹û²»´ø-fÔò»¹±ØĞëread·şÎñ¶ËÊı¾İ³É¹¦²ÅÄÜ¼Ó1)$/;"	v
-timerexpired	webbench.c	/^volatile int timerexpired=0;\/\/ÅĞ¶ÏÑ¹²âÊ±³¤ÊÇ·ñÒÑ¾­µ½´ïÉè¶¨µÄÊ±¼ä  Ê±¼äµ½ºó½ø³Ì¾Í»áÍË³ö$/;"	v
+method	webbench.c	/^int method=METHOD_GET;\/\/é»˜è®¤è¯·æ±‚æ–¹å¼ä¸ºGETï¼Œä¹Ÿæ”¯æŒHEADã€OPTIONSã€TRACE$/;"	v
+mypipe	webbench.c	/^int mypipe[2];\/\/ä½¿ç”¨ç®¡é“è¿›è¡Œçˆ¶è¿›ç¨‹å’Œå­è¿›ç¨‹çš„é€šä¿¡$/;"	v
+proxyhost	webbench.c	/^char *proxyhost=NULL;\/\/ä»£ç†æœåŠ¡å™¨çš„ip$/;"	v
+proxyport	webbench.c	/^int proxyport=80;\/\/ä»£ç†æœåŠ¡å™¨çš„ç«¯å£$/;"	v
+request	webbench.c	/^char request[REQUEST_SIZE];\/\/æ‰€è¦å‘é€çš„httpè¯·æ±‚$/;"	v
+speed	webbench.c	/^int speed=0;\/\/è®°å½•è¿›ç¨‹æˆåŠŸå¾—åˆ°æœåŠ¡å™¨å“åº”çš„æ•°é‡  æˆåŠŸå»ºç«‹è¿æ¥å¹¶å‘é€æ•°æ®(å¦‚æœä¸å¸¦-fåˆ™è¿˜å¿…é¡»readæœåŠ¡ç«¯æ•°æ®æˆåŠŸæ‰èƒ½åŠ 1)$/;"	v
+timerexpired	webbench.c	/^volatile int timerexpired=0;\/\/åˆ¤æ–­å‹æµ‹æ—¶é•¿æ˜¯å¦å·²ç»åˆ°è¾¾è®¾å®šçš„æ—¶é—´  æ—¶é—´åˆ°åè¿›ç¨‹å°±ä¼šé€€å‡º$/;"	v
 usage	webbench.c	/^static void usage(void)$/;"	f	file:

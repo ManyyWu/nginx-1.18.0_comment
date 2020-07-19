@@ -230,15 +230,17 @@ main(int argc, char *const *argv)
 
     ngx_debug_init();
 
+    //初始化错误字符串
     if (ngx_strerror_init() != NGX_OK) {
         return 1;
     }
 
-    //获取参数和配置参数,比如命令是nginx -v 那么ngx_show_version就设置为1
-    if (ngx_get_options(argc, argv) != NGX_OK) { //解析命令参数
+    //获取参数和配置参数
+    if (ngx_get_options(argc, argv) != NGX_OK) {
         return 1;
     }
 
+    //显示version,help
     if (ngx_show_version) {
         ngx_show_version_info();
 
