@@ -1,5 +1,6 @@
-# reading-code-of-nginx-1.9.2  
+#Nginx-1.18.0
    
+注释来自 https://github.com/ManyyWu/nginx-1.9.2_comment
 
    说明:  
 ===================================   
@@ -7,9 +8,7 @@ nginx的以下功能模块的相关代码已经阅读，并对其源码及相关
 的《深入理解Nginx:模块开发与架构解析》，并对书中没有讲到的相关部分功能进行了扩展，通过边阅读边调试的方法
 通读了以下功能模块，并对其进行了详细的注释，同时加了自己的理解在里面，注释比较详细，由于是周末和下班时间阅读，再加上自己
 文采限制，代码及数据结构注释都比较白话，注释中肯定会有理解错误的地方。  
-  
-阅读工具source insight,如果中文乱码，按照source insight configure目录中说明操作  
-  
+
       
 阅读过程  
 ===================================  
@@ -188,11 +187,4 @@ cd nginx-1.9.2
  ./configure --add-module=./src/mytest_config --add-module=./src/my_test_module --add-module=./src/mytest_subrequest --add-module=./src/mytest_upstream --add-module=./src/ngx_http_myfilter_module --with-debug --with-file-aio --add-module=./src/sendfile_test --with-threads  --add-module=./src/nginx-requestkey-module-master/ --with-http_secure_link_module --add-module=./src/redis2-nginx-module-master/ 
  
 步骤2：make && make install  
-
-
-  
-  
-nginx高性能特性应用于其他项目  
-===================================    
-https://github.com/y123456yz/reading-code-of-nginx-1.9.2/blob/master/%E5%80%9F%E9%89%B4nginx%E7%89%B9%E6%80%A7%E5%BA%94%E7%94%A8%E4%BA%8E%E5%85%B6%E4%BB%96%E9%A1%B9%E7%9B%AE-Nginx%E5%A4%9A%E8%BF%9B%E7%A8%8B%E9%AB%98%E5%B9%B6%E5%8F%91%E3%80%81%E4%BD%8E%E6%97%B6%E5%BB%B6%E3%80%81%E9%AB%98%E5%8F%AF%E9%9D%A0%E6%9C%BA%E5%88%B6%E5%9C%A8%E7%BC%93%E5%AD%98%E4%BB%A3%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.docx  
 
