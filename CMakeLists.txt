@@ -43,6 +43,7 @@ list(REMOVE_ITEM SRC_LIST src/http/modules/ngx_http_degradation_module.c)
 list(REMOVE_ITEM SRC_LIST src/http/modules/ngx_http_grpc_module.c)
 list(REMOVE_ITEM SRC_LIST src/http/modules/ngx_http_image_filter_module.c)
 list(REMOVE_ITEM SRC_LIST src/http/modules/ngx_http_stub_status_module.c)
+list(REMOVE_ITEM SRC_LIST src/demo.c)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
