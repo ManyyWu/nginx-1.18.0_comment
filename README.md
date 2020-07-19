@@ -2,16 +2,14 @@
    
 注释来自 https://github.com/ManyyWu/nginx-1.9.2_comment
 
-   说明:  
-===================================   
+## 说明:  
 nginx的以下功能模块的相关代码已经阅读，并对其源码及相关数据结构进行了详细备注，主要参考书籍为淘宝陶辉先生
 的《深入理解Nginx:模块开发与架构解析》，并对书中没有讲到的相关部分功能进行了扩展，通过边阅读边调试的方法
 通读了以下功能模块，并对其进行了详细的注释，同时加了自己的理解在里面，注释比较详细，由于是周末和下班时间阅读，再加上自己
 文采限制，代码及数据结构注释都比较白话，注释中肯定会有理解错误的地方。  
 
       
-阅读过程  
-===================================  
+## 阅读过程  
 截止15.9.19，已经分析并注释完成的主要功能如下:  
 	.配置编译过程中相关脚本调用过程详细注释  
 	.用户自由模块编译添加过程  
@@ -163,8 +161,7 @@ nginx的以下功能模块的相关代码已经阅读，并对其源码及相关
 18.1.26  
 	多worker进程reuserport原理重新分析       
 	   
-改造点及可疑问题:   
-===================================     
+## 改造点及可疑问题:        
 1. 和后端服务器通过检查套接字连接状态来判断后端服务器是否down机，如果失效则连接下一个服务器。这种存在缺陷，例如如果后端服务器直接拔掉网线或者后端服务器断
 电了，则检测套接字是判断不出来的，协议栈需要长时间过后才能判断出，如果关闭掉协议栈的keepalive可能永远检测不出，这时候nginx还是会把客户端请求发往后端服务器，
 如果发往后端服务器数据大小很大，可能需要多次write，这时候会由write timeout来判断出后端出现问题。但是如果发往后端数据长度小，则不会添加write定时器，而是通过
@@ -173,15 +170,13 @@ nginx的以下功能模块的相关代码已经阅读，并对其源码及相关
 2.[限流不准确分析](https://github.com/alibaba/tengine/issues/855)<br />  
 	 
 
-http2 quic学习参考:    
-===================================     
+## http2 quic学习参考:         
 libquic goquic编译安装，源码分析注释：https://github.com/y123456yz/reading-and-annotate-quic      
 nghttp2相关参考：https://github.com/y123456yz/reading-and-annotate-nghttp2  
 
 	 
      
-编译方法：
-===================================    
+## 编译方法：
 步骤1：这里根据需要编译自己的模块  
 cd nginx-1.9.2  
  ./configure --add-module=./src/mytest_config --add-module=./src/my_test_module --add-module=./src/mytest_subrequest --add-module=./src/mytest_upstream --add-module=./src/ngx_http_myfilter_module --with-debug --with-file-aio --add-module=./src/sendfile_test --with-threads  --add-module=./src/nginx-requestkey-module-master/ --with-http_secure_link_module --add-module=./src/redis2-nginx-module-master/ 
