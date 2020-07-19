@@ -57,8 +57,8 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 　　FIN_WAIT2 504
 　　TIME_WAIT 1057
 　　其中的
-SYN_RECV表示正在等待处理的请求数；
-ESTABLISHED表示正常数据传输状态；
+SYN_RECV表示正在等待处理的请求数;
+ESTABLISHED表示正常数据传输状态;
 TIME_WAIT表示处理完毕,等待超时结束的请求数.
 
 ---------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 　　FIN_WAIT1 51
 　　FIN_WAIT2 504
 　　TIME_WAIT 1057
-　　其中的SYN_RECV表示正在等待处理的请求数；ESTABLISHED表示正常数据传输状态；TIME_WAIT表示处理完毕,等待超时结束的请求数.
+　　其中的SYN_RECV表示正在等待处理的请求数;ESTABLISHED表示正常数据传输状态;TIME_WAIT表示处理完毕,等待超时结束的请求数.
 　　状态：描述
 
 　　CLOSED：无连接是活动 的或正在进行

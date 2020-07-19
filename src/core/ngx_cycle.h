@@ -145,7 +145,7 @@ ngx_cycle_t结构体支持的主要方法
 //http://tech.uc.cn/?p=300 参数解析相关数据结构参考
 //初始化参考ngx_init_cycle,最终有一个全局类型的ngx_cycle_s,即ngx_cycle,  ngx_conf_s中包含该类型成员cycle
 struct ngx_cycle_s {
-    /*     保存着所有模块存储配置项的结构体指针,     它首先是一个数组,数组大小为ngx_max_module,正好与Nginx的module个数一样；
+    /*     保存着所有模块存储配置项的结构体指针,     它首先是一个数组,数组大小为ngx_max_module,正好与Nginx的module个数一样;
     每个数组成员又是一个指针,指向另一个存储着指针的数组,因此会看到void ****    请见陶辉所著《深入理解Nginx-模块开发与架构解析》
     一书302页插图.     另外,这个图也不错：http://img.my.csdn.net/uploads/201202/9/0_1328799724GTUk.gif 该数组的成员数为ngx_max_module
     */ 

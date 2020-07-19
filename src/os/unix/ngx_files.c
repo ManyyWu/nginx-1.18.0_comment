@@ -859,13 +859,13 @@ F_DUPFD    返回一个如下描述的(文件)描述符：
         ·相同的访问模式(读,写或读/写)
         ·相同的文件状态标志(如：两个文件描述符共享相同的状态标志)
         ·与新的文件描述符结合在一起的close-on-exec标志被设置成交叉式访问execve(2)的系统调用
-实际上调用dup(oldfd)；
+实际上调用dup(oldfd);
 等效于
         fcntl(oldfd, F_DUPFD, 0);
-而调用dup2(oldfd, newfd)；
+而调用dup2(oldfd, newfd);
 等效于
-        close(oldfd)；
-        fcntl(oldfd, F_DUPFD, newfd)；
+        close(oldfd);
+        fcntl(oldfd, F_DUPFD, newfd);
 2. cmd值的F_GETFD和F_SETFD：     
 F_GETFD    取得与文件描述符fd联合的close-on-exec标志,类似FD_CLOEXEC. 如果返回值和FD_CLOEXEC进行与运算结果是0的话,文件保持交叉式访问exec(),否则如果通过exec运行的话,文件将被关闭(arg 被忽略)
 F_SETFD    设置close-on-exec标志,该标志以参数arg的FD_CLOEXEC位决定,应当了解很多现存的涉及文件描述符标志的程序并不使用常数 FD_CLOEXEC,而是将此标志设置为0(系统默认,在exec时不关闭)或1(在exec时关闭)
@@ -913,8 +913,8 @@ fcntl文件锁有两种类型：建议性锁和强制性锁
 建议性锁只在cooperating processes之间才有用. 对cooperating process的理解是最重要的,它指的是会影响其它进程的进程或被别的进程所影响的进程,举两个例子：
 (1) 我们可以同时在两个窗口中运行同一个命令,对同一个文件进行操作,那么这两个进程就是cooperating  processes
 (2) cat file | sort,那么cat和sort产生的进程就是使用了pipe的cooperating processes
-使用fcntl文件锁进行I/O操作必须小心：进程在开始任何I/O操作前如何去处理锁,在对文件解锁前如何完成所有的操作,是必须考虑的. 如果在设置锁之前打开文件,或者读取该锁之后关闭文件,另一个进程就可能在上锁/解锁操作和打开/关闭操作之间的几分之一秒内访问该文件. 当一个进程对文件加锁后,无论它是否释放所加的锁,只要文件关闭,内核都会自动释放加在文件上的建议性锁(这也是建议性锁和强制性锁的最大区别),所以不要想设置建议性锁来达到永久不让别的进程访问文件的目的(强制性锁才可以)；强制性锁则对所有进程起作用.
-fcntl使用三个参数 F_SETLK/F_SETLKW, F_UNLCK和F_GETLK 来分别要求、释放、测试record locks. record locks是对文件一部分而不是整个文件的锁,这种细致的控制使得进程更好地协作以共享文件资源. fcntl能够用于读取锁和写入锁,read lock也叫shared lock(共享锁), 因为多个cooperating process能够在文件的同一部分建立读取锁；write lock被称为exclusive lock(排斥锁),因为任何时刻只能有一个cooperating process在文件的某部分上建立写入锁. 如果cooperating processes对文件进行操作,那么它们可以同时对文件加read lock,在一个cooperating process加write lock之前,必须释放别的cooperating process加在该文件的read lock和wrtie lock,也就是说,对于文件只能有一个write lock存在,read lock和wrtie lock不能共存.
+使用fcntl文件锁进行I/O操作必须小心：进程在开始任何I/O操作前如何去处理锁,在对文件解锁前如何完成所有的操作,是必须考虑的. 如果在设置锁之前打开文件,或者读取该锁之后关闭文件,另一个进程就可能在上锁/解锁操作和打开/关闭操作之间的几分之一秒内访问该文件. 当一个进程对文件加锁后,无论它是否释放所加的锁,只要文件关闭,内核都会自动释放加在文件上的建议性锁(这也是建议性锁和强制性锁的最大区别),所以不要想设置建议性锁来达到永久不让别的进程访问文件的目的(强制性锁才可以);强制性锁则对所有进程起作用.
+fcntl使用三个参数 F_SETLK/F_SETLKW, F_UNLCK和F_GETLK 来分别要求、释放、测试record locks. record locks是对文件一部分而不是整个文件的锁,这种细致的控制使得进程更好地协作以共享文件资源. fcntl能够用于读取锁和写入锁,read lock也叫shared lock(共享锁), 因为多个cooperating process能够在文件的同一部分建立读取锁;write lock被称为exclusive lock(排斥锁),因为任何时刻只能有一个cooperating process在文件的某部分上建立写入锁. 如果cooperating processes对文件进行操作,那么它们可以同时对文件加read lock,在一个cooperating process加write lock之前,必须释放别的cooperating process加在该文件的read lock和wrtie lock,也就是说,对于文件只能有一个write lock存在,read lock和wrtie lock不能共存.
 下面的例子使用F_GETFL获取fd的文件状态标志.
 #include<fcntl.h>
 #include<unistd.h>
@@ -1256,7 +1256,7 @@ struct flcok
 　　 pid_t l_pid; / *锁定动作的进程* /  拥有锁的进程ID
 };
 这里的cmd参数在Nginx中只会有两个值：F—SETLK和F—SETLKW,它们都表示试图获得互斥锁,但使用F—SETLK时如果互斥锁已经被其他进程占用,
-fcntl方法不会等待其他进程释放锁且自己拿到锁后才返回,而是立即返回获取互斥锁失败；使用F—SETLKW时则不同,锁被占用后fcntl方法会一直
+fcntl方法不会等待其他进程释放锁且自己拿到锁后才返回,而是立即返回获取互斥锁失败;使用F—SETLKW时则不同,锁被占用后fcntl方法会一直
 等待,在其他进程没有释放锁时,当前进程就会阻塞在fcntl方法中,这种阻塞会导致当前进程由可执行状态转为睡眠状态.
  从flock结构体中可以看出,文件锁的功能绝不仅仅局限于普通的互斥锁,它还可以锁住文件中的部分内容. 但Nginx封装的文件锁仅用于保护代
 码段的顺序执行（例如,在进行负载均衡时,使用互斥锁保证同一时刻仅有一个worker进程可以处理新的TCP连接）,使用方式要简单得多：一个
@@ -1268,8 +1268,8 @@ SEEK_SET,只需要这个文件提供一个锁. l_type的值则取决于用户是
 //当关闭fd句柄对应的文件时,当前进程将自动释放已经拿到的锁.
 
 /*
-对于文件锁,Nginx封装了3个方法：ngx_trylock_fd实现了不会阻塞进程、不会便得进程进入睡眠状态的互斥锁；ngx_lock_fd提供的互斥锁在锁
-已经被其他进程拿到时将会导致当前进程进入睡眠状态,直到顺利拿到这个锁后,当前进程才会被Linux内核重新调度,所以它是阻塞操作；
+对于文件锁,Nginx封装了3个方法：ngx_trylock_fd实现了不会阻塞进程、不会便得进程进入睡眠状态的互斥锁;ngx_lock_fd提供的互斥锁在锁
+已经被其他进程拿到时将会导致当前进程进入睡眠状态,直到顺利拿到这个锁后,当前进程才会被Linux内核重新调度,所以它是阻塞操作;
 ngx_unlock fd用于释放互斥锁.
 */
 ngx_err_t

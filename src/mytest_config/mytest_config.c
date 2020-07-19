@@ -86,8 +86,8 @@ static ngx_command_t  ngx_http_mytest_config_commands[] = //所有配置的源�
     那么,my_str_array->nelts的值将是2,表示出现了两个test_str_array配置项. 而且my_str_array->elts指向
 ngx_str_t类型组成的数组,这样就可以按以下方式访问这两个值.
 ngx_str_t*  pstr  =  mycf->my_str_array->elts ;
-于是,pstr[0]和pstr[l】可以取到参数值,分别是{len=14;data=“Content-Length”；}和
-{len=16;data=“Content-Encoding”；). 从这里可以看到,当处理HTTP头部这样的配置项
+于是,pstr[0]和pstr[l】可以取到参数值,分别是{len=14;data=“Content-Length”;}和
+{len=16;data=“Content-Encoding”;). 从这里可以看到,当处理HTTP头部这样的配置项
 时是很适合使用ngx_conf_set_str_array_slot预设方法的.
     */
     {

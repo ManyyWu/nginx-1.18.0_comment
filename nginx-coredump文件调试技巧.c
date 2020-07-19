@@ -69,7 +69,7 @@ core文件生成路径:
 输入可执行文件运行命令的同一路径下.
  若系统生成的core文件不带其他任何扩展名称,则全部命名为core. 新的core文件生成将覆盖原来的core文件.
 
-1）/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展. 文件内容为1,表示添加pid作为扩展名,生成的core文件格式为core.xxxx；为0则表示生成的core文件同一命名为core.
+1）/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展. 文件内容为1,表示添加pid作为扩展名,生成的core文件格式为core.xxxx;为0则表示生成的core文件同一命名为core.
  可通过以下命令修改此文件：
 echo "1" > c
 
@@ -427,7 +427,7 @@ libc.so.6 => /lib/tls/i686/cmov/libc.so.6 (0x00675000)
 printf这类输出信息,这样可以跟踪并打印出段错误在代码中可能出现的位置.
 
 为了方便使用这种方法,可以使用条件编译指令#ifdef DEBUG和#endif把printf函数包起来. 这样在程序编译时,如果加上-DDEBUG参数就能查看调
-试信息；否则不加该参数就不会显示调试信息.
+试信息;否则不加该参数就不会显示调试信息.
 
 4.2 使用gcc和gdb 
 4.2.1 调试步骤 

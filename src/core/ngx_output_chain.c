@@ -43,7 +43,7 @@ static ngx_int_t ngx_output_chain_copy_buf(ngx_output_chain_ctx_t *ctx);
 
 /*
 函数目的是发送 in 中的数据,ctx 用来保存发送的上下文,因为发送通常情况下,不能一次完成. nginx 因为使用了 ET 模式,
-在网络编程事件管理上简单了,但是编程中处理事件复杂了,需要不停的循环做处理；事件的函数回掉,次数也不确定,因此需
+在网络编程事件管理上简单了,但是编程中处理事件复杂了,需要不停的循环做处理;事件的函数回掉,次数也不确定,因此需
 要使用 context 上下文对象来保存发送到什么环节了.
 */
 //结合ngx_http_xxx_create_request(ngx_http_fastcgi_create_request)阅读,ctx->in中的数据实际上是从ngx_http_xxx_create_request组成ngx_chain_t来的,数据来源在ngx_http_xxx_create_request
@@ -375,8 +375,8 @@ ngx_output_chain(ngx_output_chain_ctx_t *ctx, ngx_chain_t *in)  //in为需要发
 }
 
 /*
-该函数返回1,则表示数据可以直接发送出去；如果返回0,则表示数据还在磁盘文件内,需要利用directio读取或明确要求不能使用sendfile直接发送、
-明确要求读到内存缓存等情况；注意：buf->file->directio由of.is_directio与配置项directio最终关联起来
+该函数返回1,则表示数据可以直接发送出去;如果返回0,则表示数据还在磁盘文件内,需要利用directio读取或明确要求不能使用sendfile直接发送、
+明确要求读到内存缓存等情况;注意：buf->file->directio由of.is_directio与配置项directio最终关联起来
 
     函数ngx_output_chain_as_is()返回1的情况就不管了,原本该干嘛干嘛,走ngx_http_write_filter() -> ngx_linux_sendfile_chain()流程到最后,
 内存数据通过writev()发送,磁盘文件内数据通过sendfile()发送.
@@ -422,7 +422,7 @@ ngx_linux_sendfile_chain中的ngx_linux_sendfile直接通过sendfile发送出去
      Ngx_http_gzip_static_module.c (src\http\modules):    b->file->directio = of.is_directio;
      Ngx_http_mp4_module.c (src\http\modules):    b->file->directio = of.is_directio;
      Ngx_http_static_module.c (src\http\modules):    b->file->directio = of.is_directio;
-    只会在上面这几个模块中置1,从这里返回,也就是说如果有配置这几个模块命令,在同时配置sendfile on; aio on;directio xxx；的前提下,
+    只会在上面这几个模块中置1,从这里返回,也就是说如果有配置这几个模块命令,在同时配置sendfile on; aio on;directio xxx;的前提下,
     会从这里返回出去,然后从新获取空间
 
     但是如果不是上面的这些模块,在同时配置sendfile on; aio on;directio xxx;的情况下还是会返回1,也就是还是采用sendfile方式
@@ -830,7 +830,7 @@ ngx_output_chain_copy_buf(ngx_output_chain_ctx_t *ctx)
         //size的数据要么存在于文件中,要么就在内存中. 前面的size = ngx_buf_size(src);页可以看出来
 
             if (sendfile) {
-            //在同时开启sendfile on; aio on以及direction xxx；的前提下,如果有模块执行过b->file->directio = 1(of.is_directio);
+            //在同时开启sendfile on; aio on以及direction xxx;的前提下,如果有模块执行过b->file->directio = 1(of.is_directio);
             //但是文件大小小于direction的配置,则还是使用sendfile
             
                 dst->in_file = 1;

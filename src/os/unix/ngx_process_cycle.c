@@ -194,8 +194,8 @@ kill -s SIGUSR2 <nginx master pid>
 sig_atomic_t  ngx_reap;
 sig_atomic_t  ngx_sigio;
 sig_atomic_t  ngx_sigalrm;
-sig_atomic_t  ngx_terminate; //当接收到TERM信号时,ngx_terminate标志位会设为1,这是在告诉worker进程需要强制关闭进程；
-sig_atomic_t  ngx_quit; //当接收到QUIT信号时,ngx_quit标志位会设为1,这是在告诉worker进程需要优雅地关闭进程；
+sig_atomic_t  ngx_terminate; //当接收到TERM信号时,ngx_terminate标志位会设为1,这是在告诉worker进程需要强制关闭进程;
+sig_atomic_t  ngx_quit; //当接收到QUIT信号时,ngx_quit标志位会设为1,这是在告诉worker进程需要优雅地关闭进程;
 sig_atomic_t  ngx_debug_quit;
 ngx_uint_t    ngx_exiting; //ngx_exiting标志位仅由ngx_worker_process_cycle方法在退出时作为标志位使用
 sig_atomic_t  ngx_reconfigure;//nginx -s reload会触发该新号
@@ -215,7 +215,7 @@ static u_char  master_process[] = "master process";
 
 /*
 在Nginx中,如果启用了proxy(fastcgi) cache功能,master process会在启动的时候启动管理缓存的两个子进程(区别于处理请求的子进程)来管理内
-存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除；第二个进程的作用是在启动的时候将磁盘中已经缓存的个
+存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除;第二个进程的作用是在启动的时候将磁盘中已经缓存的个
 体映射到内存中(目前Nginx设定为启动以后60秒),然后退出.
 
 具体的,在这两个进程的ngx_process_events_and_timers()函数中,会调用ngx_event_expire_timers(). Nginx的ngx_event_timer_rbtree(红黑树)里
@@ -387,9 +387,9 @@ ngx_noaccept,决定执行不同的分支流程,并循环执行（注意,每次�
             setitimer(int which, const struct itimerval *value, struct itimerval *ovalue)); 
             setitimer()比alarm功能强大,支持3种类型的定时器：
             
-            ITIMER_REAL： 设定绝对时间；经过指定的时间后,内核将发送SIGALRM信号给本进程；
-            ITIMER_VIRTUAL 设定程序执行时间；经过指定的时间后,内核将发送SIGVTALRM信号给本进程；
-            ITIMER_PROF 设定进程执行以及内核因本进程而消耗的时间和,经过指定的时间后,内核将发送ITIMER_VIRTUAL信号给本进程；
+            ITIMER_REAL： 设定绝对时间;经过指定的时间后,内核将发送SIGALRM信号给本进程;
+            ITIMER_VIRTUAL 设定程序执行时间;经过指定的时间后,内核将发送SIGVTALRM信号给本进程;
+            ITIMER_PROF 设定进程执行以及内核因本进程而消耗的时间和,经过指定的时间后,内核将发送ITIMER_VIRTUAL信号给本进程;
             
             */ //设置定时器,以系统真实时间来计算,送出SIGALRM信号,这个信号反过来会设置ngx_sigalrm为1,这样delay就会不断翻倍.
             if (setitimer(ITIMER_REAL, &itv, NULL) == -1) { //每隔itv时间发送一次SIGALRM信号
@@ -406,9 +406,9 @@ ngx_noaccept,决定执行不同的分支流程,并循环执行（注意,每次�
 
          
           其实sigsuspend是一个原子操作,包含4个步骤：
-          (1) 设置新的mask阻塞当前进程；
-          (2) 收到信号,恢复原先mask；
-          (3) 调用该进程设置的信号处理函数；
+          (1) 设置新的mask阻塞当前进程;
+          (2) 收到信号,恢复原先mask;
+          (3) 调用该进程设置的信号处理函数;
           (4) 待信号处理函数返回后,sigsuspend返回.
           
           */ 
@@ -688,7 +688,7 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
 
 /*
 在Nginx中,如果启用了proxy(fastcgi) cache功能,master process会在启动的时候启动管理缓存的两个子进程(区别于处理请求的子进程)来管理内
-存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除；第二个进程的作用是在启动的时候将磁盘中已经缓存的个
+存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除;第二个进程的作用是在启动的时候将磁盘中已经缓存的个
 体映射到内存中(目前Nginx设定为启动以后60秒),然后退出.
 
 具体的,在这两个进程的ngx_process_events_and_timers()函数中,会调用ngx_event_expire_timers(). Nginx的ngx_event_timer_rbtree(红黑树)里
@@ -727,7 +727,7 @@ pathes申是否有某个路径的manage标志位打开来决定是否启动cache
 
     /*
     在Nginx中,如果启用了proxy(fastcgi) cache功能,master process会在启动的时候启动管理缓存的两个子进程(区别于处理请求的子进程)来管理内
-    存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除；第二个进程的作用是在启动的时候将磁盘中已经缓存的个
+    存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除;第二个进程的作用是在启动的时候将磁盘中已经缓存的个
     体映射到内存中(目前Nginx设定为启动以后60秒),然后退出.
     
     具体的,在这两个进程的ngx_process_events_and_timers()函数中,会调用ngx_event_expire_timers(). Nginx的ngx_event_timer_rbtree(红黑树)里
@@ -901,7 +901,7 @@ ngx_signal_worker_processes(ngx_cycle_t *cycle, int signo) //向进程发送sign
         ngx_log_debug2(NGX_LOG_DEBUG_CORE, cycle->log, 0,
                        "kill (%P, %d)", ngx_processes[i].pid, signo);
 
-        if (kill(ngx_processes[i].pid, signo) == -1) { //关闭旧的进程；  
+        if (kill(ngx_processes[i].pid, signo) == -1) { //关闭旧的进程;
             err = ngx_errno;
             ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
                           "kill(%P, %d) failed", ngx_processes[i].pid, signo);
@@ -1145,9 +1145,9 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data) //data表示这是第�
                 如果ngx_exiting为1,则开始准备关闭worker进程. 首先,根据当前ngx_cycle_t中所有正在处理的连接,调用它们对应的关闭连接处理方法
                 （就是将连接中的close标志位置为1,再调用读事件的处理方法,在第9章中会详细讲解Nginx连接）. 调用所有活动连接的读事件处理方法处
                 理连接关闭事件后,将检查ngx_event timer_ rbtree红黑树（保存所有事件的定时器,在第9章中会介绍它）是否为空,如果不为空,表示还
-                有事件需要处理,将继续向下执行,调用ngx_process—events—and—timers方法处理事件；如果为空,表示已经处理完所有的事件,这时将调
+                有事件需要处理,将继续向下执行,调用ngx_process—events—and—timers方法处理事件;如果为空,表示已经处理完所有的事件,这时将调
                 用所有模块的exit_process方法,最后销毁内存池,退出整个worker进程.
-                注意ngx_exiting标志位只有唯一一段代码会设置它,也就是下面接收到QUIT信号. ngx_quit只有；在首次设置为1时,才会将ngx_exiting置为1.
+                注意ngx_exiting标志位只有唯一一段代码会设置它,也就是下面接收到QUIT信号. ngx_quit只有;在首次设置为1时,才会将ngx_exiting置为1.
                 */
             }
         }
@@ -1564,10 +1564,10 @@ ngx_channel_handler(ngx_event_t *ev)
 
 /*
 除了充当代理服务器,nginx还可行使类似varnish/squid的缓存职责,即将客户端的请求内容缓存在Nginx服务器,下次同样的请求则由nginx直接返回,
-减轻了被代理服务器的压力；cache使用一块公共内存区域（共享内存）,存放缓存的索引数据,Nginx启动时cache loader进程将磁盘缓存的对象文件
-(cycle->pathes,以红黑树组织)加载到内存中,加载完毕后自动退出；只有开启了proxy buffer才能使用proxy cache；
+减轻了被代理服务器的压力;cache使用一块公共内存区域（共享内存）,存放缓存的索引数据,Nginx启动时cache loader进程将磁盘缓存的对象文件
+(cycle->pathes,以红黑树组织)加载到内存中,加载完毕后自动退出;只有开启了proxy buffer才能使用proxy cache;
 
-注1：若被代理服务器返回的http头包含no-store/no-cache/private/max-age=0或者expires包含过期日期时,则该响应数据不被nginx缓存；
+注1：若被代理服务器返回的http头包含no-store/no-cache/private/max-age=0或者expires包含过期日期时,则该响应数据不被nginx缓存;
 */ //后端应答数据在ngx_http_upstream_process_request->ngx_http_file_cache_update中进行缓存
 static void  
 ngx_cache_manager_process_cycle(ngx_cycle_t *cycle, void *data)
@@ -1621,7 +1621,7 @@ ngx_cache_manager_process_cycle(ngx_cycle_t *cycle, void *data)
 
 /*
 在Nginx中,如果启用了proxy(fastcgi) cache功能,master process会在启动的时候启动管理缓存的两个子进程(区别于处理请求的子进程)来管理内
-存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除；第二个进程的作用是在启动的时候将磁盘中已经缓存的个
+存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除;第二个进程的作用是在启动的时候将磁盘中已经缓存的个
 体映射到内存中(目前Nginx设定为启动以后60秒),然后退出.
 
 具体的,在这两个进程的ngx_process_events_and_timers()函数中,会调用ngx_event_expire_timers(). Nginx的ngx_event_timer_rbtree(红黑树)里
@@ -1663,7 +1663,7 @@ ngx_cache_manager_process_handler(ngx_event_t *ev)
 
 /*
 在Nginx中,如果启用了proxy(fastcgi) cache功能,master process会在启动的时候启动管理缓存的两个子进程(区别于处理请求的子进程)来管理内
-存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除；第二个进程的作用是在启动的时候将磁盘中已经缓存的个
+存和磁盘的缓存个体. 第一个进程的功能是定期检查缓存,并将过期的缓存删除;第二个进程的作用是在启动的时候将磁盘中已经缓存的个
 体映射到内存中(目前Nginx设定为启动以后60秒),然后退出.
 
 Nginx 进程启动时,会试图从缓存对应的文件系统路径下的文件读取必要数据,然后重建 缓存的内存结构. 这个过程由 cache loader 进程完成.

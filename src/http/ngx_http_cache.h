@@ -254,7 +254,7 @@ body_start: [ngx_http_file_cache_header_t]["\nKEY: "][fastcgi_cache_key中的KEY
     
     off_t                            length;//缓存文件的大小,见ngx_http_file_cache_open
     off_t                            fs_size;//文件ngx_http_file_cache_t->bsize字节对齐,见ngx_http_file_cache_open
-//c->min_uses = u->conf->cache_min_uses; //Proxy_cache_min_uses number 默认为1,当客户端发送相同请求达到规定次数后,nginx才对响应数据进行缓存；
+//c->min_uses = u->conf->cache_min_uses; //Proxy_cache_min_uses number 默认为1,当客户端发送相同请求达到规定次数后,nginx才对响应数据进行缓存;
     ngx_uint_t                       min_uses;
     ngx_uint_t                       error;
     ngx_uint_t                       valid_msec;

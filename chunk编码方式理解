@@ -50,7 +50,7 @@ trailer        = *(entity-header CRLF)
 解释：
 
 l         Chunked-Body表示经过chunked编码后的报文体. 报文体可以分为chunk, last-chunk,trailer和结束符四部分. chunk的
-数量在报文体中最少可以为0,无上限；
+数量在报文体中最少可以为0,无上限;
 
 l         每个chunk的长度是自指定的,即,起始的数据必然是16进制数字的字符串,代表后面chunk-data的长度（字节数）. 这
 个16进制的字符串第一个字符如果是“0”,则表示chunk-size为0,该chunk为last-chunk,无chunk-data部分.

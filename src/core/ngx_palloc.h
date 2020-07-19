@@ -37,7 +37,7 @@ ngx_pool_cleanup_t与ngx_http_cleanup_pt是不同的,ngx_pool_cleanup_t仅在所
 
 
 如果我们需要添加自己的回调函数,则需要调用ngx_pool_cleanup_add来得到一个ngx_pool_cleanup_t,然后设置handler为我们的清理函数,
-并设置data为我们要清理的数据. 这样在ngx_destroy_pool中会循环调用handler清理数据；
+并设置data为我们要清理的数据. 这样在ngx_destroy_pool中会循环调用handler清理数据;
 
 比如：我们可以将一个开打的文件描述符作为资源挂载到内存池上,同时提供一个关闭文件描述的函数注册到handler上,那么内存池在释放
 的时候,就会调用我们提供的关闭文件函数来处理文件描述符资源了
@@ -45,7 +45,7 @@ ngx_pool_cleanup_t与ngx_http_cleanup_pt是不同的,ngx_pool_cleanup_t仅在所
 //内存池pool中清理数据的用的,见ngx_pool_s  ngx_destroy_pool
 struct ngx_pool_cleanup_s { //这个是添加到ngx_pool_s中的cleanup上的,见ngx_pool_cleanup_add
     ngx_pool_cleanup_pt   handler;// 当前 cleanup 数据的回调函数  ngx_destroy_pool中执行    例如清理文件句柄ngx_pool_cleanup_file等
-    void                 *data;// 内存的真正地址     回调时,将此数据传入回调函数；  ngx_pool_cleanup_add中开辟空间
+    void                 *data;// 内存的真正地址     回调时,将此数据传入回调函数;  ngx_pool_cleanup_add中开辟空间
     
     ngx_pool_cleanup_t   *next;// 指向下一块 cleanup 内存的指针
 };

@@ -288,7 +288,7 @@ auto/modules(auto/sources)脚本中的. 读者可以通过阅读这个modules脚
 /*
 配置模块与核心模块都是与Nginx框架密切相关的,是其他模块的基础. 而事件模块则是HTTP模块和mail模块的基础,原因参见8.2.2节.
 HTTP模块和mail模块的“地位”相似,它们都更关注于应用层面. 在事件模块中,ngx_event_core module事件模块是其他所有事件模块
-的基础；在HTTP模块中,ngx_http_core module模块是其他所有HTTP模块的基础；在mail模块中,ngx_mail_core module模块是其他所
+的基础;在HTTP模块中,ngx_http_core module模块是其他所有HTTP模块的基础;在mail模块中,ngx_mail_core module模块是其他所
 有mail模块的基础.
 */
 struct ngx_module_s {//相关空间初始化,赋值等可以参考ngx_http_block
@@ -387,7 +387,7 @@ struct ngx_module_s {//相关空间初始化,赋值等可以参考ngx_http_block
 
 /*
 ngx_core_module_t上下文是以配置项的解析作为基础的,它提供了create_conf回调方法来创建存储配置顼的数据结构,
-在读取nginx.conf配置文件时,会根据模块中的ngx_command_t把解析出的配置项存放在这个数据结构中；它还提供了init_conf
+在读取nginx.conf配置文件时,会根据模块中的ngx_command_t把解析出的配置项存放在这个数据结构中;它还提供了init_conf
 回调方法,用于在解析完配置文件后,使用解析出的配置项初始化核心模块功能. 除此以外,Nginx框架不会约束核心模块的接口、
 功能,这种简洁、灵活的设计为Nginx实现动态可配置性、动态可扩展性、动态可定制性带来了极大的便利,这样,在每个模块的
 功能实现中就会较少地考虑如何不停止服务、不重启服务来实现以上功能.

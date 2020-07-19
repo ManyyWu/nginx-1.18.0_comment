@@ -17,7 +17,7 @@ FastCGI请求间多路复用单个传输线路. 这可支持能够利用事件�
 上提供若干独立的数据流. 这种方式,例如,stdout和stderr数据通过从应用到Web服务器的单个传输线路传递,而不是像CGI/1.1那样需要独立的管道.
 
 一个FastCGI应用扮演几个明确定义的角色中的一个. 最常用的是响应器（Responder）角色,其中应用接收所有与HTTP请求相关的信息,并产生一个
-HTTP响应；那是CGI/1.1程序扮演的角色. 第二个角色是认证器（Authorizer）,其中应用接收所有与HTTP请求相关的信息,并产生一个认可/未经认
+HTTP响应;那是CGI/1.1程序扮演的角色. 第二个角色是认证器（Authorizer）,其中应用接收所有与HTTP请求相关的信息,并产生一个认可/未经认
 可的判定. 第三个角色是过滤器（Filter）,其中应用接收所有与HTTP请求相关的信息,以及额外的来自存储在Web服务器上的文件的数据流,并产生
 "已过滤"版的数据流作为HTTP响应. 框架是易扩展的,因而以后可定义更多的FastCGI.
 
@@ -38,7 +38,7 @@ CGI调用的还是用FastCGI调用的可靠方法是调用getpeername(FCGI_LISTE
 Web服务器对于可靠传输的选择,Unix流式管道（AF_UNIX）或TCP/IP（AF_INET）,是内含于FCGI_LISTENSOCK_FILENO socket的内部状态中的.
 
 2.3 环境变量 
-Web服务器可用环境变量向应用传参数. 本规范定义了一个这样的变量,FCGI_WEB_SERVER_ADDRS；我们期望随着规范的发展定义更多. Web服务器
+Web服务器可用环境变量向应用传参数. 本规范定义了一个这样的变量,FCGI_WEB_SERVER_ADDRS;我们期望随着规范的发展定义更多. Web服务器
 可提供某种方式绑定其他环境变量,例如PATH变量.
 
 2.4 其他状态 
@@ -122,7 +122,7 @@ X窗口系统协议上的经验显示了这种对齐方式的性能优势.
 我们建议记录被放置在八字节倍数的边界上. FCGI_Record的定长部分是八字节.
 
 管理请求ID 
-Web服务器重用FastCGI请求ID；应用明了给定传输线路上的每个请求ID的当前状态. 当应用收到一个记录{FCGI_BEGIN_REQUEST, R, ...}时,
+Web服务器重用FastCGI请求ID;应用明了给定传输线路上的每个请求ID的当前状态. 当应用收到一个记录{FCGI_BEGIN_REQUEST, R, ...}时,
 请求ID R变成有效的,而且当应用向Web服务器发送记录{FCGI_END_REQUEST, R, ...}时变成无效的.
 
 当请求ID R无效时,应用会忽略requestId == R的记录,除了刚才描述的FCGI_BEGIN_REQUEST记录.
@@ -139,7 +139,7 @@ Web服务器尝试保持小的FastCGI请求ID. 那种方式下应用能利用短
 管理记录有0值的requestId,也称为null请求ID. 应用记录有非0的requestId.
 
 第二个区别在离散和连续记录之间. 一个离散记录包含一个自己的所有数据的有意义的单元. 一个流记录是stream的部分,也就是一连串流类型
-的0或更多非空记录（length != 0）,后跟一个流类型的空记录（length == 0）. 当连接流记录的多个contentData组件时,形成一个字节序列；
+的0或更多非空记录（length != 0）,后跟一个流类型的空记录（length == 0）. 当连接流记录的多个contentData组件时,形成一个字节序列;
 该字节序列是流的值. 因此流的值独立于它包含多少个记录或它的字节如何在非空记录间分配.
 
 这两种分类是独立的. 在本版的FastCGI协议定义的记录类型中,所有管理记录类型也是离散记录类型,而且几乎所有应用记录类型都是流记录类型.
@@ -259,7 +259,7 @@ FCGI_FILTER
 flags组件包含一个控制线路关闭的位： 
 
 
-flags & FCGI_KEEP_CONN：如果为0,则应用在对本次请求响应后关闭线路. 如果非0,应用在对本次请求响应后不会关闭线路；Web服务器为线路保持响应性.
+flags & FCGI_KEEP_CONN：如果为0,则应用在对本次请求响应后关闭线路. 如果非0,应用在对本次请求响应后不会关闭线路;Web服务器为线路保持响应性.
 5.2 名-值对流：FCGI_PARAMS FCGI_PARAMS 
 是流记录类型,用于从Web服务器向应用发送名-值对. 名-值对被相继地沿着流发送,没有特定顺序.
 
@@ -272,7 +272,7 @@ FCGI_STDOUT和FCGI_STDERR都是流记录类型,分别用于从应用向Web服务
 Web服务器发送FCGI_ABORT_REQUEST记录来中止请求. 收到{FCGI_ABORT_REQUEST, R}后,应用尽快用{FCGI_END_REQUEST, R, {FCGI_REQUEST_COMPLETE,
 appStatus}}响应. 这是真实的来自应用的响应,而不是来自FastCGI库的低级确认.
 
-当HTTP客户端关闭了它的传输线路,可是受客户端委托的FastCGI请求仍在运行时,Web服务器中止该FastCGI请求. 这种情况看似不太可能；多数FastCGI
+当HTTP客户端关闭了它的传输线路,可是受客户端委托的FastCGI请求仍在运行时,Web服务器中止该FastCGI请求. 这种情况看似不太可能;多数FastCGI
 请求具有很短的响应时间,同时如果客户端很慢则Web服务器提供输出缓冲. 但是FastCGI应用与其他系统的通信或执行服务器端进栈可能被延期.
 
 当不是通过一个传输线路多路复用请求时,Web服务器能通过关闭请求的传输线路来中止请求. 但使用多路复用请求时,关闭传输线路具有不幸的结果,
@@ -294,7 +294,7 @@ unsigned char reserved[3];
 
 appStatus组件是应用级别的状态码. 每种角色说明其appStatus的用法.
 
-protocolStatus组件是协议级别的状态码；可能的protocolStatus值是： 
+protocolStatus组件是协议级别的状态码;可能的protocolStatus值是：
 
 
 FCGI_REQUEST_COMPLETE：请求的正常结束.
@@ -319,7 +319,7 @@ FCGI_STDERR的角色协议允许交叉这两个流.
 再次关注可靠的协议和简化的应用编程技术,角色协议被设计为近似请求-响应. 在真正的请求-响应协议中,应用在发送其输出记录前接收其所有的
 输入记录. 请求-响应协议不允许流水线技术（pipelining）.
 
-对于某些FastCGI角色,请求响应规则约束太强；毕竟,CGI程序不限于在开始写stdout前读取全部stdin. 所以某些角色协议允许特定的可能性. 首
+对于某些FastCGI角色,请求响应规则约束太强;毕竟,CGI程序不限于在开始写stdout前读取全部stdin. 所以某些角色协议允许特定的可能性. 首
 先,除了结尾的流输入,应用接收其所有输入. 当开始接收结尾的流输入时,应用开始写其输出.
 
 当角色协议用FCGI_PARAMS传输文本值时,例如CGI程序从环境变量得到的值,其长度不包括结尾的null字节,而且它本身不包含null字节. 需要提供
@@ -345,7 +345,7 @@ environ(7)格式的名-值对的应用必须在名和值间插入等号,并在�
 
 6.3 认证器（Authorizer） 
 作为认证器的FastCGI应用接收所有与HTTP请求相关的信息,并产生一个认可/未经认可的判定. 对于认可的判定,认证器也能把名-值对同HTTP
-请求相关联；当给出未经认可的判定时,认证器向HTTP客户端发送结束响应.
+请求相关联;当给出未经认可的判定时,认证器向HTTP客户端发送结束响应.
 
 由于CGI/1.1定义了与HTTP请求相关联的信息的极好的表示方式,认证器使用同样的表示法：
 
@@ -375,7 +375,7 @@ Variable-AUTH_METHOD: database lookup
 如同响应器,过滤器应用通过FCGI_PARAMS接收来自Web服务器的名-值对. 过滤器应用接收两个过滤器特定的变量：FCGI_DATA_LAST_MOD和FCGI_DATA_LENGTH.
 接下来,过滤器应用通过FCGI_STDIN接收来自Web服务器的CGI/1.1 stdin数据. 在收到流尾指示以前,应用从该流接收最多CONTENT_LENGTH字节.
 （只有HTTP客户端未能提供时,应用收到的才少于CONTENT_LENGTH字节,例如因为客户端崩溃了. ）
-下一步,过滤器应用通过FCGI_DATA接收来自Web服务器的文件数据. 该文件的最后修改时间（表示成自UTC 1970年1月1日以来的整秒数）是FCGI_DATA_LAST_MOD；
+下一步,过滤器应用通过FCGI_DATA接收来自Web服务器的文件数据. 该文件的最后修改时间（表示成自UTC 1970年1月1日以来的整秒数）是FCGI_DATA_LAST_MOD;
 应用可能查阅该变量并从缓存作出响应,而不读取文件数据. 在收到流尾指示以前,应用从该流接收最多FCGI_DATA_LENGTH字节.
 过滤器应用通过FCGI_STDOUT向Web服务器发送CGI/1.1 stdout数据,以及通过FCGI_STDERR的CGI/1.1 stderr数据. 应用同时发送这些,而非相继地. 在开
 始写入FCGI_STDOUT和FCGI_STDERR以前,应用必须等待读取FCGI_STDIN完成,但是不需要在开始写入这两个流以前完成从FCGI_DATA的读取.
@@ -500,7 +500,7 @@ A. 表：记录类型的属性
 
 WS->App：该类型的记录只能由Web服务器发送到应用. 其他类型的记录只能由应用发送到Web服务器.
 management：该类型的记录含有非特定于某个Web服务器请求的信息,而且使用null请求ID. 其他类型的记录含有请求特定的信息,而且不能使用null请求ID.
-stream：该类型的记录组成一个由带有空contentData的记录结束的流. 其他类型的记录是离散的；各自携带一个有意义的数据单元.
+stream：该类型的记录组成一个由带有空contentData的记录结束的流. 其他类型的记录是离散的;各自携带一个有意义的数据单元.
 WS->App management stream
 FCGI_GET_VALUES x x
 FCGI_GET_VALUES_RESULT x
@@ -958,7 +958,7 @@ HTTP_FCGI_PARAMS_MAX
 
 那么CGI程序的性能问题在哪呢？PHP解析器每次都会解析php.ini文件,初始化执行环境. 标准的CGI对每个请求都会执行这些步骤,所以处理每个时间的时间会比较长.
 那么FastCGI是怎么做的呢？首先,FastCGI会先启一个master,解析配置文件,初始化执行环境,然后再启动多个worker. 当请求过来时,master会传递给一个worker,
-然后立即可以接受下一个请求. 这样就避免了重复的劳动,效率自然是高. 而且当worker不够用时,master可以根据配置预先启动几个worker等着；当然空闲worker太多时,
+然后立即可以接受下一个请求. 这样就避免了重复的劳动,效率自然是高. 而且当worker不够用时,master可以根据配置预先启动几个worker等着;当然空闲worker太多时,
 也会停掉一些,这样就提高了性能,也节约了资源. 这就是FastCGI的对进程的管理.
 
 

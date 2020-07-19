@@ -271,7 +271,7 @@ location ~ .*.(js|css)?$
 ┃                  ┃                      ┃入了NGX CONF- MULTI,则认为该配置项一定是合法       ┃
 ┃                  ┃NGX CONF MULTI        ┃                                                    ┃
 ┃                  ┃                      ┃的,然而又会有两种不同的结果：①如果配置项出现在    ┃
-┃                  ┃                      ┃type指示的块中,则会调用set方法解析醌置项；②如果   ┃
+┃                  ┃                      ┃type指示的块中,则会调用set方法解析醌置项;②如果   ┃
 ┃                  ┃                      ┃配置项没有出现在type指示的块中,则不对该配置项做    ┃
 ┃                  ┃                      ┃任何处理. 因此,NGX—CONF—MULTI会使得配置项出      ┃
 ┃                  ┃                      ┃现在未知块中时不会出错. 目前,还没有官方模块使用过  ┃
@@ -418,7 +418,7 @@ Nginx安装完毕后,会有响应的安装目录,安装目录里nginx.conf为ngi
 
 [root@rhel6u3-7 server]# vim /usr/local/nginx/conf/nginx.conf 
 user nginx nginx; //指定nginx运行的用户及用户组为nginx,默认为nobody
-worker_processes 2； //开启的进程数,一般跟逻辑cpu核数一致
+worker_processes 2; //开启的进程数,一般跟逻辑cpu核数一致
 error_log logs/error.log notice; //定于全局错误日志文件,级别以notice显示. 还有debug、info、warn、error、crit模式,debug输出最多,crit输出最少,更加实际环境而定.
 pid logs/nginx.pid; //指定进程id的存储文件位置 
 worker_rlimit_nofile 65535; //指定一个nginx进程打开的最多文件描述符数目,受系统进程的最大打开文件数量限制
@@ -598,7 +598,7 @@ index index.html index.htm;
 ┃                  ┃                      ┃入了NGX CONF- MULTI,则认为该配置项一定是合法       ┃
 ┃                  ┃NGX CONF MULTI        ┃                                                    ┃
 ┃                  ┃                      ┃的,然而又会有两种不同的结果：①如果配置项出现在    ┃
-┃                  ┃                      ┃type指示的块中,则会调用set方法解析醌置项；②如果   ┃
+┃                  ┃                      ┃type指示的块中,则会调用set方法解析醌置项;②如果   ┃
 ┃                  ┃                      ┃配置项没有出现在type指示的块中,则不对该配置项做    ┃
 ┃                  ┃                      ┃任何处理. 因此,NGX—CONF—MULTI会使得配置项出      ┃
 ┃                  ┃                      ┃现在未知块中时不会出错. 目前,还没有官方模块使用过  ┃
@@ -644,13 +644,13 @@ char*(*set)(ngx_conf_t *cf, ngx_commandj 'vcmd,void *conf)
 ┃                            ┃  与ngx_conf_set_str_array_slot类似,也是用一个ngx_array_t数组来存储所有同    ┃
 ┃                            ┃名配置项的参数. 只是每个配置项的参数不再只是1个,而必须是两个,且以“配       ┃
 ┃ngx_conf_set_keyval_slot    ┃                                                                              ┃
-┃                            ┃置项名关键字值；”的形式出现在nginx．conf文件中,同时,ngx_conf_set_keyval    ┃
+┃                            ┃置项名关键字值;”的形式出现在nginx．conf文件中,同时,ngx_conf_set_keyval    ┃
 ┃                            ┃ slot将把这蜱配置项转化为数组,其中每个元素都存储着key/value键值对            ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃ngx_conf_set_num slot       ┃  配置项后必须携带1个参数,且只能是数字. 存储这个参数的变量必须是整型         ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                            ┃  配置项后必须携带1个参数,表示空间大小,可以是一个数字,这时表示字节数       ┃
-┃                            ┃(Byte). 如果数字后跟着k或者K,就表示Kilobyt,IKB=1024B；如果数字后跟          ┃
+┃                            ┃(Byte). 如果数字后跟着k或者K,就表示Kilobyt,IKB=1024B;如果数字后跟          ┃
 ┃ngx_conf_set size slot      ┃                                                                              ┃
 ┃                            ┃着m或者M,就表示Megabyte,1MB=1024KB. ngx_conf_set_ size slot解析后将         ┃
 ┃                            ┃把配置项后的参数转化成以字节数为单位的数字                                    ┃
@@ -662,10 +662,10 @@ char*(*set)(ngx_conf_t *cf, ngx_commandj 'vcmd,void *conf)
 ┃                            ┃参数转化成以字节数为单位的数字                                                ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                            ┃  配置项后必须携带1个参数,表示时间. 这个参数可以在数字后面加单位,如         ┃
-┃                            ┃果单位为s或者没有任何单位,那么这个数字表示秒；如果单位为m,则表示分          ┃
+┃                            ┃果单位为s或者没有任何单位,那么这个数字表示秒;如果单位为m,则表示分          ┃
 ┃                            ┃钟,Im=60s：如果单位为h,则表示小时,th=60m：如果单位为d,则表示天,          ┃
 ┃ngx_conf_set msec slot      ┃                                                                              ┃
-┃                            ┃ld=24h：如果单位为w,则表示周,lw=7d；如果单位为M,则表示月,1M=30d；         ┃
+┃                            ┃ld=24h：如果单位为w,则表示周,lw=7d;如果单位为M,则表示月,1M=30d;         ┃
 ┃                            ┃如果单位为y,则表示年,ly=365d. ngx_conf_set_msec—slot解析后将把配置项后     ┃
 ┃                            ┃的参数转化成以毫秒为单位的数字                                                ┃
 ┣━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫

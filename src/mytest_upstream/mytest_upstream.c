@@ -160,7 +160,7 @@ mytest_upstream_create_request(ngx_http_request_t *r)
     ngx_int_t queryLineLen = backendQueryLine.len + r->args.len - 2;
     //必须由内存池中申请内存,这有两点好处：在网络情况不佳的情况下,向上游
 //服务器发送请求时,可能需要epoll多次调度send发送才能完成,
-//这时必须保证这段内存不会被释放；请求结束时,这段内存会被自动释放,
+//这时必须保证这段内存不会被释放;请求结束时,这段内存会被自动释放,
 //降低内存泄漏的可能
    
     ngx_buf_t* b = ngx_create_temp_buf(r->pool, queryLineLen);

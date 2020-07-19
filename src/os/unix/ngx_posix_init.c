@@ -31,7 +31,7 @@ ngx_os_io_t ngx_os_io = {//如果是linux并且编译过程使能了sendfile这�
     0
 };
 
-//调用ngx_os_init()初始化系统相关变量,如内存页面大小ngx_pagesize,ngx_cacheline_size,最大连接数ngx_max_sockets等；
+//调用ngx_os_init()初始化系统相关变量,如内存页面大小ngx_pagesize,ngx_cacheline_size,最大连接数ngx_max_sockets等;
 ngx_int_t
 ngx_os_init(ngx_log_t *log)
 {

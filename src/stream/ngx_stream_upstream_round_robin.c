@@ -34,8 +34,8 @@ static void ngx_stream_upstream_empty_save_session(ngx_peer_connection_t *pc,
 
 /*
 主要完成了配置中指定服务器的初始化工作：
-1、服务器属性获取. 包括socket、设定权重值、失败次数和失败时间上限等等；
-2、区分单台服务器. 为后续做单独处理做准备；
+1、服务器属性获取. 包括socket、设定权重值、失败次数和失败时间上限等等;
+2、区分单台服务器. 为后续做单独处理做准备;
 3、正常server和backup server分开处理.
 */
 ngx_int_t

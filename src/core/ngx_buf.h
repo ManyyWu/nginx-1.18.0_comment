@@ -96,7 +96,7 @@ struct ngx_buf_s { //可以参考ngx_create_temp_buf         函数空间在ngx_
     //遇到有flush字段被设置为1的的buf的chain,则该chain的数据即便不是最后结束的数据（last_buf被设置,标志所有要输出的内容都完了）,
     //也会进行输出,不会受postpone_output配置的限制,但是会受到发送速率等其他条件的限制.
     ////置1了表示该buf需要马上发送出去,参考ngx_http_write_filter -> if (!last && !flush && in && size < (off_t) clcf->postpone_output) {
-    unsigned         flush:1;//标志位,为1时表示需要执行flush操作  标示需要立即发送缓冲的所有数据；
+    unsigned         flush:1;//标志位,为1时表示需要执行flush操作  标示需要立即发送缓冲的所有数据;
     /*标志位,对于操作这块缓冲区时是否使用同步方式,需谨慎考虑,这可能会阻塞Nginx进程,Nginx中所有操作几乎都是异步的,这是
     它支持高并发的关键. 有些框架代码在sync为1时可能会有阻塞的方式进行I/O操作,它的意义视使用它的Nginx模块而定*/
     unsigned         sync:1;

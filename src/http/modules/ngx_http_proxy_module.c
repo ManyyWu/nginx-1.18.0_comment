@@ -112,7 +112,7 @@ typedef struct {
     ngx_str_t                      url; //proxy_pass url名字,见ngx_http_proxy_pass
 
 #if (NGX_HTTP_CACHE)
-    ngx_http_complex_value_t       cache_key;//proxy_cache_key为缓存建立索引时使用的关键字；见ngx_http_proxy_cache_key
+    ngx_http_complex_value_t       cache_key;//proxy_cache_key为缓存建立索引时使用的关键字;见ngx_http_proxy_cache_key
 #endif
 
     ngx_http_proxy_vars_t          vars;//里面保存proxy_pass uri中的uri信息
@@ -322,7 +322,7 @@ proxy_pass http://unix:/path/to/backend.socket:/uri/;路径在unix关键字的�
 当传递请求时,Nginx将location对应的URI部分替换成proxy_pass指令中所指定的部分,但是有两个例外会使其无法确定如何去替换：
 
 
-■location通过正则表达式指定；
+■location通过正则表达式指定;
 
 ■在使用代理的location中利用rewrite指令改变URI,使用这个配置可以更加精确的处理请求（break）：
 
@@ -902,15 +902,15 @@ proxy_cache_path  /data/nginx/cache/three  levels=1:1:2  keys_zone=three:1000m;�
 内存池的大小按照缓存页面数的比例进行设置,一个页面（文件）的元数据大小按照操作系统来定,FreeBSD/i386下为64字节,FreeBSD/amd64下为128字节.
 proxy_cache_path和proxy_temp_path应该使用在相同的文件系统上.
 
-Proxy_cache_path：缓存的存储路径和索引信息；
-  path 缓存文件的根目录；
-  level=N:N在目录的第几级hash目录缓存数据；
-  keys_zone=name:size 缓存索引重建进程建立索引时用于存放索引的内存区域名和大小；
-  interval=time强制更新缓存时间,规定时间内没有访问则从内存中删除,默认10s；
-  max_size=size硬盘中缓存数据的上限,由cache manager管理,超出则根据LRU策略删除；
-  loader_sleep=time索引重建进程在两次遍历间的暂停时长,默认50ms；
+Proxy_cache_path：缓存的存储路径和索引信息;
+  path 缓存文件的根目录;
+  level=N:N在目录的第几级hash目录缓存数据;
+  keys_zone=name:size 缓存索引重建进程建立索引时用于存放索引的内存区域名和大小;
+  interval=time强制更新缓存时间,规定时间内没有访问则从内存中删除,默认10s;
+  max_size=size硬盘中缓存数据的上限,由cache manager管理,超出则根据LRU策略删除;
+  loader_sleep=time索引重建进程在两次遍历间的暂停时长,默认50ms;
   loader_files=number重建索引时每次加载数据元素的上限,进程递归遍历读取硬盘上的缓存目录和文件,对每个文件在内存中建立索引,每
-  建立一个索引称为加载一个数据元素,每次遍历时可同时加载多个数据元素,默认100；
+  建立一个索引称为加载一个数据元素,每次遍历时可同时加载多个数据元素,默认100;
 */  //XXX_cache缓存是先写在xxx_temp_path再移到xxx_cache_path,所以这两个目录最好在同一个分区
 //xxx_cache(proxy_cache fastcgi_cache) abc必须xxx_cache_path(proxy_cache_path fastcgi_cache_path) xxx keys_zone=abc:10m;一起,否则在ngx_http_proxy_merge_loc_conf会失败,因为没有为该abc创建ngx_http_file_cache_t
 //fastcgi_cache 指令指定了在当前作用域中使用哪个缓存维护缓存条目,参数对应的缓存必须事先由 fastcgi_cache_path 指令定义.
@@ -1003,7 +1003,7 @@ not empty and is not equal to “0” then the response will not be saved(注意
 默认值：proxy_cache_min_uses 1; 
 使用字段：http, server, location 
 多少次的查询后应答将被缓存,默认1.
-*/ //Proxy_cache_min_uses number 默认为1,当客户端发送相同请求达到规定次数后,nginx才对响应数据进行缓存；
+*/ //Proxy_cache_min_uses number 默认为1,当客户端发送相同请求达到规定次数后,nginx才对响应数据进行缓存;
 ////例如配置Proxy_cache_min_uses 5,则需要客户端请求5才才能从缓存中取,如果现在只有4次,则都需要从后端获取数据,如果没有达到5次,函数ngx_http_upstream_cache会把 u->cacheable = 0;
     { ngx_string("proxy_cache_min_uses"),
       NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_TAKE1,
@@ -4359,7 +4359,7 @@ proxy_pass http://unix:/path/to/backend.socket:/uri/;路径在unix关键字的�
 然后修改DNS到新的IP.
 当传递请求时,Nginx将location对应的URI部分替换成proxy_pass指令中所指定的部分,但是有两个例外会使其无法确定如何去替换：
 
-■location通过正则表达式指定；
+■location通过正则表达式指定;
 ■在使用代理的location中利用rewrite指令改变URI,使用这个配置可以更加精确的处理请求（break）：
 
 location  /name/ {

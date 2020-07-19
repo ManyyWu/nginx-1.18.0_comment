@@ -974,7 +974,7 @@ if ($slow) {
 判断一个条件,如果条件成立,则后面的大括号内的语句将执行,相关配置从上级继承.
 可以在判断语句中指定下列值：
 
-·一个变量的名称；不成立的值为：空字符传""或者一些用“0”开始的字符串.
+·一个变量的名称;不成立的值为：空字符传""或者一些用“0”开始的字符串.
 ·一个使用=或者!=运算符的比较语句.
 ·使用符号~*和~模式匹配的正则表达式：
 ·~为区分大小写的匹配.
@@ -1426,7 +1426,7 @@ proxy_no_cache $http_my_secret_header;proxy_pass
 
 proxy_pass http://unix:/path/to/backend.socket:/uri/;路径在unix关键字的后面指定,位于两个冒号之间.
 当传递请求时,Nginx将location对应的URI部分替换成proxy_pass指令中所指定的部分,但是有两个例外会使其无法确定如何去替换：
-·location通过正则表达式指定；
+·location通过正则表达式指定;
 ·在使用代理的location中利用rewrite指令改变URI,使用这个配置可以更加精确的处理请求（break）：
 
 location  /name/ {

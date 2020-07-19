@@ -207,7 +207,7 @@ ngx_chain_update_chains(ngx_pool_t *p, ngx_chain_t **free, ngx_chain_t **busy,
     while (*busy) {
         cl = *busy;
 
-        // buf 大小不是 0,说明还没有输出；request body 中的 bufs 是输出用的,如上所述,bufs 中指向的 buf 和 busy 指向的 buf 对象是一模一样的
+        // buf 大小不是 0,说明还没有输出;request body 中的 bufs 是输出用的,如上所述,bufs 中指向的 buf 和 busy 指向的 buf 对象是一模一样的
         if (ngx_buf_size(cl->buf) != 0) { //pos和last不相等,说明该buf中的内容没有处理完
             break;
         }
