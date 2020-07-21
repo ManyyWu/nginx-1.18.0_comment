@@ -49,4 +49,4 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} dl pthread crypt ldap lber pcre ssl crypto dl pthread z xml2 xslt exslt)
 
-# sudo apt install automake zlib1g-dev libxslt-dev libxml2-dev libldap-dev
+# sudo apt install automake libpcre2-dev zlib1g-dev libxslt-dev libxml2-dev libldap-dev

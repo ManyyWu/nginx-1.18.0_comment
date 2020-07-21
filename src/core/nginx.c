@@ -251,7 +251,8 @@ main(int argc, char *const *argv)
 
     /* TODO */ ngx_max_sockets = -1;
 
-    ngx_time_init(); //初始化nginx环境的当前时间
+    //初始化nginx环境的当前时间
+    ngx_time_init();
 
 #if (NGX_PCRE)
     ngx_regex_init();
